@@ -1,4 +1,3 @@
-/* Reset styles */
 h1,
 h2,
 h3,
@@ -8,28 +7,50 @@ h6,
 p {
   margin: 0;
 }
-
-p:last-child {
-  margin-bottom: 0;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 a {
-  color: currentColor;
   text-decoration: none;
 }
-
-button {
-  cursor: pointer;
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
 }
 
 img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+input {
+  font-family: inherit;
+}
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+/*-------------Не обнуляючі але треба задати ці властивості(приклад того що потрібно вказати)---------------------*/
+body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+  color: #2a2a2a;
+  background-color: #fafafa;
+  line-height: 1.5;
+}
+/*-------------Якщо шрифти різні-------------------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Tahoma';
 }
