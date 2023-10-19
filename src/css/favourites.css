@@ -1,0 +1,180 @@
+body {
+  background-color: #f4f4f4;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+}
+
+.favor-title {
+  padding-top: 84px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.36;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.favor-quote-container {
+  position: relative;
+  width: 100%;
+  height: 159px;
+  border-radius: 20px;
+  background: #242424;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.favor-quote-container::before {
+  position: absolute;
+  content: '';
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #f4f4f4;
+  opacity: 0.2;
+}
+.favor-quote-icon {
+  position: absolute;
+  left: 27px;
+  top: 26px;
+  fill: #f4f4f4;
+}
+.favor-quote-wrap {
+  margin-left: 52px;
+  max-width: 243px;
+}
+.favor-quote-title {
+  color: #f4f4f4;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.favor-quote-text {
+  color: rgba(244, 244, 244, 0.6);
+}
+.favor-quote-author {
+  display: none;
+}
+.favor-quote-invcomma {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  fill: #f4f4f4;
+}
+.favor-dailynorm {
+  border-radius: 20px;
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.favor-dailynorm-ico {
+  fill: #242424;
+  margin-bottom: 15px;
+}
+.favor-dailynorm-title {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.favor-dailynorm-text {
+  color: #24242499;
+}
+.favor-img-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.favor-img {
+}
+
+.favor-exercises {
+  padding: 0 8px 80px 9px;
+}
+.favor-exercises-emptytext {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .favor-title {
+    padding-top: 100px;
+    font-size: 44px;
+    line-height: 1.09;
+    margin-bottom: 32px;
+  }
+  .favor-quote-container {
+    height: 220px;
+    padding: 40px;
+    margin-bottom: 16px;
+  }
+  .favor-quote-icon {
+    left: 47px;
+    top: 46px;
+  }
+  .favor-quote-wrap {
+    margin-left: 50px;
+    max-width: 574px;
+  }
+  .favor-quote-title {
+    font-size: 24px;
+    line-height: 1.33;
+  }
+  .favor-quote-text {
+    margin-bottom: 18px;
+  }
+  .favor-quote-author {
+    display: block;
+    color: #f4f4f4;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .favor-quote-invcomma {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+  }
+  .favor-dailynorm {
+    display: inline-block;
+    width: 344px;
+    margin-right: 16px;
+    margin-bottom: 0;
+  }
+  .favor-img-wrap {
+    display: inline-block;
+    width: 344px;
+    height: 141px;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .favor-title {
+    padding-top: 90px;
+    margin-bottom: 44px;
+  }
+  .favor-quote-container {
+    width: 494px;
+    height: 230px;
+  }
+  .favor-dailynorm {
+    width: 239px;
+  }
+  .favor-img-wrap {
+    width: 239px;
+  }
+  .favor-exercises {
+    display: inline-block;
+  }
+}
