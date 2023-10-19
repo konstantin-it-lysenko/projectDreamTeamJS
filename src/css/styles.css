@@ -11,3 +11,33 @@
 @import url('./modal-team.css');
 @import url('./loader.css');
 @import url('./scroll-up.css');
+
+@font-face {
+  font-family: 'Neue Montreal', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: local('Neue Montreal'),
+    url(../fonts/NeueMontreal-Regular.woff2) format(woff2),
+    url(../fonts/NeueMontreal-Regular.woff) format(woff);
+}
+
+@font-face {
+  font-family: 'Neue Montreal', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: local('Neue Montreal'),
+    url(../fonts/NeueMontreal-Medium.woff2) format(woff2),
+    url(../fonts/NeueMontreal-Medium.woff) format(woff);
+}
+
+@font-face {
+  font-family: 'Neue Montreal', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: local('Neue Montreal'),
+    url(../fonts/NeueMontreal-Bold.woff2) format(woff2),
+    url(../fonts/NeueMontreal-Bold.woff) format(woff);
+}
