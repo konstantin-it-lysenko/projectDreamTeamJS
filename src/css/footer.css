@@ -1,0 +1,18 @@
+.footer {
+  background-color: #242424;
+}
+
+.container {
+  max-width: 375px;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+
+.footer_soc_icon {
+  fill: aliceblue;
+  stroke: aliceblue;
+  color: aliceblue;
+}
+.foter_title {
+  color: aliceblue;
+}
