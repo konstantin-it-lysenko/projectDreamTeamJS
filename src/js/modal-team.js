@@ -8,7 +8,7 @@ teamModalCloseBtn.addEventListener('click', onCloseClick);
 function onOpenClick() {
   teamModal.classList.remove('is-hidden');
 }
-
+//
 function onCloseClick() {
   teamModal.classList.add('is-hidden');
 }
