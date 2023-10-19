@@ -1,4 +1,15 @@
+import './js/header';
+import './js/burger-menu';
+import './js/hero';
 import './js/quote';
 import './js/additional';
-import './js/burger-menu';
+import './js/categories';
+import './js/exercises-filter';
+import './js/footer';
+import './js/favourites';
+import './js/modal-exercise';
+import './js/modal-form';
+import './js/modal-team';
+import './js/scroll-up';
+import './js/loader';
 import './js/burger-menu';

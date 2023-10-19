@@ -7,8 +7,11 @@ export const API_PROPS = Object.freeze({
     SUBSCR_EDPOINT: '/subscription'
 });
 
-/*
+
+/* USE THIS IN YOUR API FILES. HERE IS AN EXAMPLE:
 import { API_PROPS } from './api/api';
 
 const { BASE_URL, QUOTE_ENDPOINT } = API_PROPS;
+
+console.log(BASE_URL, QUOTE_ENDPOINT);
 */
