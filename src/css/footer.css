@@ -27,7 +27,7 @@
   fill: #f4f4f4;
 }
 .footer_title {
-  min-width: 365px;
+  max-width: 365px;
   margin-top: 40px;
   color: #f4f4f4;
 
@@ -191,5 +191,36 @@
   .footer_text {
     margin-top: 0;
     margin-right: 58px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    max-width: 1440px;
+  }
+
+  .footer_wrap_wrap1_foottitle {
+    justify-content: unset;
+    gap: 158px;
+  }
+  .footer_wrap3 {
+    display: flex;
+    gap: 158px;
+  }
+  .footer_title {
+    max-width: 554px;
+  }
+
+  .footer_form {
+    margin: 0;
+    width: 350px;
+  }
+  .footer_wrap2 {
+    margin-top: 54px;
+  }
+  .footer_text {
+    margin-right: 136px;
+  }
+  .footer_wrap_info {
+    gap: 508px;
   }
 }
