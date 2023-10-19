@@ -1,6 +1,5 @@
 import './js/header';
 import './js/burger-menu';
-import './js/hero';
 import './js/quote';
 import './js/additional';
 import './js/categories';
