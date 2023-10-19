@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_PROPS } from '../api/api';
 
 let page = 1;
-let limit = 100;
+let limit = 9;
 const { BASE_URL, EXERCISE_ENDPOINT, FILTERS_ENDPOINT } = API_PROPS;
 
 export async function fetchCategories() {
