@@ -1,5 +1,6 @@
 import * as basicLightbox from 'basiclightbox';
-import 'basicLightbox/dist/basicLightbox.min.css';
+// import 'basicLightbox/dist/basicLightbox.min.css';
+import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { createModalExerciseMarkup } from './templates/modal-exercise-markup';
 
 const CLOSE_KEY = 'Escape';
