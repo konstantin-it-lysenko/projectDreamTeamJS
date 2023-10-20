@@ -37,7 +37,7 @@ function fetchSubscription(event) {
     })
     .catch(error => {
       if (error.response.status === 409) {
-        Notiflix.Notify.failure('Subscription already exists');
+        Notiflix.Notify.warning('Subscription already exists');
       }
       console.dir(error);
     });
