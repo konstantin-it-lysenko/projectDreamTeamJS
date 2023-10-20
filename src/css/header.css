@@ -1,21 +1,155 @@
 .header {
-  padding: 20px 0;
+  background-color: #f4f4f4;
 }
 
-.nav-list {
+.container {
+  max-width: 375px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.header-logo-container {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: block;
+}
+
+.header-logo-icon {
+  fill: #242424;
+}
+
+.header-nav-container,
+.header-social,
+#mobile-menu {
+  display: none;
+}
+
+.header-burger {
+  display: block;
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.header-burger::before,
+.header-burger::after,
+.burger-1,
+.burger-2 {
+  content: '';
+  background-color: #242424;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  right: 0;
+}
+
+.header-burger::before {
+  top: 1px;
+}
+
+.header-burger::after {
+  bottom: 0;
+}
+.burger-1 {
+  top: 11px;
+}
+.burger-2 {
+  top: 21px;
+}
+
+.mobile-menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  overflow: auto;
+  width: 100vw;
+  height: 100%;
+  background-color: #242424;
+}
+
+.close-button {
+  fill: #f4f4f4;
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.mobile-menu-wrap {
+}
+.mobile-menu-list {
+}
+.mobile-menu-item {
+}
+.mobile-menu-link {
+}
+.mobile-menu-social {
+}
+.mobile-menu-social-list {
+}
+.mobile-menu-social-item {
+}
+.mobile-menu-social-link {
+}
+.mobile-menu-social-icon {
+}
+
+/* 
+.header-nav {
+}
+
+.header-nav-list {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 40px;
 }
 
-.nav-link {
+.header-nav-item {
+}
+
+.header-nav-link {
   font-weight: 500;
   letter-spacing: 0.02em;
   line-height: 1.5;
+  cursor: pointer;
 }
 
-.nav-link:hover,
-.nav-link:focus {
+.header-nav-link:hover,
+.header-nav-link:focus {
   color: #747bff;
+} */
+
+/* .header-social-list {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
 }
+.header-social-item {
+}
+.header-social-link {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  cursor: pointer; / не для мобільного меню
+  border-radius: 10px;
+  border: 1px solid rgba(36, 36, 36, 0.1);
+}
+.header-social-icon {
+  fill: #242424;
+  opacity: 0.8;
+} */
