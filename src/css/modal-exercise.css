@@ -97,7 +97,7 @@
 .modal-exercise-btn-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .modal-exercise-btn {
@@ -120,6 +120,8 @@
 
 .add-to-favorite-btn span {
   display: block;
+  width: 18px;
+  height: 18px;
 }
 
 .modal-exercise-heart-icon {
@@ -211,9 +213,18 @@
     margin-bottom: 0;
   }
 
+  .modal-exercise-btn-list {
+    gap: 8px;
+  }
+
   .modal-exercise-btn {
     font-size: 16px;
     line-height: 1.5;
+  }
+
+  .add-to-favorite-btn span {
+    width: 20px;
+    height: 20px;
   }
 
   .modal-exercise-heart-icon {
