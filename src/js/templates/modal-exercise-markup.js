@@ -15,7 +15,7 @@ export function createModalExerciseMarkup() {
         data-modal-exercise="close"
       >
         <svg class="modal-exercise-close-icon">
-          <use href="../img/sport-sprite.svg#icon-cross"></use>
+          <use href="./img/sport-sprite.svg#icon-cross"></use>
         </svg>
       </button>
       <h3 class="modal-exercise-title">Air bike</h3>
@@ -60,7 +60,7 @@ export function createModalExerciseMarkup() {
         Add to favorites
         <span>
           <svg class="modal-exercise-heart-icon">
-            <use href="../img/sport-sprite.svg#icon-heart"></use></svg
+            <use href="./img/sport-sprite.svg#icon-heart"></use></svg
         ></span>
       </button>
     </li>
