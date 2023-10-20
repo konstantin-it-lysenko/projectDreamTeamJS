@@ -1,9 +1,19 @@
-export function createModalExerciseMarkup() {
+export function createModalExerciseMarkup({
+  gifUrl,
+  name,
+  rating,
+  target,
+  bodyPart,
+  equipment,
+  popularity,
+  burnedCalories,
+  description,
+}) {
   return `<section class="modal modal-exercise">
   <div class="modal-exercise-container">
     <img
-      src="https://www.sony.eu/alphauniverse/assets/resized/2020/11/petar-sabol-sony-alpha-7RIII-two-butterflies-on-a-plant-stem-360x360-1_square_360x360.jpg"
-      alt="test image"
+      src="${gifUrl}"
+      alt="${name}"
       class="modal-exercise-img"
       width="360"
       height="360"
@@ -15,43 +25,44 @@ export function createModalExerciseMarkup() {
         data-modal-exercise="close"
       >
         <svg class="modal-exercise-close-icon">
-          <use href="../../img/sport-sprite.svg#icon-cross"></use>
+          <use href="./img/sport-sprite.svg#icon-cross"></use>
         </svg>
       </button>
-      <h3 class="modal-exercise-title">Air bike</h3>
+      <h3 class="modal-exercise-title">${makeUpperCaseFirstLetter(name)}</h3>
       <div class="modal-exercise-rating-container">
-        <p class="modal-exercise-rating-number">4.0</p>
+        <p class="modal-exercise-rating-number">${rating}</p>
       </div>
       <div class="modal-exercise-tag-container">
         <ul class="modal-exercise-tag-list">
           <li>
             <p class="modal-exercise-tag-key">Target</p>
-            <p class="modal-exercise-tag-value">Abs</p>
+            <p class="modal-exercise-tag-value">${makeUpperCaseFirstLetter(
+              target
+            )}</p>
           </li>
           <li>
             <p class="modal-exercise-tag-key">Body Part</p>
-            <p class="modal-exercise-tag-value">Waist</p>
+            <p class="modal-exercise-tag-value">${makeUpperCaseFirstLetter(
+              bodyPart
+            )}</p>
           </li>
           <li>
             <p class="modal-exercise-tag-key">Equipment</p>
-            <p class="modal-exercise-tag-value">Body weight</p>
+            <p class="modal-exercise-tag-value">${makeUpperCaseFirstLetter(
+              equipment
+            )}</p>
           </li>
           <li>
             <p class="modal-exercise-tag-key">Popular</p>
-            <p class="modal-exercise-tag-value">150</p>
+            <p class="modal-exercise-tag-value">${popularity}</p>
           </li>
           <li>
             <p class="modal-exercise-tag-key">Burned Calories</p>
-            <p class="modal-exercise-tag-value">323/3 min</p>
+            <p class="modal-exercise-tag-value">${burnedCalories}</p>
           </li>
         </ul>
       </div>
-      <p class="modal-exercise-description">
-        This refers to your core muscles, which include the rectus abdominis,
-        obliques, and transverse abdominis. They're essential for maintaining
-        posture, stability, and generating force in many movements. Exercises
-        that target the abs include crunches, leg raises, and planks.
-      </p>
+      <p class="modal-exercise-description">${description}</p>
     </div>
   </div>
   <ul class="modal-exercise-btn-list">
@@ -60,7 +71,7 @@ export function createModalExerciseMarkup() {
         Add to favorites
         <span>
           <svg class="modal-exercise-heart-icon">
-            <use href="../../img/sport-sprite.svg#icon-heart"></use></svg
+            <use href="./img/sport-sprite.svg#icon-heart"></use></svg
         ></span>
       </button>
     </li>
@@ -72,4 +83,8 @@ export function createModalExerciseMarkup() {
   </ul>
 </section>
   `;
+}
+
+function makeUpperCaseFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
