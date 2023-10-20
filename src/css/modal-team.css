@@ -69,15 +69,29 @@
 }
 
 .team-soc-list {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
   margin-top: 15px;
-  /* display: block; */
-  display: none;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
-.is-hidden {
+.team-link {
+  border-radius: 10px;
+  border: 1px solid rgba(36, 36, 36, 0.1);
+  background: rgba(36, 36, 36, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+}
+
+.team-icon {
+  fill: #f4f4f4;
+}
+
+.hidden {
   display: none;
 }
 
@@ -85,12 +99,20 @@
   border: 1px solid #f4f4f4;
   border-radius: 30px;
   background: #f4f4f4;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 295px;
   padding: 12px 14px;
   text-align: center;
   gap: 10px;
   margin-top: 20px;
+}
+.project-icon {
+  fill: #242424;
+}
+.active-dev {
+  display: flex;
 }
 
 @media screen and (min-width: 768px) {
@@ -106,4 +128,10 @@
     width: 350px;
     margin-top: 32px;
   }
+}
+
+.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
