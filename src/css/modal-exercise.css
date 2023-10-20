@@ -1,4 +1,5 @@
 .modal-exercise {
+  position: relative;
   background-color: #242424;
   color: #f4f4f4;
   padding: 40px 20px;
@@ -19,9 +20,19 @@
   border-radius: 12px;
 }
 
-.modal-exercise-close-btn,
+.modal-exercise-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+}
+
 .modal-exercise-close-icon {
-  display: none;
+  stroke: #f4f4f4;
+  width: 24px;
+  height: 24px;
 }
 
 .modal-exercise-title {
@@ -96,9 +107,26 @@
   line-height: 1.29;
 }
 
+/* TODO Change gap to 8px (when font-family will be correct) */
+
 .add-to-favorites-btn {
   background: #f4f4f4;
   color: #242424;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-to-favorite-btn span {
+  display: block;
+}
+
+.modal-exercise-heart-icon {
+  width: 18px;
+  height: 18px;
+  stroke: #242424;
+  fill: transparent;
 }
 
 .give-rating-btn {
@@ -127,6 +155,18 @@
     display: flex;
     gap: 28px;
     margin-bottom: 64px;
+  }
+
+  .modal-exercise-close-btn {
+    top: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .modal-exercise-close-icon {
+    width: 28px;
+    height: 28px;
   }
 
   .modal-exercise-img {
@@ -174,6 +214,11 @@
   .modal-exercise-btn {
     font-size: 16px;
     line-height: 1.5;
+  }
+
+  .modal-exercise-heart-icon {
+    width: 20px;
+    height: 20px;
   }
 }
 
