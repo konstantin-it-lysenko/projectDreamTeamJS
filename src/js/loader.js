@@ -1,28 +1,16 @@
-let mask = document.querySelector(".mask");
-console.log(mask);
-window.addEventListener("load", makesDisappear);
-
-
-
-function makesDisappear () {
-    mask.classList.add("hide");
-    setTimeout(() => {mask.remove();
-    }, 600);
+// Функція для відображення лоадера
+export function showLoader() {
+    const loader = document.querySelector('div');
+    loader.classList.replace("hide", "mask")
 }
 
-// let mask = document.querySelector(".mask");
-
-// export function name(params) {
-
-// }
-// export function name(params) {
-    
-// }
-
-// window.addEventListener("load", makesDisappear);
-
-// function makesDisappear () {
-//     mask.classList.add("hide");
-//     setTimeout(() => {mask.remove();
-//     }, 600);
-// }
+// Функція для приховування лоадера
+export function hideLoader() {
+    const loader = document.querySelector('div');
+    loader.classList.replace("mask", "hide")
+}
+showLoader();
+// Викликати функцію showLoader при завантаженні сторінки
+window.addEventListener('load', () => {
+    hideLoader(); // Приховуємо лоадер, оскільки сторінка вже завантажена
+});
