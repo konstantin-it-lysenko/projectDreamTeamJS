@@ -111,6 +111,9 @@
 .project-icon {
   fill: #242424;
 }
+.active-dev {
+  display: flex;
+}
 
 @media screen and (min-width: 768px) {
   .team-modal {
