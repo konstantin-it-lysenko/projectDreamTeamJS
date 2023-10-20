@@ -1,40 +1,26 @@
-import * as basicLightbox from 'basiclightbox';
-import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import { fetchExerciseModalById } from './api-service/modal-exercise-api';
 import { createModalExerciseMarkup } from './templates/modal-exercise-markup';
+import { ModalBox } from './modal-class-box';
 
-const CLOSE_KEY = 'Escape';
-
-const openModalExerciseBtnRef = document.querySelector(
-  '[data-modal-exercise="open"]'
-);
+const openModalSelector = '[data-modal-exercise="open"]';
+const closeModalSelector = '[data-modal-exercise="close"]';
+const openModalExerciseBtnRef = document.querySelector(openModalSelector);
 
 openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
 
 async function handleOpenModalClick() {
-  const exericiseData = await fetchExerciseModalById();
+  try {
+    const exericiseData = await fetchExerciseModalById();
+    const modalBox = new ModalBox(
+      createModalExerciseMarkup,
+      closeModalSelector,
+      exericiseData
+    );
 
-  const instance = basicLightbox.create(
-    createModalExerciseMarkup(exericiseData),
-    {
-      onShow: instance => {
-        instance
-          .element()
-          .querySelector('[data-modal-exercise="close"]').onclick =
-          instance.close;
-        window.addEventListener('keydown', handleCloseModalKeyDown);
-      },
-      onClose: instance => {
-        window.removeEventListener('keydown', handleCloseModalKeyDown);
-      },
-    }
-  );
-
-  function handleCloseModalKeyDown(event) {
-    if (event.code === CLOSE_KEY) {
-      instance.close();
-    }
+    modalBox.open();
+  } catch (error) {
+    console.error(
+      "The weather is nice today, isn't it? But in fact, It's just an error"
+    );
   }
-
-  instance.show();
 }
