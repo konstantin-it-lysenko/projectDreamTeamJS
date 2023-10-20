@@ -1,7 +1,8 @@
 .team-btn-open {
   padding: 15px;
-  background-color: #14e922;
   cursor: pointer;
+  background-color: rgba(4, 4, 4, 0.4);
+  border-radius: 20px;
 }
 
 .team-backdrop {
@@ -23,8 +24,7 @@
   border-radius: 20px;
   background-color: #242424;
   color: #f4f4f4;
-  padding: 20px;
-  padding-top: 30px;
+  padding: 40px 20px;
 }
 
 .team-btn-close {
@@ -44,6 +44,7 @@
 }
 
 .team-close-icon {
+  width: 24px;
   stroke: #f4f4f4;
 }
 
@@ -61,30 +62,48 @@
   gap: 10px;
 }
 
-.team-soc {
+.team-name {
+  color: #f4f4f4;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.team-soc-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 15px;
+  /* display: block; */
   display: none;
 }
-.team-icon {
-  fill: #fff;
-}
+
 .is-hidden {
   display: none;
+}
+
+.project-git {
+  border: 1px solid #f4f4f4;
+  border-radius: 30px;
+  background: #f4f4f4;
+  display: block;
+  width: 295px;
+  padding: 12px 14px;
+  text-align: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 @media screen and (min-width: 768px) {
   .team-modal {
     width: 430px;
     min-height: 412px;
-    border-radius: 20px;
-    padding: 20px;
+    padding: 40px;
   }
-}
-
-@media screen and (min-width: 1280px) {
-  .team-modal {
-    width: 430px;
-    min-height: 412px;
-    border-radius: 20px;
-    padding: 20px;
+  .team-close-icon {
+    width: 28px;
+  }
+  .project-git {
+    width: 350px;
+    margin-top: 32px;
   }
 }
