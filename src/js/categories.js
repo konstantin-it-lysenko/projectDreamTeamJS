@@ -31,7 +31,6 @@ function catsListBtnHandler(e) {
 }
 fetchCategories()
   .then(resp => {
-    console.log(resp);
     catsList.insertAdjacentHTML('beforeend', createCategoryMarkup(resp));
     catsList.addEventListener('click', catsListBtnHandler);
   })
