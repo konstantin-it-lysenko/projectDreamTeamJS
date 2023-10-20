@@ -13,6 +13,6 @@ export async function fetchCategories() {
 
   const categoriesUrl = `${BASE_URL}${FILTERS_ENDPOINT}?${params}`;
   const response = await axios.get(categoriesUrl);
-
+  console.log('response.data.results', response.data.results);
   return response.data.results;
 }
