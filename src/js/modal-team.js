@@ -27,7 +27,7 @@ const developers = [
   },
   {
     name: 'Ihor Pozhematkin',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/ihor-pozhematkin-921678297',
     github: 'https://github.com/IhorPozhematkin',
   },
   {
@@ -49,6 +49,11 @@ const developers = [
     name: 'Anatolii Artiukhov',
     linkedin: 'https://github.com/ArtanFS',
     github: 'https://github.com/ArtanFS',
+  },
+  {
+    name: 'Oleh Mahutsii',
+    linkedin: 'https://www.linkedin.com/in/oleg-undefined-315b87296/',
+    github: 'https://github.com/ProstoOleh',
   },
   // {
   //   name: '',
@@ -81,7 +86,7 @@ function createDevMarkup(developers) {
       const { name, linkedin, github } = developer;
       return `<li class="team-item">
         <h3 class="team-name">${name}</h3>
-        <ul class="team-soc-list">
+        <ul class="team-soc-list hidden">
           <li class="team-soc-item">
             <a href="${linkedin}"
               class="team-link" target="_blank" rel="noopener noreferrer" >
