@@ -13,11 +13,11 @@
       referrerpolicy="no-referrer"
     />
     
-    <link rel="stylesheet" href="/projectDreamTeamJS/assets/styles-86894598.css">
+    <link rel="stylesheet" href="/projectDreamTeamJS/assets/styles-8ea8c6a8.css">
   </head>
   <body>
     <header class="header">
-  <div class="header-container container">
+  <div class="header-container">
     <div class="header-logo-container">
       <a href="../index.html" id="logo-link">
         <svg class="header-logo-icon" width="132" height="24">
@@ -28,11 +28,13 @@
     <div class="header-nav-container">
       <nav class="header-nav">
         <ul class="header-nav-list">
-          <li class="header-nav-item">
+          <li class="header-nav-item active" id="home-item">
             <a href="../index.html" class="header-nav-link">Home</a>
           </li>
-          <li class="header-nav-item">
-            <a href="../favourites.html" class="header-nav-link">Favorites</a>
+          <li class="header-nav-item" id="favorites-item">
+            <a href="../favourites-page.html" class="header-nav-link"
+              >Favorites</a
+            >
           </li>
         </ul>
       </nav>
@@ -87,14 +89,16 @@
     <!-- ================== МОБІЛЬНЕ  МЕНЮ====================== -->
 
     <div class="mobile-menu-container" id="mobile-menu">
-      <span class="close-button"></span>
+      <div class="close-button"></div>
       <div class="mobile-menu-wrap">
         <ul class="mobile-menu-list">
           <li class="mobile-menu-item">
             <a href="../index.html" class="mobile-menu-link">Home</a>
           </li>
           <li class="mobile-menu-item">
-            <a href="../favourites.html" class="mobile-menu-link">Favorites</a>
+            <a href="../favourites-page.html" class="mobile-menu-link"
+              >Favorites</a
+            >
           </li>
         </ul>
       </div>
@@ -108,7 +112,7 @@
               rel="noopener noreferrer"
               title="Facebook GoITclub"
             >
-              <svg class="mobile-menu-social-icon" width="40" height="40">
+              <svg class="mobile-menu-social-icon" width="28" height="28">
                 <use href="/projectDreamTeamJS/assets/sport-sprite-cd95b244.svg#icon-facebook"></use>
               </svg>
             </a>
@@ -121,7 +125,7 @@
               rel="noopener noreferrer"
               title="Instagram GoITclub"
             >
-              <svg class="mobile-menu-social-icon" width="40" height="40">
+              <svg class="mobile-menu-social-icon" width="28" height="28">
                 <use href="/projectDreamTeamJS/assets/sport-sprite-cd95b244.svg#icon-instagram"></use>
               </svg>
             </a>
@@ -134,7 +138,7 @@
               rel="noopener noreferrer"
               title="Youtube GoIT"
             >
-              <svg class="mobile-menu-social-icon" width="40" height="40">
+              <svg class="mobile-menu-social-icon" width="28" height="28">
                 <use href="/projectDreamTeamJS/assets/sport-sprite-cd95b244.svg#icon-youtube"></use>
               </svg>
             </a>
