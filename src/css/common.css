@@ -1,6 +1,6 @@
 body {
-  color: #242424;
-  font-family: Neue Montreal;
+  color: var(--primary-black-color);
+  font-family: var(--primary-fontfont-family);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -13,13 +13,15 @@ h3 {
 }
 
 :root {
-  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif; */
+  --primary-fontfont-family: Neue Montreal, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 
-  color: #242424;
-  background-color: rgba(255, 255, 255, 0.87);
+  --primary-black-color: #242424;
+  --primary-background-color: rgba(255, 255, 255, 0.87);
+  --primary-white-color: #f4f4f4;
+  --primary-color-c6cdd1: #c6cdd1;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -47,7 +49,7 @@ h3 {
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1440px) {
   .container {
     max-width: 1440px;
   }

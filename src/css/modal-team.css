@@ -1,0 +1,109 @@
+.team-btn-open {
+  padding: 15px;
+  cursor: pointer;
+  background-color: rgba(4, 4, 4, 0.4);
+  border-radius: 20px;
+}
+
+.team-backdrop {
+  position: fixed;
+  top: 0;
+  z-index: 69;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(4, 4, 4, 0.4);
+}
+
+.team-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 335px;
+  min-height: 412px;
+  border-radius: 20px;
+  background-color: #242424;
+  color: #f4f4f4;
+  padding: 40px 20px;
+}
+
+.team-btn-close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  right: 14px;
+  top: 14px;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #f4f4f4;
+}
+
+.team-close-icon {
+  width: 24px;
+  stroke: #f4f4f4;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.team-item {
+  border: 1px solid #f4f4f4;
+  border-radius: 30px;
+  padding: 12px 14px;
+  text-align: center;
+  gap: 10px;
+}
+
+.team-name {
+  color: #f4f4f4;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.team-soc-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 15px;
+  /* display: block; */
+  display: none;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.project-git {
+  border: 1px solid #f4f4f4;
+  border-radius: 30px;
+  background: #f4f4f4;
+  display: block;
+  width: 295px;
+  padding: 12px 14px;
+  text-align: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .team-modal {
+    width: 430px;
+    min-height: 412px;
+    padding: 40px;
+  }
+  .team-close-icon {
+    width: 28px;
+  }
+  .project-git {
+    width: 350px;
+    margin-top: 32px;
+  }
+}
