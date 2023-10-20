@@ -1,6 +1,3 @@
-.sidebar {
-  margin: 80px 0;
-}
 .sidebar-list {
   display: flex;
   flex-direction: column;
@@ -12,7 +9,7 @@
   overflow: hidden;
   width: 335px;
   height: 188px;
-  background: #242424;
+  background-color: var(--primary-black-color);
 }
 .sidebar-quotewrap {
   display: flex;
@@ -24,7 +21,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #f4f4f4;
+  background-color: var(--primary-white-color);
   opacity: 0.2;
 }
 .sidebar-quoteitem {
@@ -33,8 +30,8 @@
 }
 .sidebar-quote h2 {
   display: block;
-  color: #f4f4f4;
-  font-family: Neue Montreal;
+  color: var(--primary-white-color);
+  font-family: var(--primary-fontfont-family);
   font-size: 20px;
   font-weight: 500;
   line-height: 1;
@@ -45,7 +42,7 @@
   width: 243px;
   margin: 6px 0 16px 0;
   color: rgba(244, 244, 244, 0.6);
-  font-family: Neue Montreal;
+  font-family: var(--primary-fontfont-family);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.286;
@@ -53,8 +50,8 @@
 }
 .sidebar-quote h3 {
   display: block;
-  color: #f4f4f4;
-  font-family: Neue Montreal;
+  color: var(--primary-white-color);
+  font-family: var(--primary-fontfont-family);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.286;
@@ -65,12 +62,21 @@
   left: 6px;
   width: 20px;
   height: 20px;
-  fill: #f4f4f4;
+  fill: var(--primary-white-color);
 }
 .sidebar-quotesvg2 {
   width: 20px;
   height: 20px;
-  fill: #f4f4f4;
+  fill: var(--primary-white-color);
+}
+#refreshQuoteButton {
+  position: relative;
+  bottom: 16px;
+  left: 270px;
+  fill: var(--primary-white-color);
+  background-color: transparent;
+  transition: transform 250ms linear;
+  rotate: 0;
 }
 .sidebar-photo {
   border-radius: 20px;
@@ -85,12 +91,12 @@
   padding: 20px;
   border-radius: 20px;
   overflow: hidden;
-  background: #fff;
+  background-color: #fff;
 }
 .sidebar-info h2 {
   display: block;
-  color: #242424;
-  font-family: Neue Montreal;
+  color: var(--primary-black-color);
+  font-family: var(--primary-fontfont-family);
   font-size: 20px;
   font-weight: 500;
   line-height: 1;
@@ -99,21 +105,23 @@
   display: block;
   margin: 4px 0 16px 0;
   color: rgba(36, 36, 36, 0.6);
-  font-family: Neue Montreal;
+  font-family: var(--primary-fontfont-family);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.286;
 }
 .sidebar-info p {
   display: block;
+  width: 245px;
   height: 105px;
-  overflow: hidden;
-  color: #242424;
-  text-overflow: ellipsis;
-  font-family: Neue Montreal;
-  font-size: 14px;
+  padding: 10px 0;
+  color: var(--primary-black-color);
+  font-family: var(--primary-fontfont-family);
+  font-size: 14.3px;
   font-weight: 400;
   line-height: 1.286;
+  letter-spacing: 0.0001em;
+  overflow: hidden;
 }
 .sidebar-info::before {
   position: absolute;
@@ -122,13 +130,13 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #242424;
+  background-color: var(--primary-black-color);
 }
 .sidebar-infosvg {
   position: relative;
   top: 6px;
   left: 6px;
-  fill: #f4f4f4;
+  fill: var(--primary-white-color);
 }
 .sidebar-infowrap {
   display: flex;
@@ -146,6 +154,11 @@
   }
   .sidebar-quote p {
     width: 190px;
+  }
+  .sidebar-info p {
+    width: 180px;
+    padding: 5px 0;
+    font-size: 13px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -193,7 +206,9 @@
     margin: 6px 0 16px 0;
   }
   .sidebar-info p {
+    width: 270px;
     height: 97px;
+    font-size: 13.5px;
   }
 }
 @media screen and (min-width: 1440px) {
@@ -218,6 +233,10 @@
     height: 315px;
   }
   .sidebar-info p {
+    width: 314px;
     height: 163px;
+    font-size: 13.5px;
+    font-size: 13px;
+    padding: 0;
   }
 }
