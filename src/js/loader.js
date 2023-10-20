@@ -9,6 +9,7 @@ function makesDisappear () {
     setTimeout(() => {mask.remove();
     }, 600);
 }
+
 // let mask = document.querySelector(".mask");
 
 // export function name(params) {
