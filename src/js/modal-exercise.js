@@ -9,13 +9,18 @@ const openModalExerciseBtnRef = document.querySelector(openModalSelector);
 openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
 
 async function handleOpenModalClick() {
-  const exericiseData = await fetchExerciseModalById();
+  try {
+    const exericiseData = await fetchExerciseModalById();
+    const modalBox = new ModalBox(
+      createModalExerciseMarkup,
+      closeModalSelector,
+      exericiseData
+    );
 
-  const modalBox = new ModalBox(
-    createModalExerciseMarkup,
-    closeModalSelector,
-    exericiseData
-  );
-
-  modalBox.open();
+    modalBox.open();
+  } catch (error) {
+    console.error(
+      "The weather is nice today, isn't it? But in fact, It's just an error"
+    );
+  }
 }
