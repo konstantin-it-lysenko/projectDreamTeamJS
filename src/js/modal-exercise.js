@@ -4,11 +4,11 @@ import { createModalExerciseMarkup } from './templates/modal-exercise-markup';
 
 const CLOSE_KEY = 'Escape';
 
-// const openModalExerciseBtnRef = document.querySelector(
-//   '[data-modal-exercise="open"]'
-// );
+const openModalExerciseBtnRef = document.querySelector(
+  '[data-modal-exercise="open"]'
+);
 
-// openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
+openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
 
 function handleOpenModalClick() {
   const instance = basicLightbox.create(createModalExerciseMarkup(), {
