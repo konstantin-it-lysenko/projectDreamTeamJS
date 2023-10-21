@@ -31,10 +31,18 @@ function onDevClick(e) {
   const currentActiveDevSoc = document.querySelector('.active-devel');
   if (currentActiveDevSoc) {
     currentActiveDevSoc.classList.remove('active-devel');
+    devSocClick.classList.add('active-devel');
   }
 
-  //
-  devSocClick.classList.add('active-devel');
+  // if (devSocClick.classList.contains('active-devel')) {
+  //   devSocClick.classList.remove('active-devel');
+  // }
+
+  // if (currentActiveDevSoc === devSocClick) {
+  //   currentActiveDevSoc.classList.remove('active-devel');
+  // }
+
+  devSocClick.classList.toggle('active-devel');
 }
 
 function onOpenClick() {
