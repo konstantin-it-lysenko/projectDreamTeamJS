@@ -23,6 +23,8 @@ h3 {
   --primary-white-color: #f4f4f4;
   --primary-color-c6cdd1: #c6cdd1;
 
+  --transition: 300ms linear;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
