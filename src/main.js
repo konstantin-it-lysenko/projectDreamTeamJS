@@ -3,7 +3,7 @@ import './js/burger-menu';
 import './js/quote';
 import './js/additional';
 import './js/categories';
-import './js/exercises-filter';
+import './js/exercises';
 import './js/footer';
 import './js/favourites';
 import './js/modal-exercise';
