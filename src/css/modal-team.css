@@ -22,7 +22,7 @@
   transform: translate(-50%, -50%);
   width: 95%;
   max-width: 335px;
-  height: 412px;
+  height: 440px;
 
   border-radius: 20px;
   background-color: var(--primary-black-color);
@@ -34,7 +34,7 @@
 .team-wrapper {
   overflow-y: auto;
   max-width: 305px;
-  max-height: 342px;
+  max-height: 360px;
   padding-right: 40px;
 }
 
@@ -95,6 +95,9 @@
   top: 12px;
   fill: var(--primary-white-color);
 }
+.arrow-up {
+  rotate: 180deg;
+}
 
 .team-name {
   color: var(--primary-white-color);
@@ -153,8 +156,13 @@
 @media screen and (min-width: 768px) {
   .team-modal {
     max-width: 430px;
-    height: 412px;
+    height: 540px;
     padding: 40px;
+  }
+  .team-wrapper {
+    max-width: 410px;
+    max-height: 460px;
+    padding-right: 30px;
   }
   .team-close-icon {
     width: 28px;
@@ -163,11 +171,6 @@
     max-width: 350px;
     margin-top: 32px;
   }
-  .team-wrapper {
-    max-width: 410px;
-    max-height: 330px;
-    padding-right: 30px;
-  }
 }
 
 /*  */
@@ -175,37 +178,4 @@
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-}
-
-.team-name::before,
-.team-name::after {
-  content: '';
-  width: 10px;
-  height: 1px;
-  background-color: var(--primary-white-color);
-  position: absolute;
-  top: 8px;
-  transition: all 0.4s ease;
-}
-
-.team-name::before {
-  transform: rotate(40deg);
-  right: 7px;
-}
-.team-name::after {
-  transform: rotate(-40deg);
-  right: 0px;
-}
-.active-item-dev {
-  background-color: aqua;
-}
-.team-name.active-item-dev::after,
-.team-name.active-item-dev::before {
-  background-color: red;
-}
-.team-name.active-item-dev::before {
-  transform: rotate(-40deg);
-}
-.team-name.active-item-dev::after {
-  transform: rotate(40deg);
 }

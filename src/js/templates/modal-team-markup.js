@@ -3,10 +3,12 @@ export function createDevMarkup(developers) {
     .map(developer => {
       const { name, linkedin, github } = developer;
       return `<li class="team-item">
-
+              <svg class="more-icon" width="20" height="20">
+                  <use href="./img/sport-sprite.svg#icon-more"></use>
+              </svg>
         <h3 class="team-name">${name}</h3>
         <ul class="team-soc-list">
-          <li class="team-soc-item">
+          <li class="team-soc-item"> 
             <a href="${linkedin}"
               class="team-link" target="_blank" rel="noopener noreferrer" >
               <svg class="team-icon" width="28" height="28">
@@ -26,7 +28,3 @@ export function createDevMarkup(developers) {
     })
     .join('');
 }
-
-// <svg class="more-icon" width="20" height="20">
-//   <use href="./img/sport-sprite.svg#icon-more"></use>
-// </svg>;
