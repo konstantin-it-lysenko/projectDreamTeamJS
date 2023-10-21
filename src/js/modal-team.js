@@ -15,15 +15,23 @@ const devSocials = [...teamList.children];
 
 function returnHidden() {
   devSocials.forEach(dev => {
-    dev.lastElementChild.classList.add('hidden');
+    dev.lastElementChild.classList.remove('active-devel');
   });
 }
 
 function onDevClick(e) {
-  const currentActiveDevItem = e.target.closest('.team-item');
-  const currentDevSoc = currentActiveDevItem.querySelector('.team-soc-list');
+  const devClick = e.target.closest('.team-item');
+  if (!devClick) {
+    return;
+  }
+  const devSocClick = devClick.querySelector('.team-soc-list');
 
-  currentDevSoc.classList.remove('hidden');
+  const currentActiveDevSoc = document.querySelector('.active-devel');
+  if (currentActiveDevSoc) {
+    currentActiveDevSoc.classList.remove('active-devel');
+  }
+  //
+  devSocClick.classList.add('active-devel');
 }
 
 function onOpenClick() {
