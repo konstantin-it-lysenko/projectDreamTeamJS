@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix';
 import { fetchExerciseModalById } from './api-service/modal-exercise-api';
 import {
   createModalExerciseMarkup,
@@ -30,8 +31,8 @@ async function handleOpenModalClick() {
 
     modalBox.open();
   } catch (error) {
-    console.error(
-      "The weather is nice today, isn't it? But in fact, It's just an error"
+    Notify.failure(
+      'Sorry, there are no data matching your category. Please try again.'
     );
   }
 
