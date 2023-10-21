@@ -1,5 +1,6 @@
 const sidebarText = document.querySelector('.sidebar-infotext');
 
+window.addEventListener('load', обрезатьТекст);
 window.addEventListener('resize', truncateText);
 
 function truncateText() {
