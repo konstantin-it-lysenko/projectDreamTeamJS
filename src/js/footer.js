@@ -1,8 +1,5 @@
-import { API_PROPS } from './api/api';
-import axios from 'axios';
 import Notiflix from 'notiflix';
-
-const { BASE_URL, SUBSCR_EDPOINT } = API_PROPS;
+import { fetchPostApi } from './api-service/footer-api';
 
 const formSubmit = document.querySelector('.js-footer-form');
 
@@ -22,29 +19,21 @@ function fetchSubscription(event) {
     email: email,
   };
 
-  axios
-    .post(`${BASE_URL}${SUBSCR_EDPOINT}`, subscriptionData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-
+  fetchPostApi(subscriptionData)
     .then(resp => {
       Notiflix.Notify.success(
         'Were excited to have you on board! 🎉 Thank you f…ep towards improving your fitness and well-being.'
       );
-      console.log('respons', resp);
     })
     .catch(error => {
       if (error.response.status === 409) {
         Notiflix.Notify.warning('Subscription already exists');
       }
-      console.dir(error);
     });
-
-  console.log(13456);
+  formSubmit.reset();
 }
 function isValidEmail(email) {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
   return emailPattern.test(email);
 }
