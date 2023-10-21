@@ -55,11 +55,19 @@
 }
 
 .team-item {
+  position: relative;
   border: 1px solid #f4f4f4;
   border-radius: 30px;
   padding: 12px 14px;
   text-align: center;
   gap: 10px;
+}
+
+.more-icon {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  fill: #f4f4f4;
 }
 
 .team-name {
@@ -69,7 +77,11 @@
 }
 
 .team-soc-list {
-  margin-top: 15px;
+  display: none;
+}
+
+.active-devel {
+  margin-top: 8px;
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -91,10 +103,6 @@
   fill: #f4f4f4;
 }
 
-.hidden {
-  display: none;
-}
-
 .project-git {
   border: 1px solid #f4f4f4;
   border-radius: 30px;
@@ -107,12 +115,10 @@
   text-align: center;
   gap: 10px;
   margin-top: 20px;
+  color: #242424;
 }
 .project-icon {
   fill: #242424;
-}
-.active-dev {
-  display: flex;
 }
 
 @media screen and (min-width: 768px) {

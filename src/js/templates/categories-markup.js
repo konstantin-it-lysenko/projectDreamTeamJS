@@ -1,5 +1,6 @@
 export function createCategoryMarkup(data) {
-	return data.map(createMarkup).join('');
+	return `<ul class="categories-list">${data.map(createMarkup).join('')}</ul>
+	<ul class="cat-pagination-list"></ul>`
 }
 
 function createMarkup({ filter, name, imgURL }) {

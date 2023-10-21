@@ -4,12 +4,13 @@
   color: #f4f4f4;
   padding: 40px 20px;
   border-radius: 20px;
-  /* max-width: 335px; */
   max-width: 90%;
+  max-height: 754px;
   margin: 0 auto;
   flex-shrink: 0;
   font-style: normal;
   font-size: 14px;
+  overflow: auto;
 }
 
 .modal-exercise-img {

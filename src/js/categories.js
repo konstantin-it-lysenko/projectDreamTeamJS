@@ -2,7 +2,7 @@ import { fetchCategories } from './api-service/categories-api';
 import { createCategoryMarkup, createPaginationBtnsMarkup } from './templates/categories-markup';
 
 const refs = {
-  catsList: document.querySelector('.categories-list'),
+  catsList: document.querySelector('.categories-wrapper'),
   catFilterList: document.querySelector('.cat-filter-list'),
   catPaginationList: document.querySelector('.cat-pagination-list'),
 };
