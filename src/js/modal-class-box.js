@@ -18,10 +18,15 @@ export class ModalBox {
     onShow: instance => {
       instance.element().querySelector(this.closeSelector).onclick =
         instance.close;
-      window.addEventListener('keydown', this.handleCloseModalKeyDownBound);
+      document.addEventListener('keydown', this.handleCloseModalKeyDownBound);
+      document.body.style.overflow = 'hidden';
     },
     onClose: () => {
-      window.removeEventListener('keydown', this.handleCloseModalKeyDownBound);
+      document.removeEventListener(
+        'keydown',
+        this.handleCloseModalKeyDownBound
+      );
+      document.body.style.overflow = 'auto';
     },
   };
 
