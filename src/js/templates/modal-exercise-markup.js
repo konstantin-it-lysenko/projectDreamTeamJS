@@ -70,7 +70,7 @@ export function createModalExerciseMarkup({
       <button type="button" class="modal-exercise-btn add-to-favorites-btn js-add-to-favorites-btn">
         Add to favorites
         <span>
-          <svg class="modal-exercise-heart-icon">
+          <svg class="modal-exercise-heart-icon js-modal-exercise-heart-icon">
             <use href="./img/sport-sprite.svg#icon-heart"></use></svg
         ></span>
       </button>
@@ -82,6 +82,25 @@ export function createModalExerciseMarkup({
     </li>
   </ul>
 </section>
+  `;
+}
+
+export function createAddToFavoritesMarkup() {
+  return `
+  Add to favorites
+        <span>
+          <svg class="modal-exercise-heart-icon js-modal-exercise-heart-icon">
+            <use href="./img/sport-sprite.svg#icon-heart"></use></svg
+        ></span>`;
+}
+
+export function createRemoveFromFavoritesMarkup() {
+  return `
+  Remove from favorites
+        <span>
+          <svg class="modal-exercise-heart-icon js-modal-exercise-heart-icon modal-favorite-active-icon">
+            <use href="./img/sport-sprite.svg#icon-heart"></use></svg
+        ></span>
   `;
 }
 
