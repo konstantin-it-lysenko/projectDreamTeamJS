@@ -43,3 +43,69 @@ navItems.forEach(function (nav, index) {
     localStorage.setItem('activeNavItemIndex', index);
   });
 });
+
+// Loading....{XАЛЕПА}
+// document.addEventListener('DOMContentLoaded', () => {
+//   const contentEl = document.querySelector('.content');
+//   const navLinks = document.querySelectorAll('.header-nav-link');
+//   const loadingOverlay = document.querySelector('.loading-overlay');
+
+//   console.log(contentEl.classList.contains('header-fade-out'));
+
+//   function showLoadingOverlay() {
+//     loadingOverlay.style.opacity = '1';
+//   }
+
+//   function hideLoadingOverlay() {
+//     loadingOverlay.style.opacity = '0';
+//   }
+
+//   function loadScripts(url) {
+//     if (url.includes('index')) {
+//     }
+//   }
+
+//   function loadPage(url) {
+//     showLoadingOverlay();
+
+//     fetch(url)
+//       .then(response => response.text())
+//       .then(html => {
+//         const parser = new DOMParser();
+//         const docActive = parser.parseFromString(html, 'text/html');
+//         const newContent = docActive.querySelector('.content').innerHTML;
+
+//         contentEl.classList.add('header-fade-out');
+
+//         contentEl.innerHTML = newContent;
+//         document.title = docActive.title;
+
+//         setTimeout(() => {
+//           contentEl.classList.remove('header-fade-out');
+
+//           history.pushState({}, '', url);
+
+//           hideLoadingOverlay();
+//         }, 500);
+//       })
+//       .then(() => {
+//         loadScripts(url);
+//       });
+//   }
+
+//   navLinks.forEach(navLink => {
+//     navLink.addEventListener('click', event => {
+//       event.preventDefault();
+
+//       const url = event.currentTarget.getAttribute('href');
+
+//       loadPage(url);
+//     });
+//   });
+
+//   loadPage(window.location.pathname);
+
+//   window.addEventListener('popstate', () => {
+//     loadPage(window.location.pathname);
+//   });
+// });
