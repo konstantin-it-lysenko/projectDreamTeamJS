@@ -3,8 +3,8 @@ export function createExercisesMarkup(data) {
 	<ul class="exer-pagination-list"></ul>`;
 }
 
-function createMarkup({ rating, name, burnedCalories, bodyPart, target }) {
-	return `<li class="exercises-item">
+function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
+	return `<li class="exercises-item" data-exercise-id="${_id}">
 			<div class="exercises-header">
 				<div class="exercises-meta-container">
 					<p class="exercises-meta">WORKOUT</p>

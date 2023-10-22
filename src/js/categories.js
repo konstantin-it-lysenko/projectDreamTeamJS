@@ -8,6 +8,7 @@ import {
   createCategoryMarkup,
   createPaginationBtnsMarkup,
 } from './templates/categories-markup';
+import { handleOpenModalClick } from './modal-exercise';
 
 const refs = {
   catsList: document.querySelector('.categories-wrapper'),
@@ -16,8 +17,10 @@ const refs = {
   catFilterInput: document.querySelector('.cat-filter-input'),
 };
 const { catsList, catFilterList, exercisesTitleSpan, catFilterInput } = refs;
+
 let categoryName = '';
 let currentExercise;
+
 catFilterList.addEventListener('click', catFilterBtnHandler);
 catFilterInput.addEventListener('input', catInputHandler);
 
@@ -71,13 +74,23 @@ async function catsListBtnHandler(e) {
   }
 
   currentExercise = e.target.closest('.categories-item').dataset.bodyPart;
+  console.log('Exercise', currentExercise);
   const getExercises = await fetchExercises(categoryName, currentExercise);
 
   catsList.innerHTML = createExercisesMarkup(getExercises);
 
   exercisesTitleSpan.innerHTML = currentExercise;
   catFilterInput.hidden = false;
-//   const resp = await fetchAllExercises(categoryName, currentExercise);
+
+  const openModalBtns = document.querySelectorAll('[data-modal-exercise="open"]').forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      const exerciseId = event.currentTarget.closest('.exercises-item').dataset.exerciseId;
+      console.log(exerciseId);
+      handleOpenModalClick(event, exerciseId);
+    })
+  });
+
+  //   const resp = await fetchAllExercises(categoryName, currentExercise);
 }
 
 function catInputHandler(e) {
