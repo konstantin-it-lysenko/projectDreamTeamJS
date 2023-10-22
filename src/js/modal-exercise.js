@@ -15,11 +15,12 @@ const favoriteIdList = JSON.parse(localStorage.getItem(LS_FAVORITES_ID)) || [];
 
 openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
 
-async function handleOpenModalClick() {
+export async function handleOpenModalClick(
+  _,
+  favoriteId = '64f389465ae26083f39b17a2'
+) {
   let modalBox = {};
-
-  // TODO change favoriteId for dynamic ID
-  const favoriteId = '64f389465ae26083f39b17a2';
+  let ratingValue = 0;
 
   try {
     const exericiseData = await fetchExerciseModalById();
@@ -30,11 +31,15 @@ async function handleOpenModalClick() {
     );
 
     modalBox.open();
+
+    ratingValue = Math.round(exericiseData.rating);
   } catch (error) {
     Notify.failure(
       'Sorry, there are no data matching your category. Please try again.'
     );
   }
+
+  processActiveRatingStars(ratingValue);
 
   const giveRatingBtnRef = document.querySelector('.js-give-rating-btn');
   const addToFavoriteBtnRef = document.querySelector(
@@ -49,9 +54,7 @@ async function handleOpenModalClick() {
     handleAddToFavoriteBtnClick(event, favoriteId, addToFavoriteBtnRef)
   );
 
-  if (favoriteIdList.includes(favoriteId)) {
-    addToFavoriteBtnRef.innerHTML = createRemoveFromFavoritesMarkup();
-  }
+  createRemoveMarkupIfIncludesId(favoriteId, addToFavoriteBtnRef);
 }
 
 function handleGiveRatingBtnClick(_, modalBox) {
@@ -87,8 +90,25 @@ function processRemovalsFromFavorites(favoriteId, addToFavoriteBtnRef) {
   addToFavoriteBtnRef.innerHTML = createAddToFavoritesMarkup();
 }
 
+function createRemoveMarkupIfIncludesId(favoriteId, addToFavoriteBtnRef) {
+  if (favoriteIdList.includes(favoriteId)) {
+    addToFavoriteBtnRef.innerHTML = createRemoveFromFavoritesMarkup();
+  }
+}
+
 function removeLocalStorageIfEmpty() {
   if (favoriteIdList.length === 0) {
     localStorage.removeItem(LS_FAVORITES_ID);
   }
+}
+
+function processActiveRatingStars(ratingValue) {
+  const ratingStarsContainer = document.querySelector(
+    '#modal-exercise-rating-stars'
+  );
+
+  [...ratingStarsContainer.children].forEach((ratingStar, index) => {
+    index < ratingValue &&
+      ratingStar.classList.add('modal-exercise-active-rating-stars');
+  });
 }
