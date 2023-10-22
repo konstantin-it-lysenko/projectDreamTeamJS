@@ -79,7 +79,7 @@ function getFavorExercises() {
       //   Notify.failure(`There are no exercises in your favorites`);
     }
   } catch (err) {
-    Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
+    // Notify.failure(`Oops012! Something went wrong! Try reloading the page!`);
   }
 }
 

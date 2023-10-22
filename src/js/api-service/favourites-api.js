@@ -30,7 +30,7 @@ const load = key => {
 // Test favor exercises
 async function getExercises() {
   const resp = await axios(
-    'https://your-energy.b.goit.study/api/exercises?page=1&limit=6'
+    'https://your-energy.b.goit.study/api/exercises?page=1&limit=26'
   );
   return resp.data;
 }
