@@ -1,0 +1,56 @@
+.scroll-up {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    color: #dcdcdc;
+    cursor: pointer;
+    visibility: hidden;
+    border-radius: 50px;
+    box-shadow: inset 0 0 0 4px #dcdcdc;
+    opacity: 0;
+    transition: 1.5s;
+    transform: translateY(25px);
+}
+.scroll-up::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    /* content: '\25B2'; */
+    }
+    .scroll-up:hover{
+        color: #242424;
+    }
+.scroll-up--active{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.scroll-up__path {
+    box-sizing: border-box;
+    fill: none;
+    stroke:  #242424;
+    stroke-width: 4px;
+    transform: 2s;
+}
+.scroll-up__svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
