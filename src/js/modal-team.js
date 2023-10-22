@@ -14,10 +14,12 @@ backdrop.addEventListener('click', onBackdropClick);
 
 teamList.insertAdjacentHTML('beforeend', createDevMarkup(developers));
 const devSocials = [...teamList.children];
+console.log(devSocials);
 
 function returnHidden() {
   devSocials.forEach(dev => {
     dev.lastElementChild.classList.remove('active-devel');
+    dev.firstElementChild.classList.remove('arrow-up');
   });
 }
 
@@ -27,13 +29,17 @@ function onDevClick(e) {
     return;
   }
   const devSocClick = devClick.querySelector('.team-soc-list');
+  const moreIcon = devClick.querySelector('.more-icon');
 
   const currentActiveDevSoc = document.querySelector('.active-devel');
   if (currentActiveDevSoc) {
     currentActiveDevSoc.classList.remove('active-devel');
+    moreIcon.classList.remove('arrow-up');
+
+    devSocClick.classList.add('active-devel');
   }
 
-  //
+  moreIcon.classList.add('arrow-up');
   devSocClick.classList.add('active-devel');
 }
 

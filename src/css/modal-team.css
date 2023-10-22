@@ -12,6 +12,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(4, 4, 4, 0.4);
+  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .team-modal {
@@ -19,12 +20,36 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 335px;
-  min-height: 412px;
+  width: 95%;
+  max-width: 335px;
+  height: 440px;
+
   border-radius: 20px;
-  background-color: #242424;
-  color: #f4f4f4;
+  background-color: var(--primary-black-color);
+  color: var(--primary-white-color);
   padding: 40px 20px;
+  transition: transform 0.4s ease;
+}
+
+.team-wrapper {
+  overflow-y: auto;
+  max-width: 305px;
+  max-height: 360px;
+  padding-right: 40px;
+}
+
+.team-wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.team-wrapper::-webkit-scrollbar-thumb {
+  background: var(--primary-white-color);
+  border-radius: 20px;
+}
+
+.team-wrapper::-webkit-scrollbar-track {
+  background-color: #929292;
+  border-radius: 8px;
 }
 
 .team-btn-close {
@@ -40,12 +65,12 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: #f4f4f4;
+  color: var(--primary-white-color);
 }
 
 .team-close-icon {
   width: 24px;
-  stroke: #f4f4f4;
+  stroke: var(--primary-white-color);
 }
 
 .team-list {
@@ -56,28 +81,34 @@
 
 .team-item {
   position: relative;
-  border: 1px solid #f4f4f4;
+  border: 1px solid var(--primary-white-color);
   border-radius: 30px;
   padding: 12px 14px;
   text-align: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .more-icon {
   position: absolute;
   right: 20px;
   top: 12px;
-  fill: #f4f4f4;
+  fill: var(--primary-white-color);
+}
+.arrow-up {
+  rotate: 180deg;
 }
 
 .team-name {
-  color: #f4f4f4;
+  color: var(--primary-white-color);
   font-size: 16px;
   font-weight: 400;
+  position: relative;
 }
 
 .team-soc-list {
   display: none;
+  transition: all 0.4s ease;
 }
 
 .active-devel {
@@ -85,6 +116,7 @@
   display: flex;
   gap: 10px;
   justify-content: center;
+  transition: all 0.4s ease;
 }
 
 .team-link {
@@ -100,42 +132,48 @@
 }
 
 .team-icon {
-  fill: #f4f4f4;
+  fill: var(--primary-white-color);
 }
 
 .project-git {
-  border: 1px solid #f4f4f4;
+  border: 1px solid var(--primary-white-color);
   border-radius: 30px;
-  background: #f4f4f4;
+  background: var(--primary-white-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 295px;
+  max-width: 295px;
   padding: 12px 14px;
   text-align: center;
   gap: 10px;
   margin-top: 20px;
-  color: #242424;
+  color: var(--primary-black-color);
 }
 .project-icon {
-  fill: #242424;
+  fill: var(--primary-black-color);
 }
 
 @media screen and (min-width: 768px) {
   .team-modal {
-    width: 430px;
-    min-height: 412px;
+    max-width: 430px;
+    height: 540px;
     padding: 40px;
+  }
+  .team-wrapper {
+    max-width: 410px;
+    max-height: 460px;
+    padding-right: 30px;
   }
   .team-close-icon {
     width: 28px;
   }
   .project-git {
-    width: 350px;
+    max-width: 350px;
     margin-top: 32px;
   }
 }
 
+/*  */
 .is-hidden {
   visibility: hidden;
   opacity: 0;
