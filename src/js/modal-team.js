@@ -3,7 +3,6 @@
 
 const teamModalOpenBtn = document.querySelector('.team-btn-open');
 const teamModalCloseBtn = document.querySelector('.team-btn-close');
-const teamModal = document.querySelector('.team-backdrop');
 const teamList = document.querySelector('.team-list');
 const backdrop = document.querySelector('.team-backdrop');
 
@@ -15,47 +14,24 @@ backdrop.addEventListener('click', onBackdropClick);
 // teamList.insertAdjacentHTML('beforeend', createDevMarkup(developers));
 const devSocials = [...teamList.children];
 
+// ! функції відкриття-закриття модалки і скидання стилів девів
+function onOpenClick() {
+  backdrop.classList.remove('is-hidden');
+  window.addEventListener('keydown', onEscKeyPress);
+}
+
+function onCloseClick() {
+  backdrop.classList.add('is-hidden');
+  window.removeEventListener('keydown', onEscKeyPress);
+
+  returnHidden();
+}
+
 function returnHidden() {
   devSocials.forEach(dev => {
     dev.lastElementChild.classList.remove('active-devel');
     dev.firstElementChild.classList.remove('arrow-up');
   });
-}
-
-function onDevClick(e) {
-  const devClick = e.target.closest('.team-item');
-  if (!devClick) {
-    return;
-  }
-  const devSocClick = devClick.querySelector('.team-soc-list');
-  const moreIcon = devClick.querySelector('.more-icon');
-
-  const currentActiveDevSoc = document.querySelector('.active-devel');
-  if (currentActiveDevSoc) {
-    currentActiveDevSoc.classList.remove('active-devel');
-
-    devSocClick.classList.add('active-devel');
-  }
-
-  const currentMoreArrow = document.querySelector('.arrow-up');
-  if (currentMoreArrow) {
-    currentMoreArrow.classList.remove('arrow-up');
-    moreIcon.classList.add('arrow-up');
-  }
-
-  moreIcon.classList.add('arrow-up');
-  devSocClick.classList.add('active-devel');
-}
-
-function onOpenClick() {
-  teamModal.classList.remove('is-hidden');
-  window.addEventListener('keydown', onEscKeyPress);
-}
-function onCloseClick() {
-  teamModal.classList.add('is-hidden');
-  window.removeEventListener('keydown', onEscKeyPress);
-
-  returnHidden();
 }
 
 function onEscKeyPress(e) {
@@ -73,24 +49,52 @@ function onBackdropClick(e) {
   }
 }
 
-// ! АКОРДЕОН
-const teamName = document.querySelectorAll('.team-item');
+// ! інші функції
 
-let i;
+// function onDevClick(e) {
+//   const devClick = e.target.closest('.team-item');
+//   if (!devClick) {
+//     return;
+//   }
+//   const devSocClick = devClick.querySelector('.team-soc-list');
+// const moreIcon = devClick.querySelector('.more-icon');
 
-for (let i = 0; i < teamName.length; i += 1) {
-  teamName[i].addEventListener('click', function () {
-    /* Toggle between adding and removing the "active" class,
-        to highlight the button that controls the panel */
+//   const currentActiveDevSoc = document.querySelector('.active-devel');
+//   if (currentActiveDevSoc) {
+//     currentActiveDevSoc.classList.remove('active-devel');
 
-    this.classList.toggle('active-developer');
+//     devSocClick.classList.add('active-devel');
+//   }
 
-    /* Toggle between hiding and showing the active panel */
-    const panel = this.lastElementChild;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-    }
-  });
+// const currentMoreArrow = document.querySelector('.arrow-up');
+// if (currentMoreArrow) {
+//   currentMoreArrow.classList.remove('arrow-up');
+//   moreIcon.classList.add('arrow-up');
+// }
+
+// moreIcon.classList.add('arrow-up');
+//   devSocClick.classList.add('active-devel');
+// }
+
+function onDevClick(e) {
+  const devClick = e.target.closest('.team-item');
+  if (!devClick) {
+    return;
+  }
+
+  const moreIcon = devClick.querySelector('.more-icon');
+  const currentMoreArrow = document.querySelector('.arrow-up');
+
+  moreIcon.classList.add('arrow-up');
+
+  devClick.classList.add('active-devel');
+  // console.log(devClick);
+  const activeSoc = devClick.lastElementChild;
+  if (activeSoc.style.maxHeight) {
+    activeSoc.style.maxHeight = null;
+    currentMoreArrow.classList.remove('arrow-up');
+  } else {
+    activeSoc.style.maxHeight = activeSoc.scrollHeight + 'px';
+    moreIcon.classList.add('arrow-up');
+  }
 }
