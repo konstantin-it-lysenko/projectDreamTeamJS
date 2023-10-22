@@ -1,5 +1,6 @@
 import { API_PROPS } from '../api/api';
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const { BASE_URL, QUOTE_ENDPOINT } = API_PROPS;
 
@@ -13,7 +14,7 @@ const save = (key, value) => {
     const serializedState = JSON.stringify(value);
     localStorage.setItem(key, serializedState);
   } catch (error) {
-    console.error('Set state error: ', error.message);
+    Notify.failure('Save data error: ', error.message);
   }
 };
 
@@ -22,8 +23,18 @@ const load = key => {
     const serializedState = localStorage.getItem(key);
     return serializedState === null ? undefined : JSON.parse(serializedState);
   } catch (error) {
-    console.error('Get state error: ', error.message);
+    Notify.failure('Load data error: ', error.message);
   }
 };
 
-export { getQuote, save, load };
+// Test favor exercises
+async function getExercises() {
+  const resp = await axios(
+    'https://your-energy.b.goit.study/api/exercises?page=1&limit=36'
+  );
+  return resp.data;
+}
+
+// Test favor exercises
+
+export { getQuote, save, load, getExercises };
