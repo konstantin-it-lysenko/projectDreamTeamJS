@@ -1,3 +1,4 @@
+/** кнопки, бекдроп, загальні стилі модалки, скролбар **/
 .team-btn-open {
   padding: 15px;
   cursor: pointer;
@@ -21,7 +22,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 95%;
-  max-width: 335px;
+  max-width: 360px;
   height: 440px;
 
   border-radius: 20px;
@@ -33,7 +34,7 @@
 
 .team-wrapper {
   overflow-y: auto;
-  max-width: 305px;
+  max-width: 320px;
   max-height: 360px;
   padding-right: 40px;
 }
@@ -65,13 +66,13 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: var(--primary-white-color);
 }
 
 .team-close-icon {
   width: 24px;
   stroke: var(--primary-white-color);
 }
+/** кнопки, бекдроп, загальні стилі модалки, скролбар **/
 
 .team-list {
   display: flex;
@@ -79,14 +80,15 @@
   gap: 10px;
 }
 
+/* ? лішки девів ? */
 .team-item {
   position: relative;
   border: 1px solid var(--primary-white-color);
   border-radius: 30px;
-  padding: 12px 14px;
+  padding: 20px;
   text-align: center;
-  gap: 10px;
   cursor: pointer;
+  transition: 0.4s;
 }
 
 .more-icon {
@@ -105,12 +107,18 @@
   font-weight: 400;
   position: relative;
 }
-
-.team-soc-list {
-  display: none;
-  transition: all 0.4s ease;
+.hidden-content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }
-
+/* .team-soc-list {
+  display: none;
+} */
+.active-developer {
+  background-color: rgb(8, 8, 8);
+}
 .active-devel {
   margin-top: 8px;
   display: flex;
@@ -130,11 +138,11 @@
   height: 44px;
   padding: 8px;
 }
-
 .team-icon {
   fill: var(--primary-white-color);
 }
 
+/* ! посилання на репозиторій проекту ! */
 .project-git {
   border: 1px solid var(--primary-white-color);
   border-radius: 30px;
