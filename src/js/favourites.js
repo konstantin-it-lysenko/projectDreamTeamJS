@@ -14,6 +14,7 @@ const refs = {
   quote: document.querySelector('.favor-quote-wrap p'),
   quoteAuthor: document.querySelector('.favor-quote-wrap h4'),
   exercises: document.querySelector('.favor-exercises-list'),
+  noExercises: document.querySelector('.favor-exercises'),
   pagination: document.querySelector('.pag-list'),
 };
 
@@ -57,8 +58,8 @@ async function getCurrentQuote() {
 function getFavorExercises() {
   try {
     const favorExercises = load('favor-exercises');
-    console.log(favorExercises);
     if (favorExercises) {
+      refs.noExercises.classList.remove('favor-exercises-noitems');
       const totalExercises = favorExercises.length;
       if (pagination === 0 || totalExercises <= pagination) {
         page = favorExercises;
@@ -72,12 +73,10 @@ function getFavorExercises() {
           pagination * (1 + currentPage)
         );
       }
-      console.log(pagination);
-      console.log(page);
       refs.exercises.innerHTML = createMarkupExercises(page);
-      console.log('Yahoo!');
     } else {
-      console.log('No data');
+      refs.noExercises.classList.add('favor-exercises-noitems');
+      //   Notify.failure(`There are no exercises in your favorites`);
     }
   } catch (err) {
     Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
