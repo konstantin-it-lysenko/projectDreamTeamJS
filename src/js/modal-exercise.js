@@ -45,7 +45,6 @@ async function handleOpenModalClick() {
     handleGiveRatingBtnClick(event, modalBox)
   );
 
-  // TODO remove LS_FAVORITES_ID if [] from Local Storage
   addToFavoriteBtnRef.addEventListener('click', event =>
     handleAddToFavoriteBtnClick(event, favoriteId, addToFavoriteBtnRef)
   );
@@ -62,6 +61,7 @@ function handleGiveRatingBtnClick(_, modalBox) {
 function handleAddToFavoriteBtnClick(_, favoriteId, addToFavoriteBtnRef) {
   if (favoriteIdList.includes(favoriteId)) {
     processRemovalsFromFavorites(favoriteId, addToFavoriteBtnRef);
+    removeLocalStorageIfEmpty();
     return;
   }
 
@@ -85,4 +85,10 @@ function processRemovalsFromFavorites(favoriteId, addToFavoriteBtnRef) {
   localStorage.setItem(LS_FAVORITES_ID, favoriteIdData);
 
   addToFavoriteBtnRef.innerHTML = createAddToFavoritesMarkup();
+}
+
+function removeLocalStorageIfEmpty() {
+  if (favoriteIdList.length === 0) {
+    localStorage.removeItem(LS_FAVORITES_ID);
+  }
 }
