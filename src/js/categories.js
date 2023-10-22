@@ -19,7 +19,6 @@ const refs = {
 const { catsList, catFilterList, exercisesTitleSpan, catFilterInput } = refs;
 
 let categoryName = '';
-let currentExercise;
 
 catFilterList.addEventListener('click', catFilterBtnHandler);
 catFilterInput.addEventListener('input', catInputHandler);
@@ -69,27 +68,26 @@ function paginationBtnHandler(e) {
     .catch(err => console.log(err));
 }
 async function catsListBtnHandler(e) {
-  if (e.target.nodeName === 'UL') {
-    return;
-  }
+  try {
+    const currentExercise = e.target.closest('.categories-item').dataset.bodyPart;
+    const getExercises = await fetchExercises(categoryName, currentExercise);
+    catsList.innerHTML = createExercisesMarkup(getExercises);
+    exercisesTitleSpan.innerHTML = currentExercise;
 
-  currentExercise = e.target.closest('.categories-item').dataset.bodyPart;
-  console.log('Exercise', currentExercise);
-  const getExercises = await fetchExercises(categoryName, currentExercise);
+    catFilterInput.hidden = false;
 
-  catsList.innerHTML = createExercisesMarkup(getExercises);
+    const exericesBtns = document.querySelectorAll('[data-modal-exercise="open"]');
 
-  exercisesTitleSpan.innerHTML = currentExercise;
-  catFilterInput.hidden = false;
+    exericesBtns.forEach(btn => {
+      btn.addEventListener('click', (event) => {
+        const exerciseId = event.currentTarget.closest('.exercises-item').dataset.exerciseId;
 
-  const openModalBtns = document.querySelectorAll('[data-modal-exercise="open"]').forEach(btn => {
-    btn.addEventListener('click', (event) => {
-      const exerciseId = event.currentTarget.closest('.exercises-item').dataset.exerciseId;
-      console.log(exerciseId);
-      handleOpenModalClick(event, exerciseId);
+        handleOpenModalClick(event, exerciseId);
+      })
     })
-  });
-
+  } catch {
+    err => console.log('Err', err);
+  }
   //   const resp = await fetchAllExercises(categoryName, currentExercise);
 }
 
