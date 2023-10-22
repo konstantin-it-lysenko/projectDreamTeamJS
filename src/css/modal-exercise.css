@@ -46,12 +46,31 @@
 
 .modal-exercise-rating-container {
   margin-bottom: 20px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .modal-exercise-rating-number {
   font-feature-settings: 'clig' off, 'liga' off;
   font-size: 12px;
   line-height: 1.5;
+  height: 14px;
+}
+
+.modal-exercise-rating-stars {
+  display: flex;
+  gap: 4px;
+  fill: rgba(244, 244, 244, 0.2);
+}
+
+.modal-exercise-rating-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.modal-exercise-rating-icon.modal-exercise-active-rating-stars {
+  fill: #eea10c;
 }
 
 .modal-exercise-tag-container {
