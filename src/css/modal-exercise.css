@@ -46,12 +46,31 @@
 
 .modal-exercise-rating-container {
   margin-bottom: 20px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .modal-exercise-rating-number {
   font-feature-settings: 'clig' off, 'liga' off;
   font-size: 12px;
   line-height: 1.5;
+  height: 14px;
+}
+
+.modal-exercise-rating-stars {
+  display: flex;
+  gap: 4px;
+  fill: rgba(244, 244, 244, 0.2);
+}
+
+.modal-exercise-rating-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.modal-exercise-rating-icon.modal-exercise-active-rating-stars {
+  fill: #eea10c;
 }
 
 .modal-exercise-tag-container {
@@ -119,7 +138,7 @@
   justify-content: center;
 }
 
-.add-to-favorite-btn span {
+.add-to-favorites-btn span {
   display: block;
   width: 18px;
   height: 18px;
@@ -130,6 +149,11 @@
   height: 18px;
   stroke: #242424;
   fill: transparent;
+}
+
+.modal-favorite-active-icon {
+  fill: #d10000;
+  stroke: #d10000;
 }
 
 .give-rating-btn {
@@ -223,7 +247,7 @@
     line-height: 1.5;
   }
 
-  .add-to-favorite-btn span {
+  .add-to-favorites-btn span {
     width: 20px;
     height: 20px;
   }
