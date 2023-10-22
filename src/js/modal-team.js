@@ -14,7 +14,6 @@ backdrop.addEventListener('click', onBackdropClick);
 
 teamList.insertAdjacentHTML('beforeend', createDevMarkup(developers));
 const devSocials = [...teamList.children];
-console.log(devSocials);
 
 function returnHidden() {
   devSocials.forEach(dev => {
