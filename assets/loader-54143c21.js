@@ -13,7 +13,7 @@ Notiflix needs to be appended to the "<`+s+'>" element, but you called it before
 				<div class="exercises-meta-container">
 					<p class="exercises-meta">WORKOUT</p>
 					<p class="exercises-rating">
-						${t}
+						${t.toFixed(1)}
 						<svg width="18" height="18" class="exercises-svg">
 							<use href="../img/sport-sprite.svg#icon-star"></use>
 						</svg>
@@ -27,9 +27,11 @@ Notiflix needs to be appended to the "<`+s+'>" element, but you called it before
 				</button>
 			</div>
 			<div class="exercises-name-container">
-				<svg width="14" height="14" class="exercises-name-svg">
+				<span class="exercises-name-span">
+				<svg width="20" height="20" class="exercises-name-svg">
 					<use href="../img/sport-sprite.svg#icon-running-stick"></use>
 				</svg>
+				</span>
 				<p class="exercises-name">
 					${e}
 				</p>
@@ -38,7 +40,7 @@ Notiflix needs to be appended to the "<`+s+'>" element, but you called it before
 				<ul class="exercises-descr-list">
 					<li class="exercises-descr-item">
 						<span class="exercises-descr-span">Burned calories:</span>
-						${n}
+						${n} / 3 min
 					</li>
 					<li class="exercises-descr-item">
 						<span class="exercises-descr-span">Body part:</span>
