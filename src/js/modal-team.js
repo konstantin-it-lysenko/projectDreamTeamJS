@@ -1,5 +1,5 @@
-import { createDevMarkup } from './templates/modal-team-markup';
-import { developers } from '../js/templates/team-array.js';
+// import { createDevMarkup } from './templates/modal-team-markup';
+// import { developers } from '../js/templates/team-array.js';
 
 const teamModalOpenBtn = document.querySelector('.team-btn-open');
 const teamModalCloseBtn = document.querySelector('.team-btn-close');
@@ -12,7 +12,7 @@ teamModalCloseBtn.addEventListener('click', onCloseClick);
 teamList.addEventListener('click', onDevClick);
 backdrop.addEventListener('click', onBackdropClick);
 
-teamList.insertAdjacentHTML('beforeend', createDevMarkup(developers));
+// teamList.insertAdjacentHTML('beforeend', createDevMarkup(developers));
 const devSocials = [...teamList.children];
 
 function returnHidden() {
@@ -71,4 +71,26 @@ function onBackdropClick(e) {
   if (e.currentTarget === e.target) {
     onCloseClick();
   }
+}
+
+// ! АКОРДЕОН
+const teamName = document.querySelectorAll('.team-item');
+
+let i;
+
+for (let i = 0; i < teamName.length; i += 1) {
+  teamName[i].addEventListener('click', function () {
+    /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+
+    this.classList.toggle('active-developer');
+
+    /* Toggle between hiding and showing the active panel */
+    const panel = this.lastElementChild;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
 }
