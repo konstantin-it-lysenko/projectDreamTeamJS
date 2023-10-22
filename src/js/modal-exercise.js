@@ -15,12 +15,12 @@ const favoriteIdList = JSON.parse(localStorage.getItem(LS_FAVORITES_ID)) || [];
 
 openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
 
-async function handleOpenModalClick() {
+export async function handleOpenModalClick(
+  _,
+  favoriteId = '64f389465ae26083f39b17a2'
+) {
   let modalBox = {};
   let ratingValue = 0;
-
-  // TODO change favoriteId for dynamic ID
-  const favoriteId = '64f389465ae26083f39b17a2';
 
   try {
     const exericiseData = await fetchExerciseModalById();
