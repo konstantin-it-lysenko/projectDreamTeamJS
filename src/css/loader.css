@@ -14,7 +14,10 @@
     width: 100px; /* Розмір іконки (змінюйте за потребою) */
     height: 100px; /* Розмір іконки (змінюйте за потребою) */
     animation: loader 1.5s linear infinite;
-    fill: #f4f4f4;
+    fill: var(--primary-white-color);
+  }
+  .svg-color{
+    fill: var(rgba(255, 255, 255, 0.87));
   }
   @keyframes loader {
     0% {
