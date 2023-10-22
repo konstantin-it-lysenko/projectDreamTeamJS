@@ -94,7 +94,7 @@
 .more-icon {
   position: absolute;
   right: 20px;
-  top: 12px;
+  top: 20px;
   fill: var(--primary-white-color);
 }
 .arrow-up {
@@ -116,15 +116,17 @@
 /* .team-soc-list {
   display: none;
 } */
-.active-developer {
+/* .active-developer {
   background-color: rgb(8, 8, 8);
-}
+} */
 .active-devel {
-  margin-top: 8px;
+  background-color: rgba(115, 160, 173, 0.8);
+}
+.team-soc-list {
   display: flex;
+  margin-top: 12px;
   gap: 10px;
   justify-content: center;
-  transition: all 0.4s ease;
 }
 
 .team-link {
@@ -163,12 +165,12 @@
 
 @media screen and (min-width: 768px) {
   .team-modal {
-    max-width: 430px;
-    height: 540px;
-    padding: 40px;
+    max-width: 450px;
+    height: 570px;
+    padding: 60px 50px 40px 40px;
   }
   .team-wrapper {
-    max-width: 410px;
+    max-width: 390px;
     max-height: 460px;
     padding-right: 30px;
   }
