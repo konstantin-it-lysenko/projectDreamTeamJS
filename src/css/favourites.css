@@ -1,24 +1,6 @@
 body {
   background-color: var(--primary-white-color);
 }
-/* img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-} */
-
-/* .visually-hidden {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-} */
 .favor-container {
   padding-top: 80px;
   padding-bottom: 80px;
@@ -46,6 +28,7 @@ body {
   position: relative;
   background-color: rgba(244, 244, 244, 0.2);
   min-width: 32px;
+  width: 32px;
   height: 32px;
   border-radius: 50%;
 }
@@ -80,7 +63,7 @@ body {
 /**                          dailynorm */
 .favor-dailynorm {
   border-radius: 20px;
-  background: #fff;
+  background-color: #fff;
   padding: 20px;
   margin-bottom: 20px;
 }
@@ -101,11 +84,109 @@ body {
   overflow: hidden;
 }
 /**                          exercises */
-.noitems {
+.favor-exercises {
+  padding-top: 40px;
+}
+.favor-exercises-noitems {
   padding: 40px 8px 0 9px;
 }
-.favor-exercises p {
+.favor-exercises-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.favor-exercises-list p {
   text-align: center;
+}
+/**                          exercises-card */
+.favor-exercises-card {
+  width: 335px;
+  height: 141px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 16px;
+}
+.favor-exercises-head {
+  display: flex;
+  gap: 8px;
+  /* justify-content: center; */
+  align-items: center;
+}
+.favor-exercises-head svg {
+  fill: var(--primary-black-color);
+}
+.favor-exercises-name {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-top: 27px;
+  padding-bottom: 8px;
+}
+.favor-exercises-icon {
+  position: relative;
+  background-color: var(--primary-black-color);
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.favor-exercises-icon svg {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  fill: var(--primary-white-color);
+}
+.favor-exercises-name h3 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.33;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.favor-exercises-info {
+  display: flex;
+  gap: 10px;
+}
+.favor-exercises-item {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--primary-black-color);
+  letter-spacing: -0.03em;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.favor-exercises-item span {
+  color: rgba(36, 36, 36, 0.4);
+  margin-right: 2px;
+}
+.favor-exercises-calories {
+  max-width: 144px;
+}
+.favor-exercises-body {
+  max-width: 83px;
+}
+.favor-exercises-target {
+  width: 56px;
+}
+.favor-workout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  height: 24px;
+  border-radius: 15px;
+  border: 1px solid var(--primary-black-color);
+}
+.favor-workout p {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
 }
 /**                          @media */
 @media screen and (min-width: 768px) {
@@ -167,12 +248,29 @@ body {
     height: 141px;
   }
   /**                          exercises */
-  .noitems {
+  .favor-exercises {
+    padding-top: 64px;
+  }
+  .favor-exercises-noitems {
     padding: 132px 75px 0;
   }
-  .favor-exercises p {
+  .favor-exercises-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px 16px;
+  }
+  .favor-exercises-text {
     font-size: 18px;
     line-height: 1.33;
+  }
+  .favor-exercises-card {
+    width: 344px;
+  }
+  .favor-exercises-body {
+    max-width: 88px;
+  }
+  .favor-exercises-target {
+    width: 60px;
   }
 }
 @media screen and (min-width: 1440px) {
@@ -183,7 +281,7 @@ body {
   .favor-title {
     margin-bottom: 44px;
   }
-  .yyy {
+  .favor-quote {
     display: flex;
     gap: 32px;
   }
@@ -199,10 +297,45 @@ body {
     width: 239px;
   }
   .favor-exercises {
-    width: 850px;
+    min-width: 850px;
     height: 487px;
+    padding-top: 0;
+    overflow: auto;
   }
-  .noitems {
+  .favor-exercises-noitems {
     padding: 102px 148px 0;
   }
+  .favor-exercises-card {
+    width: 405px;
+  }
+  .favor-exercises-info {
+    gap: 16px;
+  }
+  .favor-exercises-body {
+    max-width: 123px;
+  }
+  .favor-exercises-target {
+    width: 74px;
+  }
+}
+
+.pag-list {
+  display: flex;
+  gap: 8px;
+  padding-top: 32px;
+  justify-content: center;
+  align-items: center;
+}
+.pag-btn {
+  text-align: center;
+  cursor: pointer;
+  background-color: transparent;
+  color: #d4d4d4;
+}
+.pag-btn-active {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-black-color);
+  color: var(--primary-black-color);
 }
