@@ -33,9 +33,14 @@ function onDevClick(e) {
   const currentActiveDevSoc = document.querySelector('.active-devel');
   if (currentActiveDevSoc) {
     currentActiveDevSoc.classList.remove('active-devel');
-    moreIcon.classList.remove('arrow-up');
 
     devSocClick.classList.add('active-devel');
+  }
+
+  const currentMoreArrow = document.querySelector('.arrow-up');
+  if (currentMoreArrow) {
+    currentMoreArrow.classList.remove('arrow-up');
+    moreIcon.classList.add('arrow-up');
   }
 
   moreIcon.classList.add('arrow-up');
