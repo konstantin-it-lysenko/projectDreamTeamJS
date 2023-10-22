@@ -11,14 +11,14 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 					<p class="exercises-rating">
 						${rating.toFixed(1)}
 						<svg width="18" height="18" class="exercises-svg">
-							<use src="/src/img/sport-sprite.svg#icon-star"></use>
+							<use href="/projectDreamTeamJS/assets/sport-sprite.svg#icon-star"></use>
 						</svg>
 					</p>
 				</div>
 				<button type="button" class="exercises-btn" data-modal-exercise="open">
 					Start
 					<svg width="16" height="16" class="exercises-btn-svg">
-						<use src="../../img/sport-sprite.svg#icon-arrow-up"></use>
+						<use href="./img/sport-sprite.svg#icon-arrow-up"></use>
 					</svg>
 				</button>
 			</div>
