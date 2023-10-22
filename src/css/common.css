@@ -38,6 +38,20 @@ h3 {
   padding: 0 20px;
 }
 
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--primary-black-color);
+  border-radius: 20px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #929292;
+  border-radius: 8px;
+}
+
 @media screen and (min-width: 375px) {
   .container {
     max-width: 375px;

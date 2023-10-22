@@ -52,12 +52,13 @@ export const developers = [
   },
   {
     name: 'Oleh Mahutsii',
-    linkedin: 'https://www.linkedin.com/in/oleg-undefined-315b87296/',
+    linkedin:
+      'https://www.linkedin.com/in/oleg-mahutsii-315b87296/?trk=contact-info',
     github: 'https://github.com/ProstoOleh',
   },
-  // {
-  //   name: '',
-  //   linkedin: '',
-  //   github: '',
-  // },
+  {
+    name: 'Artem Zelenin',
+    linkedin: 'https://www.linkedin.com/in/artem-zelenin-84a216226/',
+    github: 'https://github.com/azelenin057',
+  },
 ];
