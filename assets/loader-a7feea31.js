@@ -15,14 +15,14 @@ Notiflix needs to be appended to the "<`+s+'>" element, but you called it before
 					<p class="exercises-rating">
 						${t.toFixed(1)}
 						<svg width="18" height="18" class="exercises-svg">
-							<use href="../../img/sport-sprite.svg#icon-star"></use>
+							<use src="/src/img/sport-sprite.svg#icon-star"></use>
 						</svg>
 					</p>
 				</div>
 				<button type="button" class="exercises-btn" data-modal-exercise="open">
 					Start
 					<svg width="16" height="16" class="exercises-btn-svg">
-						<use href="./img/sport-sprite.svg#icon-arrow-up"></use>
+						<use src="../../img/sport-sprite.svg#icon-arrow-up"></use>
 					</svg>
 				</button>
 			</div>
