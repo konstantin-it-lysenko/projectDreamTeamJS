@@ -31,6 +31,18 @@ export function createModalExerciseMarkup({
       <h3 class="modal-exercise-title">${makeUpperCaseFirstLetter(name)}</h3>
       <div class="modal-exercise-rating-container">
         <p class="modal-exercise-rating-number">${rating}</p>
+        <div class="modal-exercise-rating-stars" id="modal-exercise-rating-stars">
+            <svg class="modal-exercise-rating-icon">
+              <use href="./img/sport-sprite.svg#icon-star"></use></svg>
+            <svg class="modal-exercise-rating-icon">
+              <use href="./img/sport-sprite.svg#icon-star"></use></svg>
+            <svg class="modal-exercise-rating-icon">
+              <use href="./img/sport-sprite.svg#icon-star"></use></svg>
+            <svg class="modal-exercise-rating-icon">
+              <use href="./img/sport-sprite.svg#icon-star"></use></svg>
+            <svg class="modal-exercise-rating-icon">
+              <use href="./img/sport-sprite.svg#icon-star"></use></svg>
+        </div> 
       </div>
       <div class="modal-exercise-tag-container">
         <ul class="modal-exercise-tag-list">
