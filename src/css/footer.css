@@ -1,10 +1,10 @@
 .footer {
   background-color: var(--primary-black-color);
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 .container {
   max-width: 375px;
-  padding-top: 40px;
-  padding-bottom: 20px;
 }
 .footer_logo_icon {
   fill: var(--primary-white-color);
@@ -151,9 +151,13 @@
   letter-spacing: -0.02em;
 }
 @media screen and (min-width: 768px) {
+  .footer {
+    padding-top: 64px;
+    padding-bottom: 32px;
+  }
   .container {
     max-width: 768px;
-    padding: 64px 32px 32px 32px;
+    padding: 0 32px;
   }
   /* .footer_wrap_logo_soc {
   } */
