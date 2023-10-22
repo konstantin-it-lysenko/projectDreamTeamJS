@@ -15,7 +15,7 @@ Notiflix needs to be appended to the "<`+s+'>" element, but you called it before
 					<p class="exercises-rating">
 						${t.toFixed(1)}
 						<svg width="18" height="18" class="exercises-svg">
-							<use href="./img/sport-sprite.svg#icon-star"></use>
+							<use href="../../img/sport-sprite.svg#icon-star"></use>
 						</svg>
 					</p>
 				</div>
