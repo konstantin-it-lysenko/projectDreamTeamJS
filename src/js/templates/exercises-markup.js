@@ -11,7 +11,7 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 					<p class="exercises-rating">
 						${rating.toFixed(1)}
 						<svg width="18" height="18" class="exercises-svg">
-							<use href="./img/sport-sprite.svg#icon-star"></use>
+							<use href="../../img/sport-sprite.svg#icon-star"></use>
 						</svg>
 					</p>
 				</div>
