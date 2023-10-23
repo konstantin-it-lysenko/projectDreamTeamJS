@@ -6,15 +6,25 @@ const { BASE_URL, QUOTE_ENDPOINT } = API_PROPS;
 
 async function fetchAndDisplayQuote() {
   try {
+    localStorage.removeItem('quoteData');
+    localStorage.removeItem('quoteDate');
+
     const response = await axios.get(`${BASE_URL}${QUOTE_ENDPOINT}`);
     const data = response.data;
+
     if (data && data.quote && data.author) {
       const today = new Date();
-      localStorage.setItem('quote', data.quote);
-      localStorage.setItem('author', data.author);
-      localStorage.setItem('quoteDate', today);
+      const quoteAndAuthor = {
+        quote: data.quote,
+        author: data.author,
+        quoteDate: today,
+      };
+
+      localStorage.setItem('quoteData', JSON.stringify(quoteAndAuthor));
+
       const quoteElement = document.querySelector('.quote');
       const authorElement = document.querySelector('.author');
+
       quoteElement.textContent = data.quote;
       authorElement.textContent = data.author;
     } else {
