@@ -27,9 +27,9 @@ var os=Object.defineProperty;var as=(r,t,e)=>t in r?os(r,t,{enumerable:!0,config
 					<use href="../img/sport-sprite.svg#icon-running-stick"></use>
 				</svg>
 				</span>
-				<p class="exercises-name">
+				<h3 class="exercises-name">
 					${t}
-				</p>
+				</h3>
 			</div>
 			<div class="exercises-descr-container">
 				<ul class="exercises-descr-list">
