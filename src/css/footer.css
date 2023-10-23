@@ -7,7 +7,7 @@
   max-width: 375px;
 }
 .footer_logo_icon {
-  fill: var(--primary-white-color);
+  fill: rgb(36, 36, 36);
 }
 .footer_soc_list {
   margin-top: 20px;

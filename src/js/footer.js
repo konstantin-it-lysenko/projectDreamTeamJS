@@ -1,5 +1,6 @@
 import Notiflix from 'notiflix';
 import { fetchPostApi } from './api-service/footer-api';
+import { gsap } from 'gsap';
 
 const formSubmit = document.querySelector('.js-footer-form');
 
@@ -36,4 +37,30 @@ function isValidEmail(email) {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
   return emailPattern.test(email);
+}
+
+const circleElement = document.querySelector('.footer_logo_icon');
+
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0,
+};
+const icon = document.querySelector('.footer_logo_icon');
+
+const observer = new IntersectionObserver(handleIntersection, options);
+
+observer.observe(icon);
+
+function handleIntersection(entries, observer) {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) {
+      return;
+    }
+
+    const animation = gsap.to(icon, {
+      duration: 4,
+      fill: '#f4f4f4',
+    });
+  });
 }
