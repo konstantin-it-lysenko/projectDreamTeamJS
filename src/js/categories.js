@@ -9,6 +9,7 @@ import {
   createPaginationBtnsMarkup,
 } from './templates/categories-markup';
 import { handleOpenModalClick } from './modal-exercise';
+import throttle from 'lodash.throttle';
 
 const refs = {
   catsList: document.querySelector('.categories-wrapper'),
@@ -21,8 +22,9 @@ const { catsList, catFilterList, exercisesTitleSpan, catFilterInput } = refs;
 let categoryName = '';
 let test = 'bodypart';
 let respFilterAll = [];
+
 catFilterList.addEventListener('click', catFilterBtnHandler);
-catFilterInput.addEventListener('input', catInputHandler);
+catFilterInput.addEventListener('input', throttle(catInputHandler, 300));
 
 fetchCategories()
   .then(resp => {
@@ -41,6 +43,7 @@ async function catFilterBtnHandler(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
+  catFilterInput.value = '';
   categoryName = e.target.dataset.name;
 
   switch (categoryName) {
@@ -99,13 +102,13 @@ async function catsListBtnHandler(e) {
     const totalPages = getExercises.totalPages;
     catsList.innerHTML = createExercisesMarkup(getExercises.results);
     exercisesTitleSpan.innerHTML = currentExercise;
-    respAll = await fetchAllExercises(
+    respFilterAll = await fetchAllExercises(
       test,
       currentExercise,
       perPage,
       totalPages
     );
-    console.log(respAll);
+
     catFilterInput.hidden = false;
 
     const exericesBtns = document.querySelectorAll(
@@ -123,10 +126,16 @@ async function catsListBtnHandler(e) {
   } catch {
     err => console.log('Err', err);
   }
-  //   const resp = await fetchAllExercises(categoryName, currentExercise);
 }
 
-function catInputHandler(e) {
-  const filterInput = e.currentTarget.value.toLowerCase().trim('');
-  console.log(respFilterAll);
+function catInputHandler() {
+  let filterInput = catFilterInput.value.toLowerCase().trim('');
+  const filteredExercises = respFilterAll.filter(({ name }) =>
+    name.includes(filterInput)
+  );
+  const markupNotFound = `<span class='exer-not-found'>Sorry, there is no data matching your search query.</span>`;
+  catsList.innerHTML =
+    filteredExercises.length === 0
+      ? markupNotFound
+      : createExercisesMarkup(filteredExercises);
 }
