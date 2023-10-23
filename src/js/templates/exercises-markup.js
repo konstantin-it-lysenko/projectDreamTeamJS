@@ -1,10 +1,10 @@
 export function createExercisesMarkup(data) {
-  return `<ul class="exercises-list">${data.map(createMarkup).join('')}</ul>
+	return `<ul class="exercises-list">${data.map(createMarkup).join('')}</ul>
 	<ul class="exer-pagination-list"></ul>`;
 }
 
 function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
-  return `<li class="exercises-item" data-exercise-id="${_id}">
+	return `<li class="exercises-item" data-exercise-id="${_id}">
 			<div class="exercises-header">
 				<div class="exercises-meta-container">
 					<p class="exercises-meta">WORKOUT</p>
@@ -28,9 +28,9 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 					<use href="../img/sport-sprite.svg#icon-running-stick"></use>
 				</svg>
 				</span>
-				<p class="exercises-name">
+				<h3 class="exercises-name">
 					${name}
-				</p>
+				</h3>
 			</div>
 			<div class="exercises-descr-container">
 				<ul class="exercises-descr-list">
@@ -51,19 +51,19 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 		</li>`;
 }
 export function createExercisesPaginationBtnsMarkup(
-  firstBtn = 1,
-  secondBtn = 2,
-  thirdBtn = 3
+	firstBtn = 1,
+	secondBtn = 2,
+	thirdBtn = 3
 ) {
-  return `
-			<li class="cat-pagination-item">
-				<button type="button" class="cat-pagination-btn" data-id="1">${firstBtn}</button>
+	return `
+			<li class="exer-pagination-item">
+				<button type="button" class="exer-pagination-btn active" data-id="1">${firstBtn}</button>
 			</li>
-			<li class="cat-pagination-item">
-				<button type="button" class="cat-pagination-btn" data-id="2">${secondBtn}</button>
+			<li class="exer-pagination-item">
+				<button type="button" class="exer-pagination-btn" data-id="2">${secondBtn}</button>
 			</li>
-			<li class="cat-pagination-item">
-				<button type="button" class="cat-pagination-btn" data-id="3">${thirdBtn}</button>
+			<li class="exer-pagination-item">
+				<button type="button" class="exer-pagination-btn" data-id="3">${thirdBtn}</button>
 			</li>
 		`;
 }
