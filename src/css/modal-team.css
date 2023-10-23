@@ -120,11 +120,11 @@
   background-color: rgb(8, 8, 8);
 } */
 .active-devel {
-  background-color: rgba(115, 160, 173, 0.8);
+  background-color: rgba(4, 4, 4, 0.4);
 }
 .team-soc-list {
   display: flex;
-  margin-top: 12px;
+  margin-top: 16px;
   gap: 10px;
   justify-content: center;
 }
@@ -138,7 +138,7 @@
   align-items: center;
   width: 44px;
   height: 44px;
-  padding: 8px;
+  /* padding: 8px; */
 }
 .team-icon {
   fill: var(--primary-white-color);
