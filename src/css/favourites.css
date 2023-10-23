@@ -121,6 +121,8 @@ body {
   align-items: center;
 }
 .favor-exercises button {
+  display: flex;
+  align-items: center;
   line-height: 1.29;
   color: var(--primary-black-color);
   background-color: transparent;
@@ -131,9 +133,7 @@ body {
   fill: var(--primary-black-color);
 }
 .favor-exercises-startbtn {
-  display: flex;
   gap: 8px;
-  align-items: center;
   height: 18px;
 }
 .favor-exercises-startbtn svg {

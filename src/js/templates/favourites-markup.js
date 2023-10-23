@@ -2,7 +2,7 @@ function createMarkupExercises(arr) {
   return arr
     .map(
       ({ _id, name, burnedCalories, bodyPart, target }) =>
-        `<li><div class="favor-exercises-card" id="${_id}">
+        `<li><div class="favor-exercises-card" data-id="${_id}">
       <div class="favor-exercises-head">
         <div class="favor-exercises-wrap">
           <div class="favor-workout"><p>Workout</p></div>
@@ -12,7 +12,7 @@ function createMarkupExercises(arr) {
             </svg>
           </button>
         </div>
-        <button class="favor-exercises-startbtn" type="button">Start<svg width="16" height="16">
+        <button class="favor-exercises-startbtn" data-modal-exercise="open" type="button">Start<svg width="16" height="16">
             <use href="./img/sport-sprite.svg#icon-arrow-up"></use>
           </svg></button>
       </div>
