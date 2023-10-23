@@ -5,9 +5,9 @@
 /* .header-fade-out {
   opacity: 0;
   visibility: hidden;
-}
+} */
 
-.loading-overlay {
+/* .loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -95,6 +95,7 @@
   overflow: auto;
   width: 100vw;
   height: 100%;
+  padding-top: 280px;
   background-color: var(--primary-black-color);
 }
 
@@ -130,9 +131,6 @@
   transform: rotate(-45deg);
 }
 
-.mobile-menu-wrap {
-  padding-top: 280px;
-}
 .mobile-menu-list {
   display: flex;
   flex-direction: column;
