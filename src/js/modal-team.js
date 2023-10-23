@@ -56,7 +56,7 @@ function onDevClick(e) {
   if (!devClick) {
     return;
   }
-
+  
   const activeSoc = devClick.lastElementChild;
   const moreIcon = devClick.querySelector('.more-icon');
   const currentActiveDeveloper = document.querySelector('.active-devel');
@@ -67,8 +67,8 @@ function onDevClick(e) {
   }
 
   moreIcon.classList.add('arrow-up');
-
   devClick.classList.add('active-devel');
+
   if (activeSoc.style.maxHeight) {
     activeSoc.style.maxHeight = null;
     devClick.firstElementChild.classList.remove('arrow-up');
