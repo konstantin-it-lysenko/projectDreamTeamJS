@@ -1,4 +1,4 @@
-import svgSprite from '../../img/sport-sprite';
+import svgSprite from '../../img/sport-sprite.svg';
 
 export function createExercisesMarkup(data) {
 	return `<ul class="exercises-list">${data.map(createMarkup).join('')}</ul>
