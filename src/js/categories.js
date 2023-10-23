@@ -9,6 +9,7 @@ import {
   createPaginationBtnsMarkup,
 } from './templates/categories-markup';
 import { handleOpenModalClick } from './modal-exercise';
+import throttle from 'lodash.throttle';
 
 const refs = {
   catsList: document.querySelector('.categories-wrapper'),
@@ -21,18 +22,33 @@ const { catsList, catFilterList, exercisesTitleSpan, catFilterInput } = refs;
 let categoryName = '';
 let test = 'bodypart';
 let respFilterAll = [];
+let totalCategoryPages = 1;
+let currentCategoryPage = 1;
+
 catFilterList.addEventListener('click', catFilterBtnHandler);
-catFilterInput.addEventListener('input', catInputHandler);
+catFilterInput.addEventListener('input', throttle(catInputHandler, 300));
 
 fetchCategories()
   .then(resp => {
-    catsList.insertAdjacentHTML('beforeend', createCategoryMarkup(resp));
+    totalCategoryPages = resp.totalPages;
+    currentCategoryPage = resp.page;
+    catsList.insertAdjacentHTML(
+      'beforeend',
+      createCategoryMarkup(resp.results)
+    );
     catsList.addEventListener('click', catsListBtnHandler);
     const catPaginationList = document.querySelector('.cat-pagination-list');
     catPaginationList.insertAdjacentHTML(
       'beforeend',
       createPaginationBtnsMarkup()
     );
+
+    updatePagination(
+      catPaginationList,
+      currentCategoryPage,
+      totalCategoryPages
+    );
+
     catPaginationList.addEventListener('click', paginationBtnHandler);
   })
   .catch(err => console.log(err));
@@ -41,6 +57,7 @@ async function catFilterBtnHandler(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
+  catFilterInput.value = '';
   categoryName = e.target.dataset.name;
 
   switch (categoryName) {
@@ -57,17 +74,27 @@ async function catFilterBtnHandler(e) {
 
   fetchCategories(categoryName)
     .then(resp => {
-      const categoryByName = resp.filter(
+      totalCategoryPages = resp.totalPages;
+      console.log(totalCategoryPages);
+      const categoryByName = resp.results.filter(
         ({ filter }) => filter === categoryName
       );
       exercisesTitleSpan.innerHTML = '';
       catFilterInput.hidden = true;
       catsList.innerHTML = createCategoryMarkup(categoryByName);
+      const catPaginationList = document.querySelector('.cat-pagination-list');
+      updatePagination(
+        catPaginationList,
+        currentCategoryPage,
+        totalCategoryPages
+      );
     })
     .catch(err => console.log(err));
   try {
     const resp = await fetchCategories(categoryName);
-    const categoryByName = resp.filter(({ filter }) => filter === categoryName);
+    const categoryByName = resp.results.filter(
+      ({ filter }) => filter === categoryName
+    );
     exercisesTitleSpan.innerHTML = '';
     catFilterInput.hidden = true;
     catsList.innerHTML = createCategoryMarkup(categoryByName);
@@ -80,7 +107,7 @@ async function paginationBtnHandler(e) {
   const currentPage = e.target.dataset.id;
   try {
     const resp = await fetchCategories(categoryName, currentPage);
-    const removeExtraCategories = resp.filter(
+    const removeExtraCategories = resp.results.filter(
       ({ filter }) => filter === categoryName
     );
     catsList.innerHTML = createCategoryMarkup(removeExtraCategories);
@@ -99,13 +126,13 @@ async function catsListBtnHandler(e) {
     const totalPages = getExercises.totalPages;
     catsList.innerHTML = createExercisesMarkup(getExercises.results);
     exercisesTitleSpan.innerHTML = currentExercise;
-    respAll = await fetchAllExercises(
+    respFilterAll = await fetchAllExercises(
       test,
       currentExercise,
       perPage,
       totalPages
     );
-    console.log(respAll);
+
     catFilterInput.hidden = false;
 
     const exericesBtns = document.querySelectorAll(
@@ -123,10 +150,57 @@ async function catsListBtnHandler(e) {
   } catch {
     err => console.log('Err', err);
   }
-  //   const resp = await fetchAllExercises(categoryName, currentExercise);
 }
 
-function catInputHandler(e) {
-  const filterInput = e.currentTarget.value.toLowerCase().trim('');
-  console.log(respFilterAll);
+function catInputHandler() {
+  let filterInput = catFilterInput.value.toLowerCase().trim('');
+  const filteredExercises = respFilterAll.filter(({ name }) =>
+    name.includes(filterInput)
+  );
+  const markupNotFound = `<span class='exer-not-found'>Sorry, there is no data matching your search query.</span>`;
+  catsList.innerHTML =
+    filteredExercises.length === 0
+      ? markupNotFound
+      : createExercisesMarkup(filteredExercises);
+}
+
+// const itemsPerPage = 10; // Количество элементов на одной странице
+// let currentPage = 1; // Текущая страница
+// let totalItems = 23; // Общее количество элементов
+
+// // Вычисляем общее количество страниц
+// const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+// // Создаем контейнер для пагинации
+// const paginationContainer = document.getElementById('pagination-container');
+
+function updatePagination(paginationContainer, currentPage, totalPages) {
+  paginationContainer.innerHTML = ''; // Очищаем контейнер
+
+  for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+    if (i >= 1 && i <= totalPages) {
+      const item = document.createElement('li');
+      item.className = 'pagination-item';
+      if (i === currentPage) {
+        item.className += ' active';
+      }
+      const button = document.createElement('button');
+      button.textContent = i;
+      item.appendChild(button);
+
+      if (i === currentPage && currentPage >= totalPages) {
+        item.className += ' disabled';
+      }
+
+      // Добавляем обработчик клика на кнопку
+      button.addEventListener('click', function () {
+        if (i !== currentPage) {
+          currentPage = i;
+          updatePagination(paginationContainer, currentPage, totalPages);
+        }
+      });
+
+      paginationContainer.appendChild(item);
+    }
+  }
 }

@@ -7,9 +7,39 @@
   gap: 20px;
 }
 .exercises-title {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.36;
+  letter-spacing: -0.56px;
+}
+.exercises-title-span {
+  color: rgba(36, 36, 36, 0.5);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.4px;
+}
+/* .exercises-title-span::first-letter {
+  text-transform: capitalize;
+} */
+.filter-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cat-filter-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 30px;
+  border: 1px solid #242424;
+}
+.cat-filter-input::placeholder {
+  color: var(--primary-black-color);
+  font-size: 14px;
+  line-height: 1.43;
 }
 .cat-filter-list {
-  margin-bottom: 28px;
   display: flex;
   gap: 20px;
 }
@@ -17,12 +47,32 @@
 }
 .cat-filter-btn {
   margin: 10px;
+  color: rgba(36, 36, 36, 0.6);
+  line-height: 1.43;
+  background-color: transparent;
+}
+.cat-filter-btn:is(:hover, :focus) {
+  color: var(--primary-black-color);
+}
+.cat-filter-btn.active {
+  color: var(--primary-black-color);
+}
+.cat-filter-btn.active.cat-filter-btn::after {
+  display: block;
+  content: '';
+  margin-top: 4px;
+  background-color: var(--primary-black-color);
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
 }
 .exercises-wrapper {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   gap: 80px;
+}
+.categories-wrapper {
+  width: 100%;
 }
 .categories-list {
   display: flex;
@@ -32,16 +82,42 @@
 }
 .categories-item {
   width: 100%;
+  border-radius: 12px;
 }
 .categories-btn {
+  position: relative;
+  border-radius: 12px;
 }
 .categories-img {
+  border-radius: 12px;
+  background-image: linear-gradient(
+    rgba(17, 17, 17, 0.5),
+    rgba(17, 17, 17, 0.5)
+  );
 }
 .categories-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  z-index: 1;
 }
 .category-title {
+  color: var(--primary-white-color);
+}
+.category-title::first-letter {
+  text-transform: capitalize;
 }
 .category-descr {
+  color: rgba(244, 244, 244, 0.4);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 @media screen and (min-width: 768px) {
@@ -50,6 +126,18 @@
   }
   .cat-filter-container {
     gap: 32px;
+  }
+  .cat-filter-input {
+    padding: 12px 14px;
+    width: 270px;
+  }
+  .filter-container {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
   }
   .categories-list {
     flex-direction: row;

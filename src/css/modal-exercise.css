@@ -5,7 +5,7 @@
   padding: 40px 20px;
   border-radius: 20px;
   max-width: 90%;
-  max-height: 754px;
+  max-height: 90vh;
   margin: 0 auto;
   flex-shrink: 0;
   font-style: normal;
@@ -84,7 +84,7 @@
   width: 295px;
   height: 0px;
   stroke-width: 1px;
-  stroke: rgba(244, 244, 244, 0.2);
+  background-color: rgba(244, 244, 244, 0.2);
   padding: 1px;
 }
 .modal-exercise-tag-list {

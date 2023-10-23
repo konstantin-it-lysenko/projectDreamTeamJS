@@ -28,9 +28,9 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 					<use href="../img/sport-sprite.svg#icon-running-stick"></use>
 				</svg>
 				</span>
-				<p class="exercises-name">
+				<h3 class="exercises-name">
 					${name}
-				</p>
+				</h3>
 			</div>
 			<div class="exercises-descr-container">
 				<ul class="exercises-descr-list">
@@ -56,14 +56,14 @@ export function createExercisesPaginationBtnsMarkup(
 	thirdBtn = 3
 ) {
 	return `
-			<li class="cat-pagination-item">
-				<button type="button" class="cat-pagination-btn" data-id="1">${firstBtn}</button>
+			<li class="exer-pagination-item">
+				<button type="button" class="exer-pagination-btn active" data-id="1">${firstBtn}</button>
 			</li>
-			<li class="cat-pagination-item">
-				<button type="button" class="cat-pagination-btn" data-id="2">${secondBtn}</button>
+			<li class="exer-pagination-item">
+				<button type="button" class="exer-pagination-btn" data-id="2">${secondBtn}</button>
 			</li>
-			<li class="cat-pagination-item">
-				<button type="button" class="cat-pagination-btn" data-id="3">${thirdBtn}</button>
+			<li class="exer-pagination-item">
+				<button type="button" class="exer-pagination-btn" data-id="3">${thirdBtn}</button>
 			</li>
 		`;
 }

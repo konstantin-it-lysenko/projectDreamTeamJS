@@ -1,5 +1,6 @@
 .exercises-list {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   gap: 20px;
 }
@@ -65,6 +66,9 @@
   justify-content: center;
   fill: #fff;
 }
+.exercises-name::first-letter {
+  text-transform: capitalize;
+}
 .exercises-descr-container {
 }
 .exercises-descr-list {
@@ -79,7 +83,26 @@
 .exercises-descr-span {
   color: rgba(36, 36, 36, 0.4);
 }
+.exercises-descr-span::first-letter,
+.exercises-name::first-letter {
+  text-transform: capitalize;
+}
 .exer-pagination-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.exer-pagination-item {
+}
+.exer-pagination-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--primary-black-color);
+  border-radius: 50%;
+}
+.exer-not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @media screen and (min-width: 768px) {
   .exercises-list {
