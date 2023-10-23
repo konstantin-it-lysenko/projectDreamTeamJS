@@ -11,6 +11,10 @@
   height: 188px;
   background-color: var(--primary-black-color);
 }
+#sidebar-error {
+  width: 335px;
+  height: 188px;
+}
 .sidebar-quotewrap {
   display: flex;
 }
@@ -136,6 +140,7 @@
 @media screen and (max-width: 374.98px) {
   .sidebar-photo,
   .sidebar-quote,
+  #sidebar-error,
   .sidebar-info {
     width: 250px;
     height: auto;
@@ -187,6 +192,7 @@
     height: 249px;
   }
   .sidebar-quote,
+  #sidebar-error,
   .sidebar-info {
     padding: 40px;
     width: 400px;
@@ -210,7 +216,8 @@
     flex-direction: column;
     gap: 32px;
   }
-  .sidebar-quote {
+  .sidebar-quote,
+  #sidebar-error {
     width: 444px;
     height: 230px;
   }
@@ -231,5 +238,8 @@
     height: 163px;
     font-size: 14px;
     padding: 0;
+  }
+  .image-error404 {
+    width: 444px;
   }
 }

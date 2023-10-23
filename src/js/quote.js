@@ -10,7 +10,7 @@ async function fetchAndDisplayQuote() {
     const storedData = JSON.parse(localStorage.getItem('quoteData'));
 
     if (!storedData || todayDateString !== storedData.quoteDate) {
-      const response = await axios.get(`${BASE_URL}&${QUOTE_ENDPOINT}`);
+      const response = await axios.get(`${BASE_URL}${QUOTE_ENDPOINT}`);
       const data = response.data;
 
       if (data && data.quote && data.author) {
@@ -43,7 +43,7 @@ async function fetchAndDisplayQuote() {
 
 function showErrorPage() {
   const appContainer = document.getElementById('app');
-  const errorPageContainer = document.getElementById('error-page');
+  const errorPageContainer = document.getElementById('sidebar-error');
 
   appContainer.style.display = 'none';
   errorPageContainer.style.display = 'block';
