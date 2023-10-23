@@ -13,16 +13,19 @@ backdrop.addEventListener('click', onBackdropClick);
 
 teamList.insertAdjacentHTML('beforeend', createDevMarkup(developers));
 const devSocials = [...teamList.children];
+console.log(devSocials);
 
 // ! функції відкриття-закриття модалки і скидання стилів девів
 function onOpenClick() {
   backdrop.classList.remove('is-hidden');
   window.addEventListener('keydown', onEscKeyPress);
+  document.body.style.overflow = 'hidden';
 }
 
 function onCloseClick() {
   backdrop.classList.add('is-hidden');
   window.removeEventListener('keydown', onEscKeyPress);
+  document.body.style.overflow = 'auto';
 
   returnHidden();
 }
@@ -87,6 +90,7 @@ function onDevClick(e) {
   const currentMoreArrow = document.querySelector('.arrow-up');
   const currentActiveDeveloper = document.querySelector('.active-devel');
 
+  console.log(devClick.firstElementChild);
   if (currentActiveDeveloper) {
     currentActiveDeveloper.classList.remove('active-devel');
     // devClick.classList.add('active-devel');
@@ -95,10 +99,9 @@ function onDevClick(e) {
   moreIcon.classList.add('arrow-up');
 
   devClick.classList.add('active-devel');
-  // console.log(devClick);
   if (activeSoc.style.maxHeight) {
     activeSoc.style.maxHeight = null;
-    currentMoreArrow.classList.remove('arrow-up');
+    devClick.firstElementChild.classList.remove('arrow-up');
   } else {
     activeSoc.style.maxHeight = activeSoc.scrollHeight + 'px';
     moreIcon.classList.add('arrow-up');
