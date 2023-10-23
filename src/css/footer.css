@@ -248,7 +248,7 @@
   }
 
   .team-btn-open {
-    margin-left: 14px;
+    margin-left: 12px;
     display: block;
     background-color: unset;
     border: none;
@@ -256,7 +256,7 @@
     transition: all var(--transition);
   }
   .footer_text_year {
-    margin-left: 296px;
+    margin-left: 314px;
   }
   .team-btn-open:hover,
   .team-btn-open:focus {
