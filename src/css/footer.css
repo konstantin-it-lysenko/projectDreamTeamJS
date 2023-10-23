@@ -150,6 +150,9 @@
   line-height: 18px; /* 128.571% */
   letter-spacing: -0.02em;
 }
+.team-btn-open {
+  display: none;
+}
 @media screen and (min-width: 768px) {
   .footer {
     padding-top: 64px;
@@ -243,7 +246,21 @@
   .footer_text {
     margin-right: 136px;
   }
-  .footer_wrap_info {
-    gap: 508px;
+
+  .team-btn-open {
+    margin-left: 14px;
+    display: block;
+    background-color: unset;
+    border: none;
+    color: var(--primary-color-c6cdd1);
+    transition: all var(--transition);
+  }
+  .footer_text_year {
+    margin-left: 296px;
+  }
+  .team-btn-open:hover,
+  .team-btn-open:focus {
+    color: var(--primary-white-color);
+    transform: scale(1.1);
   }
 }

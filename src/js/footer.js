@@ -59,7 +59,7 @@ function handleIntersection(entries, observer) {
     }
 
     const animation = gsap.to(icon, {
-      duration: 4,
+      duration: 5,
       fill: '#f4f4f4',
     });
   });
