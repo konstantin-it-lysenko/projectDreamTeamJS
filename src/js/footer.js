@@ -39,7 +39,7 @@ function isValidEmail(email) {
   return emailPattern.test(email);
 }
 
-const circleElement = document.querySelector('.footer_logo_icon');
+// const circleElement = document.querySelector('.footer_logo_icon');
 
 const options = {
   root: null,
@@ -47,6 +47,7 @@ const options = {
   threshold: 0,
 };
 const icon = document.querySelector('.footer_logo_icon');
+const text = document.querySelector('.footer_title_span');
 
 const observer = new IntersectionObserver(handleIntersection, options);
 
@@ -57,10 +58,15 @@ function handleIntersection(entries, observer) {
     if (!entry.isIntersecting) {
       return;
     }
-
-    const animation = gsap.to(icon, {
-      duration: 5,
-      fill: '#f4f4f4',
+    gsap.to(icon, {
+      duration: 2,
+      opacity: 1,
+      x: 0,
+      rotationX: 360,
+    });
+    gsap.to(text, {
+      duration: 2,
+      opacity: 1,
     });
   });
 }
