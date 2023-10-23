@@ -54,7 +54,13 @@
   align-items: center;
   justify-content: center;
 }
-
+@media screen and (max-width: 374.98px) {
+  .hero-tags-list {
+    margin: 0 auto;
+    flex-wrap: wrap;
+    width: 180px;
+  }
+}
 @media screen and (min-width: 768px) {
   .hero {
     padding-top: 100px;

@@ -52,6 +52,7 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 			</div>
 		</li>`;
 }
+
 export function createExercisesPaginationBtnsMarkup(
 	firstBtn = 1,
 	secondBtn = 2,
