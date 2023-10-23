@@ -17,13 +17,14 @@ openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
 
 export async function handleOpenModalClick(
   _,
-  favoriteId = '64f389465ae26083f39b17a2'
+  favoriteId,
 ) {
+  console.log(favoriteId);
   let modalBox = {};
   let ratingValue = 0;
 
   try {
-    const exericiseData = await fetchExerciseModalById();
+    const exericiseData = await fetchExerciseModalById(favoriteId);
     modalBox = new ModalBox(
       createModalExerciseMarkup,
       closeModalSelector,
