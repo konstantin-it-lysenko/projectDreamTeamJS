@@ -12,6 +12,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(4, 4, 4, 0.4);
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .form-modal { /*Тут*/
@@ -25,6 +26,8 @@
     background-color: #242424;
     color: #f4f4f4;
     padding: 40px 20px;
+    transition: transform 0.4s ease;
+    overflow: auto;
 }
 
 .form-btn-close {
