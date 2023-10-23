@@ -9,6 +9,7 @@ import {
   createPaginationBtnsMarkup,
 } from './templates/categories-markup';
 import { handleOpenModalClick } from './modal-exercise';
+import throttle from 'lodash.throttle';
 
 const refs = {
   catsList: document.querySelector('.categories-wrapper'),
@@ -19,10 +20,11 @@ const refs = {
 const { catsList, catFilterList, exercisesTitleSpan, catFilterInput } = refs;
 
 let categoryName = '';
-let currentExercise;
+let test = 'bodypart';
+let respFilterAll = [];
 
 catFilterList.addEventListener('click', catFilterBtnHandler);
-catFilterInput.addEventListener('input', catInputHandler);
+catFilterInput.addEventListener('input', throttle(catInputHandler, 300));
 
 fetchCategories()
   .then(resp => {
@@ -37,11 +39,24 @@ fetchCategories()
   })
   .catch(err => console.log(err));
 
-function catFilterBtnHandler(e) {
+async function catFilterBtnHandler(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
+  catFilterInput.value = '';
   categoryName = e.target.dataset.name;
+
+  switch (categoryName) {
+    case 'Muscles':
+      test = 'muscles';
+      break;
+    case 'Equipment':
+      test = 'equipment';
+      break;
+    case 'Body parts':
+      test = 'bodypart';
+      break;
+  }
 
   fetchCategories(categoryName)
     .then(resp => {
@@ -53,46 +68,74 @@ function catFilterBtnHandler(e) {
       catsList.innerHTML = createCategoryMarkup(categoryByName);
     })
     .catch(err => console.log(err));
-}
-
-function paginationBtnHandler(e) {
-  const currentPage = e.target.dataset.id;
-
-  fetchCategories(categoryName, currentPage)
-    .then(resp => {
-      const removeExtraCategories = resp.filter(
-        ({ filter }) => filter === categoryName
-      );
-
-      catsList.innerHTML = createCategoryMarkup(removeExtraCategories);
-    })
-    .catch(err => console.log(err));
-}
-async function catsListBtnHandler(e) {
-  if (e.target.nodeName === 'UL') {
-    return;
+  try {
+    const resp = await fetchCategories(categoryName);
+    const categoryByName = resp.filter(({ filter }) => filter === categoryName);
+    exercisesTitleSpan.innerHTML = '';
+    catFilterInput.hidden = true;
+    catsList.innerHTML = createCategoryMarkup(categoryByName);
+  } catch {
+    err => console.log(err);
   }
-
-  currentExercise = e.target.closest('.categories-item').dataset.bodyPart;
-  console.log('Exercise', currentExercise);
-  const getExercises = await fetchExercises(categoryName, currentExercise);
-
-  catsList.innerHTML = createExercisesMarkup(getExercises);
-
-  exercisesTitleSpan.innerHTML = currentExercise;
-  catFilterInput.hidden = false;
-
-  const openModalBtns = document.querySelectorAll('[data-modal-exercise="open"]').forEach(btn => {
-    btn.addEventListener('click', (event) => {
-      const exerciseId = event.currentTarget.closest('.exercises-item').dataset.exerciseId;
-      console.log(exerciseId);
-      handleOpenModalClick(event, exerciseId);
-    })
-  });
-
-  //   const resp = await fetchAllExercises(categoryName, currentExercise);
 }
 
-function catInputHandler(e) {
-  const filterInput = e.currentTarget.value.toLowerCase().trim('');
+async function paginationBtnHandler(e) {
+  const currentPage = e.target.dataset.id;
+  try {
+    const resp = await fetchCategories(categoryName, currentPage);
+    const removeExtraCategories = resp.filter(
+      ({ filter }) => filter === categoryName
+    );
+    catsList.innerHTML = createCategoryMarkup(removeExtraCategories);
+  } catch {
+    err => console.log(err);
+  }
+}
+
+async function catsListBtnHandler(e) {
+  try {
+    catFilterInput.hidden = false;
+    const currentExercise =
+      e.target.closest('.categories-item').dataset.bodyPart;
+    const getExercises = await fetchExercises(test, currentExercise);
+    const perPage = getExercises.perPage;
+    const totalPages = getExercises.totalPages;
+    catsList.innerHTML = createExercisesMarkup(getExercises.results);
+    exercisesTitleSpan.innerHTML = currentExercise;
+    respFilterAll = await fetchAllExercises(
+      test,
+      currentExercise,
+      perPage,
+      totalPages
+    );
+
+    catFilterInput.hidden = false;
+
+    const exericesBtns = document.querySelectorAll(
+      '[data-modal-exercise="open"]'
+    );
+
+    exericesBtns.forEach(btn => {
+      btn.addEventListener('click', event => {
+        const exerciseId =
+          event.currentTarget.closest('.exercises-item').dataset.exerciseId;
+
+        handleOpenModalClick(event, exerciseId);
+      });
+    });
+  } catch {
+    err => console.log('Err', err);
+  }
+}
+
+function catInputHandler() {
+  let filterInput = catFilterInput.value.toLowerCase().trim('');
+  const filteredExercises = respFilterAll.filter(({ name }) =>
+    name.includes(filterInput)
+  );
+  const markupNotFound = `<span class='exer-not-found'>Sorry, there is no data matching your search query.</span>`;
+  catsList.innerHTML =
+    filteredExercises.length === 0
+      ? markupNotFound
+      : createExercisesMarkup(filteredExercises);
 }

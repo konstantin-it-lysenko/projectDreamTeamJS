@@ -16,13 +16,18 @@ export async function fetchExercises(category, bodyPart, page = 1) {
   const categoriesUrl = `${BASE_URL}${EXERCISE_ENDPOINT}?${params}`;
   const response = await axios.get(categoriesUrl);
 
-  return response.data.results;
+  return response.data;
 }
 
-export async function fetchAllExercises(category, bodyPart) {
+export async function fetchAllExercises(
+  category,
+  bodyPart,
+  perPage,
+  totalPages
+) {
   const params = new URLSearchParams({
     [category]: bodyPart,
-    limit: 100,
+    limit: perPage * totalPages,
   });
 
   const categoriesUrl = `${BASE_URL}${EXERCISE_ENDPOINT}?${params}`;
