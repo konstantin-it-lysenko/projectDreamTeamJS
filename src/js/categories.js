@@ -19,7 +19,8 @@ const refs = {
 const { catsList, catFilterList, exercisesTitleSpan, catFilterInput } = refs;
 
 let categoryName = '';
-
+let test = 'bodypart';
+let respFilterAll = [];
 catFilterList.addEventListener('click', catFilterBtnHandler);
 catFilterInput.addEventListener('input', catInputHandler);
 
@@ -41,6 +42,18 @@ function catFilterBtnHandler(e) {
     return;
   }
   categoryName = e.target.dataset.name;
+
+  switch (categoryName) {
+    case 'Muscles':
+      test = 'muscles';
+      break;
+    case 'Equipment':
+      test = 'equipment';
+      break;
+    case 'Body parts':
+      test = 'bodypart';
+      break;
+  }
 
   fetchCategories(categoryName)
     .then(resp => {
@@ -69,22 +82,35 @@ function paginationBtnHandler(e) {
 }
 async function catsListBtnHandler(e) {
   try {
-    const currentExercise = e.target.closest('.categories-item').dataset.bodyPart;
-    const getExercises = await fetchExercises(categoryName, currentExercise);
-    catsList.innerHTML = createExercisesMarkup(getExercises);
+    catFilterInput.hidden = false;
+    const currentExercise =
+      e.target.closest('.categories-item').dataset.bodyPart;
+    const getExercises = await fetchExercises(test, currentExercise);
+    const perPage = getExercises.perPage;
+    const totalPages = getExercises.totalPages;
+    catsList.innerHTML = createExercisesMarkup(getExercises.results);
     exercisesTitleSpan.innerHTML = currentExercise;
-
+    respAll = await fetchAllExercises(
+      test,
+      currentExercise,
+      perPage,
+      totalPages
+    );
+    console.log(respAll);
     catFilterInput.hidden = false;
 
-    const exericesBtns = document.querySelectorAll('[data-modal-exercise="open"]');
+    const exericesBtns = document.querySelectorAll(
+      '[data-modal-exercise="open"]'
+    );
 
     exericesBtns.forEach(btn => {
-      btn.addEventListener('click', (event) => {
-        const exerciseId = event.currentTarget.closest('.exercises-item').dataset.exerciseId;
+      btn.addEventListener('click', event => {
+        const exerciseId =
+          event.currentTarget.closest('.exercises-item').dataset.exerciseId;
 
         handleOpenModalClick(event, exerciseId);
-      })
-    })
+      });
+    });
   } catch {
     err => console.log('Err', err);
   }
@@ -93,4 +119,5 @@ async function catsListBtnHandler(e) {
 
 function catInputHandler(e) {
   const filterInput = e.currentTarget.value.toLowerCase().trim('');
+  console.log(respFilterAll);
 }
