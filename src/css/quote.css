@@ -127,6 +127,13 @@
   border-radius: 50%;
   background-color: var(--primary-black-color);
 }
+.sidebar-info .sidebar-infosvg {
+  transition: transform 1s ease 0.25s;
+  transform: scale(1);
+}
+.sidebar-info:hover .sidebar-infosvg {
+  transform: scale(1.7);
+}
 .sidebar-infosvg {
   position: relative;
   top: 6px;
@@ -147,7 +154,7 @@
   padding: 5px;
   font-size: 16px;
   opacity: 0;
-  transition: opacity 1s ease 0.5s;
+  transition: opacity 1s ease 0.25s;
 }
 .sidebar-timerstart[data-active='true']::before {
   content: 'The training has begun!';
