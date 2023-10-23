@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.header-nav-link');
   const loader = document.querySelector('.loader');
 
-  console.log(loader);
-
   // console.log(contentEl.classList.contains('header-fade-out'));
 
   // Функції/скрипти, які відбуваються після перемальовування сторінки
@@ -75,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const parser = new DOMParser();
         const docActive = parser.parseFromString(html, 'text/html');
         const newContent = docActive.querySelector('.content').innerHTML;
-        console.log(newContent);
 
         // contentEl.classList.add('header-fade-out');
 
