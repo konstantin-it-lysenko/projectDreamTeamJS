@@ -13,7 +13,6 @@ backdrop.addEventListener('click', onBackdropClick);
 
 teamList.insertAdjacentHTML('beforeend', createDevMarkup(developers));
 const devSocials = [...teamList.children];
-console.log(devSocials);
 
 // ! функції відкриття-закриття модалки і скидання стилів девів
 function onOpenClick() {
@@ -52,53 +51,24 @@ function onBackdropClick(e) {
   }
 }
 
-// ! інші функції
-
-// function onDevClick(e) {
-//   const devClick = e.target.closest('.team-item');
-//   if (!devClick) {
-//     return;
-//   }
-//   const devSocClick = devClick.querySelector('.team-soc-list');
-// const moreIcon = devClick.querySelector('.more-icon');
-
-// const currentActiveDevSoc = document.querySelector('.active-devel');
-// if (currentActiveDevSoc) {
-//   currentActiveDevSoc.classList.remove('active-devel');
-
-//   devSocClick.classList.add('active-devel');
-// }
-
-// const currentMoreArrow = document.querySelector('.arrow-up');
-// if (currentMoreArrow) {
-//   currentMoreArrow.classList.remove('arrow-up');
-//   moreIcon.classList.add('arrow-up');
-// }
-
-// moreIcon.classList.add('arrow-up');
-//   devSocClick.classList.add('active-devel');
-// }
-
 function onDevClick(e) {
   const devClick = e.target.closest('.team-item');
   if (!devClick) {
     return;
   }
-
+  
   const activeSoc = devClick.lastElementChild;
   const moreIcon = devClick.querySelector('.more-icon');
-  const currentMoreArrow = document.querySelector('.arrow-up');
   const currentActiveDeveloper = document.querySelector('.active-devel');
 
   console.log(devClick.firstElementChild);
   if (currentActiveDeveloper) {
     currentActiveDeveloper.classList.remove('active-devel');
-    // devClick.classList.add('active-devel');
   }
 
   moreIcon.classList.add('arrow-up');
-
   devClick.classList.add('active-devel');
+
   if (activeSoc.style.maxHeight) {
     activeSoc.style.maxHeight = null;
     devClick.firstElementChild.classList.remove('arrow-up');
