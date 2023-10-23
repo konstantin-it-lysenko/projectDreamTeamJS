@@ -1,11 +1,4 @@
 /** кнопки, бекдроп, загальні стилі модалки, скролбар **/
-.team-btn-open {
-  padding: 15px;
-  cursor: pointer;
-  background-color: rgba(4, 4, 4, 0.4);
-  border-radius: 20px;
-}
-
 .team-backdrop {
   position: fixed;
   top: 0;
