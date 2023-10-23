@@ -1,6 +1,5 @@
-import { API_PROPS } from './api/api';
 import axios from 'axios';
-import Notiflix from 'notiflix';
+import { API_PROPS } from './api/api';
 
 const { BASE_URL, QUOTE_ENDPOINT } = API_PROPS;
 
@@ -11,7 +10,7 @@ async function fetchAndDisplayQuote() {
     const storedData = JSON.parse(localStorage.getItem('quoteData'));
 
     if (!storedData || todayDateString !== storedData.quoteDate) {
-      const response = await axios.get(`${BASE_URL}${QUOTE_ENDPOINT}`);
+      const response = await axios.get(`${BASE_URL}&${QUOTE_ENDPOINT}`);
       const data = response.data;
 
       if (data && data.quote && data.author) {
@@ -29,7 +28,7 @@ async function fetchAndDisplayQuote() {
         quoteElement.textContent = data.quote;
         authorElement.textContent = data.author;
       } else {
-        Notiflix.Notify.failure('Пожалуйста, попробуйте снова.');
+        showErrorPage();
       }
     } else {
       const quoteElement = document.querySelector('.quote');
@@ -38,8 +37,18 @@ async function fetchAndDisplayQuote() {
       authorElement.textContent = storedData.author;
     }
   } catch (error) {
-    Notiflix.Notify.failure('Пожалуйста, попробуйте снова.');
+    showErrorPage();
   }
 }
 
-fetchAndDisplayQuote();
+function showErrorPage() {
+  const appContainer = document.getElementById('app');
+  const errorPageContainer = document.getElementById('error-page');
+
+  appContainer.style.display = 'none';
+  errorPageContainer.style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  fetchAndDisplayQuote();
+});
