@@ -1,3 +1,5 @@
+import svgSprite from '../../img/sport-sprite.svg';
+
 export function createExercisesMarkup(data) {
 	return `<ul class="exercises-list">${data.map(createMarkup).join('')}</ul>
 	<ul class="exer-pagination-list"></ul>`;
@@ -11,21 +13,21 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 					<p class="exercises-rating">
 						${rating.toFixed(1)}
 						<svg width="18" height="18" class="exercises-svg">
-							<use href="../img/sport-sprite.svg#icon-star"></use>
+							<use href="${svgSprite}#icon-star"></use>
 						</svg>
 					</p>
 				</div>
 				<button type="button" class="exercises-btn" data-modal-exercise="open">
 					Start
 					<svg width="16" height="16" class="exercises-btn-svg">
-						<use href="../img/sport-sprite.svg#icon-arrow-up"></use>
+						<use href="${svgSprite}#icon-arrow-up"></use>
 					</svg>
 				</button>
 			</div>
 			<div class="exercises-name-container">
 				<span class="exercises-name-span">
 				<svg width="20" height="20" class="exercises-name-svg">
-					<use href="../img/sport-sprite.svg#icon-running-stick"></use>
+					<use href="${svgSprite}#icon-running-stick"></use>
 				</svg>
 				</span>
 				<h3 class="exercises-name">
