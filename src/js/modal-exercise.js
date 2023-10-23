@@ -6,6 +6,7 @@ import {
   createRemoveFromFavoritesMarkup,
 } from './templates/modal-exercise-markup';
 import { ModalBox } from './modal-class-box';
+import { onOpenClick } from './modal-form';
 
 const openModalSelector = '[data-modal-exercise="open"]';
 const closeModalSelector = '[data-modal-exercise="close"]';
@@ -48,7 +49,7 @@ export async function handleOpenModalClick(
   );
 
   giveRatingBtnRef.addEventListener('click', event =>
-    handleGiveRatingBtnClick(event, modalBox)
+    handleGiveRatingBtnClick(event, modalBox, exerciseData._id)
   );
 
   addToFavoriteBtnRef.addEventListener('click', event =>
@@ -102,8 +103,9 @@ function removeLocalStorageIfEmpty() {
   !favoriteIdList.length && localStorage.removeItem(LS_FAVORITES_ID);
 }
 
-function handleGiveRatingBtnClick(_, modalBox) {
+function handleGiveRatingBtnClick(_, modalBox, exerciseId) {
   modalBox.instance.close();
+  onOpenClick(_, exerciseId);
 }
 
 function processActiveRatingStars(ratingValue) {
