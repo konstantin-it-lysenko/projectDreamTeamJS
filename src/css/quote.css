@@ -137,13 +137,33 @@
   display: flex;
   gap: 24px;
 }
+.sidebar-timerstart::before {
+  content: 'Want to start training?';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--primary-black-color);
+  color: #fff;
+  padding: 5px;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 1s ease 0.5s;
+}
+.sidebar-timerstart[data-active='true']::before {
+  content: 'The training has begun!';
+}
+.sidebar-timerstart:hover::before,
+.sidebar-timerstart:focus::before {
+  opacity: 1;
+}
 @media screen and (max-width: 374.98px) {
   .sidebar-photo,
   .sidebar-quote,
   #sidebar-error,
   .sidebar-info {
-    width: 250px;
+    max-width: 220px;
     height: auto;
+    margin: 0 auto;
   }
   .sidebar-quoteitem {
     margin-right: -40px;
