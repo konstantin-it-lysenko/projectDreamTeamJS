@@ -10,30 +10,30 @@ import { ModalBox } from './modal-class-box';
 const openModalSelector = '[data-modal-exercise="open"]';
 const closeModalSelector = '[data-modal-exercise="close"]';
 const openModalExerciseBtnRef = document.querySelector(openModalSelector);
-const LS_FAVORITES_ID = 'favorite-id-list';
+const LS_FAVORITES_ID = 'favorite-exercises-list';
 const favoriteIdList = JSON.parse(localStorage.getItem(LS_FAVORITES_ID)) || [];
 
 openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
 
 export async function handleOpenModalClick(
   _,
-  favoriteId,
+  exerciseId = '64f389465ae26083f39b17a2'
 ) {
-  console.log(favoriteId);
   let modalBox = {};
+  let exerciseData = {};
   let ratingValue = 0;
 
   try {
-    const exericiseData = await fetchExerciseModalById(favoriteId);
+    exerciseData = await fetchExerciseModalById(exerciseId);
     modalBox = new ModalBox(
       createModalExerciseMarkup,
       closeModalSelector,
-      exericiseData
+      exerciseData
     );
 
     modalBox.open();
 
-    ratingValue = Math.round(exericiseData.rating);
+    ratingValue = Math.round(exerciseData.rating);
   } catch (error) {
     Notify.failure(
       'Sorry, there are no data matching your category. Please try again.'
@@ -52,55 +52,58 @@ export async function handleOpenModalClick(
   );
 
   addToFavoriteBtnRef.addEventListener('click', event =>
-    handleAddToFavoriteBtnClick(event, favoriteId, addToFavoriteBtnRef)
+    handleAddToFavoriteBtnClick(event, exerciseData, addToFavoriteBtnRef)
   );
 
-  createRemoveMarkupIfIncludesId(favoriteId, addToFavoriteBtnRef);
+  createRemoveMarkupIfIncludesId(exerciseData, addToFavoriteBtnRef);
 }
 
-function handleGiveRatingBtnClick(_, modalBox) {
-  modalBox.instance.close();
-}
+function handleAddToFavoriteBtnClick(
+  _,
+  { _id, name, burnedCalories, bodyPart, target },
+  addToFavoriteBtnRef
+) {
+  const favoriteExercise = { _id, name, burnedCalories, bodyPart, target };
 
-function handleAddToFavoriteBtnClick(_, favoriteId, addToFavoriteBtnRef) {
-  if (favoriteIdList.includes(favoriteId)) {
-    processRemovalsFromFavorites(favoriteId, addToFavoriteBtnRef);
+  if (favoriteIdList.some(({ _id }) => _id === favoriteExercise._id)) {
+    processRemovalsFromFavorites(favoriteExercise, addToFavoriteBtnRef);
     removeLocalStorageIfEmpty();
     return;
   }
 
-  processAddingToFavorites(favoriteId, addToFavoriteBtnRef);
+  processAddingToFavorites(favoriteExercise, addToFavoriteBtnRef);
 }
 
-function processAddingToFavorites(favoriteId, addToFavoriteBtnRef) {
+function processAddingToFavorites(favoriteExercise, addToFavoriteBtnRef) {
   addToFavoriteBtnRef.innerHTML = createRemoveFromFavoritesMarkup();
 
-  favoriteIdList.push(favoriteId);
-  const favoriteIdData = JSON.stringify(favoriteIdList);
+  favoriteIdList.push(favoriteExercise);
+  const favoriteData = JSON.stringify(favoriteIdList);
 
-  localStorage.setItem(LS_FAVORITES_ID, favoriteIdData);
+  localStorage.setItem(LS_FAVORITES_ID, favoriteData);
 }
 
-function processRemovalsFromFavorites(favoriteId, addToFavoriteBtnRef) {
-  const currentFavoriteIndex = favoriteIdList.indexOf(favoriteId);
+function processRemovalsFromFavorites(favoriteExercise, addToFavoriteBtnRef) {
+  const currentFavoriteIndex = favoriteIdList.indexOf(favoriteExercise._id);
   favoriteIdList.splice(currentFavoriteIndex, 1);
 
-  const favoriteIdData = JSON.stringify(favoriteIdList);
-  localStorage.setItem(LS_FAVORITES_ID, favoriteIdData);
+  const favoriteData = JSON.stringify(favoriteIdList);
+  localStorage.setItem(LS_FAVORITES_ID, favoriteData);
 
   addToFavoriteBtnRef.innerHTML = createAddToFavoritesMarkup();
 }
 
-function createRemoveMarkupIfIncludesId(favoriteId, addToFavoriteBtnRef) {
-  if (favoriteIdList.includes(favoriteId)) {
-    addToFavoriteBtnRef.innerHTML = createRemoveFromFavoritesMarkup();
-  }
+function createRemoveMarkupIfIncludesId(favoriteExercise, addToFavoriteBtnRef) {
+  favoriteIdList.some(({ _id }) => _id === favoriteExercise._id) &&
+    (addToFavoriteBtnRef.innerHTML = createRemoveFromFavoritesMarkup());
 }
 
 function removeLocalStorageIfEmpty() {
-  if (favoriteIdList.length === 0) {
-    localStorage.removeItem(LS_FAVORITES_ID);
-  }
+  !favoriteIdList.length && localStorage.removeItem(LS_FAVORITES_ID);
+}
+
+function handleGiveRatingBtnClick(_, modalBox) {
+  modalBox.instance.close();
 }
 
 function processActiveRatingStars(ratingValue) {

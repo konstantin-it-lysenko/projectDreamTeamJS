@@ -84,7 +84,7 @@
   width: 295px;
   height: 0px;
   stroke-width: 1px;
-  stroke: rgba(244, 244, 244, 0.2);
+  background-color: rgba(244, 244, 244, 0.2);
   padding: 1px;
 }
 .modal-exercise-tag-list {
