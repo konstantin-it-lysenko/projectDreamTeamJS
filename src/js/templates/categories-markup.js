@@ -1,10 +1,10 @@
 export function createCategoryMarkup(data) {
-  return `<ul class="categories-list">${data.map(createMarkup).join('')}</ul>
+	return `<ul class="categories-list">${data.map(createMarkup).join('')}</ul>
 	<ul class="cat-pagination-list"></ul>`;
 }
 
 function createMarkup({ filter, name, imgURL }) {
-  return `<li class="categories-item" data-body-part='${name}'>
+	return `<li class="categories-item" data-body-part='${name}'>
 			<button type="button" class="categories-btn">
 				<img src="${imgURL}" alt="${name}" class="categories-img">
 				<div class="categories-info">
@@ -15,11 +15,11 @@ function createMarkup({ filter, name, imgURL }) {
 		</li>`;
 }
 export function createPaginationBtnsMarkup(
-  firstBtn = 1,
-  secondBtn = 2,
-  thirdBtn = 3
+	firstBtn = 1,
+	secondBtn = 2,
+	thirdBtn = 3
 ) {
-  return `
+	return `
 			<li class="cat-pagination-item">
 				<button type="button" class="cat-pagination-btn" data-id="1">${firstBtn}</button>
 			</li>
