@@ -104,7 +104,7 @@ export function createAddToFavoritesMarkup() {
   Add to favorites
         <span>
           <svg class="modal-exercise-heart-icon js-modal-exercise-heart-icon">
-            <use href="./img/sport-sprite.svg#icon-heart"></use></svg
+            <use href="${svgSpritePath}#icon-heart"></use></svg
         ></span>`;
 }
 
@@ -113,7 +113,7 @@ export function createRemoveFromFavoritesMarkup() {
   Remove from favorites
         <span>
           <svg class="modal-exercise-heart-icon js-modal-exercise-heart-icon modal-favorite-active-icon">
-            <use href="./img/sport-sprite.svg#icon-heart"></use></svg
+            <use href="${svgSpritePath}#icon-heart"></use></svg
         ></span>
   `;
 }
