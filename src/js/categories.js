@@ -37,7 +37,7 @@ fetchCategories()
   })
   .catch(err => console.log(err));
 
-function catFilterBtnHandler(e) {
+async function catFilterBtnHandler(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
@@ -65,21 +65,30 @@ function catFilterBtnHandler(e) {
       catsList.innerHTML = createCategoryMarkup(categoryByName);
     })
     .catch(err => console.log(err));
+  try {
+    const resp = await fetchCategories(categoryName);
+    const categoryByName = resp.filter(({ filter }) => filter === categoryName);
+    exercisesTitleSpan.innerHTML = '';
+    catFilterInput.hidden = true;
+    catsList.innerHTML = createCategoryMarkup(categoryByName);
+  } catch {
+    err => console.log(err);
+  }
 }
 
-function paginationBtnHandler(e) {
+async function paginationBtnHandler(e) {
   const currentPage = e.target.dataset.id;
-
-  fetchCategories(categoryName, currentPage)
-    .then(resp => {
-      const removeExtraCategories = resp.filter(
-        ({ filter }) => filter === categoryName
-      );
-
-      catsList.innerHTML = createCategoryMarkup(removeExtraCategories);
-    })
-    .catch(err => console.log(err));
+  try {
+    const resp = await fetchCategories(categoryName, currentPage);
+    const removeExtraCategories = resp.filter(
+      ({ filter }) => filter === categoryName
+    );
+    catsList.innerHTML = createCategoryMarkup(removeExtraCategories);
+  } catch {
+    err => console.log(err);
+  }
 }
+
 async function catsListBtnHandler(e) {
   try {
     catFilterInput.hidden = false;

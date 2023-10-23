@@ -8,11 +8,11 @@ function truncateText() {
   if (window.innerWidth >= 1440) {
     maxCharacters = 560;
   } else if (window.innerWidth >= 768 && window.innerWidth < 1440) {
-    maxCharacters = 258;
+    maxCharacters = 260;
   } else if (window.innerWidth >= 375 && window.innerWidth < 768) {
-    maxCharacters = 211;
+    maxCharacters = 216;
   } else {
-    maxCharacters = 205;
+    maxCharacters = 170;
   }
   const originalText = sidebarText.textContent;
   if (originalText.length > maxCharacters) {
