@@ -147,10 +147,6 @@ function reloadCurrentPage(num, arr) {
   setExercisesToReload(arr);
 }
 
-function removeLocalStorageIfEmpty() {
-  !favoriteIdList.length && localStorage.removeItem(LS_FAVORITES_ID);
-}
-
 getCurrentQuote();
 
 // Test favor exercises
