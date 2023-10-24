@@ -2,13 +2,9 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   createMarkupExercises,
   createMarkupPagination,
+  createMurkupNoitems,
 } from './templates/favourites-markup';
-import {
-  getQuote,
-  save,
-  load,
-  getExercises,
-} from './api-service/favourites-api';
+import { getQuote, save, load } from './api-service/favourites-api';
 import { handleOpenModalClick } from './modal-exercise';
 
 //-----------------------------------------------------------------------
@@ -79,7 +75,7 @@ export function getFavoriteExercises() {
             const pagBtnId = Number(
               event.currentTarget.closest('.pag-btn').dataset.id
             );
-            reloadCurrentPage(pagBtnId, favorExercises);
+            reloadCurrentPage(pagBtnId, favoriteExercises);
           });
         });
         setExercisesToReload(favoriteExercises);
@@ -88,6 +84,7 @@ export function getFavoriteExercises() {
       reloadMarkupExercises(page, favoriteExercises);
     } else {
       noExercises.classList.add('favor-exercises-noitems');
+      exercises.innerHTML = createMurkupNoitems();
     }
   } catch (err) {
     // Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
@@ -142,6 +139,7 @@ function removeFavoriteExerciseFromLS(id, arr) {
   const favoriteExerciseIndex = arr.indexOf(removerObj);
   arr.splice(favoriteExerciseIndex, 1);
   save(LS_FAVORITES_ID, arr);
+  !arr.length && localStorage.removeItem(LS_FAVORITES_ID);
 }
 
 function reloadCurrentPage(num, arr) {
