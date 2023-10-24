@@ -40,13 +40,11 @@ fetchCategories()
     const catPaginationList = document.querySelector('.cat-pagination-list');
     catPaginationList.insertAdjacentHTML(
       'beforeend',
-      createPaginationBtnsMarkup()
-    );
-
-    updatePagination(
-      catPaginationList,
-      currentCategoryPage,
-      totalCategoryPages
+      updatePagination(
+        catPaginationList,
+        currentCategoryPage,
+        totalCategoryPages
+      )
     );
 
     catPaginationList.addEventListener('click', paginationBtnHandler);
@@ -59,6 +57,10 @@ async function catFilterBtnHandler(e) {
   }
   catFilterInput.value = '';
   categoryName = e.target.dataset.name;
+
+  const catFilterBtns = document.querySelectorAll('.cat-filter-btn');
+  catFilterBtns.forEach(btn => btn.classList.remove('active'));
+  e.target.classList.add('active');
 
   switch (categoryName) {
     case 'Muscles':
@@ -75,7 +77,8 @@ async function catFilterBtnHandler(e) {
   fetchCategories(categoryName)
     .then(resp => {
       totalCategoryPages = resp.totalPages;
-      console.log(totalCategoryPages);
+      currentCategoryPage = resp.page;
+
       const categoryByName = resp.results.filter(
         ({ filter }) => filter === categoryName
       );
@@ -83,6 +86,7 @@ async function catFilterBtnHandler(e) {
       catFilterInput.hidden = true;
       catsList.innerHTML = createCategoryMarkup(categoryByName);
       const catPaginationList = document.querySelector('.cat-pagination-list');
+      createExercisesPaginationBtnsMarkup();
       updatePagination(
         catPaginationList,
         currentCategoryPage,
@@ -125,6 +129,11 @@ async function catsListBtnHandler(e) {
     const perPage = getExercises.perPage;
     const totalPages = getExercises.totalPages;
     catsList.innerHTML = createExercisesMarkup(getExercises.results);
+
+    const exercisesList = document.querySelector('.exercises-list');
+
+    exercisesList.addEventListener('click', exericesModalBtnsHandler);
+
     exercisesTitleSpan.innerHTML = currentExercise;
     respFilterAll = await fetchAllExercises(
       test,
@@ -134,25 +143,12 @@ async function catsListBtnHandler(e) {
     );
 
     catFilterInput.hidden = false;
-
-    const exericesBtns = document.querySelectorAll(
-      '[data-modal-exercise="open"]'
-    );
-
-    exericesBtns.forEach(btn => {
-      btn.addEventListener('click', event => {
-        const exerciseId =
-          event.currentTarget.closest('.exercises-item').dataset.exerciseId;
-
-        handleOpenModalClick(event, exerciseId);
-      });
-    });
   } catch {
     err => console.log('Err', err);
   }
 }
 
-function catInputHandler() {
+function catInputHandler(e) {
   let filterInput = catFilterInput.value.toLowerCase().trim('');
   const filteredExercises = respFilterAll.filter(({ name }) =>
     name.includes(filterInput)
@@ -162,6 +158,10 @@ function catInputHandler() {
     filteredExercises.length === 0
       ? markupNotFound
       : createExercisesMarkup(filteredExercises);
+
+  const exercisesList = document.querySelector('.exercises-list');
+
+  exercisesList.addEventListener('click', exericesModalBtnsHandler);
 }
 
 // const itemsPerPage = 10; // Количество элементов на одной странице
@@ -174,22 +174,65 @@ function catInputHandler() {
 // // Создаем контейнер для пагинации
 // const paginationContainer = document.getElementById('pagination-container');
 
+// function updatePagination(paginationContainer, currentPage, totalPages) {
+//   paginationContainer.innerHTML = ''; // Очищаем контейнер
+
+//   for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+//     if (i >= 1 && i <= totalPages) {
+//       const item = document.createElement('li');
+//       item.className = 'pagination-item';
+//       if (i === currentPage) {
+//         item.className += ' active';
+//       }
+//       const button = document.createElement('button');
+//       button.className = 'cat-pagination-btn';
+//       button.textContent = i;
+//       item.appendChild(button);
+
+//       if (i === currentPage && currentPage >= totalPages) {
+//         item.className += ' disabled';
+//       }
+
+//       // Добавляем обработчик клика на кнопку
+//       button.addEventListener('click', function () {
+//         if (i !== currentPage) {
+//           currentPage = i;
+//           updatePagination(paginationContainer, currentPage, totalPages);
+//         }
+//       });
+
+//       paginationContainer.appendChild(item);
+//     }
+//   }
+// }
+
 function updatePagination(paginationContainer, currentPage, totalPages) {
   paginationContainer.innerHTML = ''; // Очищаем контейнер
-
+  createExercisesPaginationBtnsMarkup();
   for (let i = currentPage - 1; i <= currentPage + 1; i++) {
     if (i >= 1 && i <= totalPages) {
-      const item = document.createElement('li');
-      item.className = 'pagination-item';
+      const item = document.querySelector('.cat-pagination-item');
       if (i === currentPage) {
         item.className += ' active';
       }
-      const button = document.createElement('button');
+      const button = document.querySelector('cat-pagination-btn');
       button.textContent = i;
-      item.appendChild(button);
 
-      if (i === currentPage && currentPage >= totalPages) {
-        item.className += ' disabled';
+      if (i === currentPage) {
+        // Если текущая страница равна i
+        if (i === 1) {
+          // Если это первая страница
+          if (totalPages === 1) {
+            // Если всего одна страница, то кнопки 2 и 3 неактивны
+            item.className += ' disabled';
+          } else {
+            // Иначе, только кнопка 3 неактивна
+            item.className += ' disabled';
+          }
+        } else if (i === totalPages) {
+          // Если текущая страница - последняя, то только кнопка 2 неактивна
+          item.className += ' disabled';
+        }
       }
 
       // Добавляем обработчик клика на кнопку
@@ -202,5 +245,15 @@ function updatePagination(paginationContainer, currentPage, totalPages) {
 
       paginationContainer.appendChild(item);
     }
+  }
+}
+function exericesModalBtnsHandler(event) {
+  const nodeName = event.target.nodeName;
+
+  if (nodeName === 'BUTTON' || nodeName === 'svg' || nodeName === 'use') {
+    const exerciseId =
+      event.target.closest('.exercises-item').dataset.exerciseId;
+    console.log('💖 ~ exericesModalBtnsHandler ~ exerciseId:', exerciseId);
+    handleOpenModalClick(event, exerciseId);
   }
 }
