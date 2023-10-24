@@ -60,6 +60,7 @@ async function getCurrentQuote() {
       save('quote-current-day', currentQuote);
     }
   } catch (err) {
+    console.log('Favourites page', err);
     // Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
   }
 }

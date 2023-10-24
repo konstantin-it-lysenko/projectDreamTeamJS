@@ -7,8 +7,10 @@
   max-width: 375px;
 }
 .footer_logo_icon {
-  fill: rgb(36, 36, 36);
+  opacity: 0;
+  fill: var(--primary-white-color);
 }
+
 .footer_soc_list {
   margin-top: 20px;
   display: flex;
@@ -43,6 +45,8 @@
 }
 
 .footer_title {
+  opacity: 1;
+
   max-width: 365px;
   margin-top: 40px;
   color: var(--primary-white-color);
@@ -53,6 +57,7 @@
   letter-spacing: 0.02em;
 }
 .footer_title_span {
+  opacity: 0;
   color: var(--primary-white-color);
   font-size: 40px;
   font-style: italic;
@@ -248,7 +253,7 @@
   }
 
   .team-btn-open {
-    margin-left: 12px;
+    margin-left: 15px;
     display: block;
     background-color: unset;
     border: none;

@@ -1,21 +1,46 @@
 import axios from "axios";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
+import { postRatting } from "./api-service/modal-form-api";
 
 const teamModalOpenBtn = document.querySelector('.form-modal-btn');
 const teamModalCloseBtn = document.querySelector('.form-btn-close');
 const formModal = document.querySelector('.form-modal-backdrop');
+const backdrop = document.querySelector('.form-modal-backdrop')
+
+
+backdrop.addEventListener('click', onBackdropClick);
 
 
 teamModalOpenBtn.addEventListener('click', onOpenClick);
 teamModalCloseBtn.addEventListener('click', onCloseClick);
 
-function onOpenClick() {
+export function onOpenClick(_, id) {
     formModal.classList.remove('is-hidden');
+    window.addEventListener('keydown', onEscKeyPress);
+    document.body.style.overflow = 'hidden';
   }
+
   function onCloseClick() {
     formModal.classList.add('is-hidden');
+    window.removeEventListener('keydown', onEscKeyPress);
+    document.body.style.overflow = 'auto';
+
   }
+
+  function onEscKeyPress(e) {
+    const ESC_KEY_CODE = 'Escape';
+    const isEscKey = e.code === ESC_KEY_CODE;
+  
+    if (isEscKey) {
+      onCloseClick();
+    }
+  }
+  function onBackdropClick(e) {
+    if (e.currentTarget === e.target) {
+      onCloseClick();
+    }
+  }
+
 
 
   const ratings  = document.querySelectorAll('.rating');
@@ -56,11 +81,18 @@ function onOpenClick() {
       const ratingItems = rating.querySelectorAll(".rating_item");
       for (let index = 0; index < ratingItems.length; index += 1) {
         const ratingItem = ratingItems[index]; 
+        
         ratingItem.addEventListener('mouseenter', function (e){
           initRatingVars(rating)
           setRatingActiveWidth(ratingItem.value)
-          ratingValue.innerHTML = index + 1;
         });
+
+        ratingItem.addEventListener('mouseleave', function (e) {
+          setRatingActiveWidth();
+        })
+
+
+
         ratingItem.addEventListener('click', function (e) {
           initRatingVars(rating);
           ratingValue.innerHTML = index + 1;
@@ -68,29 +100,35 @@ function onOpenClick() {
       }
     }
 
-    const submit = document.querySelector('.form-submit-btn')
+    const submit = document.querySelector('.form-info')
 
-    submit.addEventListener('click', handeleClick);
+    submit.addEventListener('submit', handeleClick);
 
-    function handeleClick() {
+    async function handeleClick(event) {
+      event.preventDefault();
       const email = document.querySelector('.form-mail-input');
-      const review = document.querySelector('.form-textarea')
+      const review = document.querySelector('.form-textarea');
 
 
-      function postRatting(id, userData) {        
-        return axios.patch(`https://your-energy.b.goit.study/api/exercises/
-      ${id}/rating`, userData);
-      }
-
-
-      postRatting("64f389465ae26083f39b17a4", {
-          rate: Number(ratingValue.innerHTML),
-          email: `${email.value}`,
-          review: `${review.value}`,
-        })
-        .then(Notify.success('Success'))
-        .catch(error => Notify.failure(error.response.data.message));
+    try {
+      const result = await postRatting(id, {
+        rate: Number(ratingValue.innerHTML),
+        email: `${email.value}`,
+        review: `${review.value}`,
+      }); 
+      Notify.success("Success");
+      onCloseClick();    
+      
+    } catch (error) {
+      console.log(error);
+      Notify.failure(error.response.data.message)
     }
+
+
+    }
+
+    
+
 
   }
 

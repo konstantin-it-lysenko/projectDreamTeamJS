@@ -1,5 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
   <defs>
+  <symbol id="icon-sun" viewBox="0 0 32 32">
+      <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.1333" d="M15.168 13.852l0.832-0.156 0.832 0.156 0.72 0.446 0.51 0.676 0.231 0.814-0.078 0.843-0.378 0.758-0.626 0.571-0.789 0.306h-0.847l-0.789-0.306-0.626-0.571-0.378-0.757-0.077-0.844 0.231-0.814 0.51-0.676 0.72-0.446z"></path>
+    </symbol>
   <symbol id="icon-loop" viewBox="0 0 32 32">
       <path d="M27.802 5.197A15.958 15.958 0 0 0 15.999 0c-8.837 0-16 7.163-16 16h3c0-7.18 5.82-13 13-13 3.844 0 7.298 1.669 9.678 4.322L20.999 12h11V1l-4.198 4.197zM29 16c0 7.18-5.82 13-13 13a12.965 12.965 0 0 1-9.678-4.322L11 20H0v11l4.197-4.197A15.958 15.958 0 0 0 16 32c8.837 0 16-7.163 16-16h-3z"/>
     </symbol>

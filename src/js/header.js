@@ -5,6 +5,8 @@ import {
   closeMobileMenu,
 } from './burger-menu.js';
 
+import { showLoader, hideLoader } from './loader.js';
+
 const navItems = document.querySelectorAll('.header-nav-item');
 const activeNavItemIndex = localStorage.getItem('activeNavItemIndex'); //активна сторінка
 
@@ -43,69 +45,61 @@ navItems.forEach(function (nav, index) {
     localStorage.setItem('activeNavItemIndex', index);
   });
 });
+// при натисканні стрілки "назад"
+// window.addEventListener('popstate', function (event) {
+
+// });
 
 // Loading....{XАЛЕПА}
-// document.addEventListener('DOMContentLoaded', () => {
-//   const contentEl = document.querySelector('.content');
-//   const navLinks = document.querySelectorAll('.header-nav-link');
-//   const loadingOverlay = document.querySelector('.loading-overlay');
+document.addEventListener('DOMContentLoaded', () => {
+  const contentEl = document.querySelector('.content');
+  const navLinks = document.querySelectorAll('.header-nav-link');
+  const loader = document.querySelector('.loader');
 
-//   console.log(contentEl.classList.contains('header-fade-out'));
+  // console.log(contentEl.classList.contains('header-fade-out'));
 
-//   function showLoadingOverlay() {
-//     loadingOverlay.style.opacity = '1';
-//   }
+  // Функції/скрипти, які відбуваються після перемальовування сторінки
+  // function loadScripts(url) {
+  //   if (url.includes('index')) {
+  //   }
+  // }
 
-//   function hideLoadingOverlay() {
-//     loadingOverlay.style.opacity = '0';
-//   }
+  // Функція завантаження сторінки
+  function loadPage(url) {
+    showLoader();
+    fetch(url)
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const docActive = parser.parseFromString(html, 'text/html');
+        const newContent = docActive.querySelector('.content').innerHTML;
 
-//   function loadScripts(url) {
-//     if (url.includes('index')) {
-//     }
-//   }
+        // contentEl.classList.add('header-fade-out');
 
-//   function loadPage(url) {
-//     showLoadingOverlay();
+        contentEl.innerHTML = newContent;
+        document.title = docActive.title;
+        // console.log(document.title);
 
-//     fetch(url)
-//       .then(response => response.text())
-//       .then(html => {
-//         const parser = new DOMParser();
-//         const docActive = parser.parseFromString(html, 'text/html');
-//         const newContent = docActive.querySelector('.content').innerHTML;
+        setTimeout(() => {
+          history.pushState({}, '', url);
+          hideLoader();
+        }, 500);
+      })
+      .then(() => {
+        // loadScripts(url);
+      });
+  }
+  navLinks.forEach(navLink => {
+    navLink.addEventListener('click', event => {
+      event.preventDefault();
+      const url = event.currentTarget.getAttribute('href');
+      loadPage(url);
+    });
+  });
+  loadPage(window.location.pathname); //автоматичне завантаження при відкритті сайту/сторінки
 
-//         contentEl.classList.add('header-fade-out');
-
-//         contentEl.innerHTML = newContent;
-//         document.title = docActive.title;
-
-//         setTimeout(() => {
-//           contentEl.classList.remove('header-fade-out');
-
-//           history.pushState({}, '', url);
-
-//           hideLoadingOverlay();
-//         }, 500);
-//       })
-//       .then(() => {
-//         loadScripts(url);
-//       });
-//   }
-
-//   navLinks.forEach(navLink => {
-//     navLink.addEventListener('click', event => {
-//       event.preventDefault();
-
-//       const url = event.currentTarget.getAttribute('href');
-
-//       loadPage(url);
-//     });
-//   });
-
-//   loadPage(window.location.pathname);
-
-//   window.addEventListener('popstate', () => {
-//     loadPage(window.location.pathname);
-//   });
-// });
+  // відображення при використанні кнопки "назад"
+  window.addEventListener('popstate', () => {
+    loadPage(window.location.pathname);
+  });
+});
