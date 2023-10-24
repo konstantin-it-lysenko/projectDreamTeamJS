@@ -45,7 +45,9 @@ function createMarkupPagination(num) {
       markup =
         markup +
         `<li class="pag-page">
-          <button class="pag-btn" type="button" id="p-${i}">${i}</button>
+          <button class="pag-btn" type="button" data-id="${
+            i - 1
+          }" id="p-${i}">${i}</button>
         </li>`;
     }
   }

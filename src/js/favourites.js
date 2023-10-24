@@ -29,7 +29,7 @@ const refs = {
 
 let pagination;
 let paginationPages = 1;
-let currentPage = 1;
+let currentPage = 0;
 let page;
 
 window.addEventListener('load', takeScreenParams);
@@ -60,7 +60,7 @@ async function getCurrentQuote() {
       save('quote-current-day', currentQuote);
     }
   } catch (err) {
-    Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
+    // Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
   }
 }
 
@@ -76,24 +76,19 @@ function getFavorExercises() {
       } else {
         paginationPages = Math.ceil(totalExercises / pagination);
         refs.pagination.innerHTML = createMarkupPagination(paginationPages);
-        setCurrentPage(currentPage);
-        page = favorExercises.slice(
-          0 + currentPage * pagination,
-          pagination * (1 + currentPage)
-        );
-      }
-      refs.exercises.innerHTML = createMarkupExercises(page);
-      const exericesOpenBtns = document.querySelectorAll(
-        '[data-modal-exercise="open"]'
-      );
-      exericesOpenBtns.forEach(btn => {
-        btn.addEventListener('click', event => {
-          const exerciseId = event.currentTarget.closest(
-            '.favor-exercises-card'
-          ).dataset.id;
-          handleOpenModalClick(event, exerciseId);
+        const paginationBtns = document.querySelectorAll('.pag-btn');
+        paginationBtns.forEach(btn => {
+          btn.addEventListener('click', event => {
+            const pagBtnId = Number(
+              event.currentTarget.closest('.pag-btn').dataset.id
+            );
+            reloadCurrentPage(pagBtnId, favorExercises);
+          });
         });
-      });
+        ddd(favorExercises);
+        setCurrentPage(currentPage);
+      }
+      fff(page);
     } else {
       refs.noExercises.classList.add('favor-exercises-noitems');
     }
@@ -103,9 +98,40 @@ function getFavorExercises() {
 }
 
 function setCurrentPage(num) {
-  let currentPage = num + 1;
-  const activeBtn = document.getElementById(`p-${currentPage}`);
+  currentPage = num;
+  const inActiveBtns = document.querySelectorAll('.pag-btn');
+  inActiveBtns.forEach(btn => {
+    btn.classList.remove('pag-btn-active');
+  });
+  const activeBtn = document.getElementById(`p-${num + 1}`);
   activeBtn.classList.add('pag-btn-active');
+}
+
+function ddd(arr) {
+  page = arr.slice(
+    0 + currentPage * pagination,
+    pagination * (1 + currentPage)
+  );
+  fff(page);
+}
+
+function fff(page) {
+  refs.exercises.innerHTML = createMarkupExercises(page);
+  const exericesOpenBtns = document.querySelectorAll(
+    '[data-modal-exercise="open"]'
+  );
+  exericesOpenBtns.forEach(btn => {
+    btn.addEventListener('click', event => {
+      const exerciseId = event.currentTarget.closest('.favor-exercises-card')
+        .dataset.id;
+      handleOpenModalClick(event, exerciseId);
+    });
+  });
+}
+
+function reloadCurrentPage(num, arr) {
+  setCurrentPage(num);
+  ddd(arr);
 }
 
 getCurrentQuote();
