@@ -6,6 +6,7 @@ let isMobileMenuOpen = false;
 
 // Функція відкриття мобільного меню
 export function openMobileMenu() {
+  mobileMenu.classList.add('open');
   mobileMenu.style.display = 'block';
   burgerEl.style.display = 'none';
   logoEl.style.display = 'none';
@@ -15,6 +16,7 @@ export function openMobileMenu() {
 
 // Функція закриття мобільного меню
 export function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
   mobileMenu.style.display = 'none';
   burgerEl.style.display = 'block';
   logoEl.style.display = 'block';

@@ -1,15 +1,13 @@
+/* ========================================MOBILE==================================== */
 .header {
   background-color: var(--primary-white-color);
+  padding-top: 20px;
 }
-
-/* ========================================MOBILE==================================== */
-
 .header-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
 }
 
 .header-logo-container {
@@ -71,6 +69,13 @@
   height: 100%;
   padding-top: 280px;
   background-color: var(--primary-black-color);
+
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.mobile-menu-container.open {
+  transform: translateX(0);
 }
 
 .close-button {
@@ -146,7 +151,7 @@
 /* ========================================TABLET==================================== */
 
 @media (min-width: 768px) {
-  .header-container {
+  .header {
     padding-top: 24px;
   }
 
@@ -175,10 +180,9 @@
     border-radius: 30px;
     padding: 6px 12px;
   }
+
   .header-nav-item.active {
     background-color: var(--primary-white-color);
-    /* border-radius: 30px;
-    padding: 6px 12px; */
   }
 
   .header-nav-link {
@@ -215,6 +219,26 @@
     transition: fill var(--transition);
   }
 
+  /* /*!=========================hover - focus ================= */
+
+  .header-logo-container {
+    transition: transform 0.3s;
+  }
+
+  .header-logo-container:hover,
+  .header-logo-container:focus {
+    transform: scale(1.1);
+  }
+
+  .header-nav-item {
+    transition: border 0.3s;
+  }
+
+  .header-nav-item:hover,
+  .header-nav-item:focus {
+    border: 1px solid var(--primary-white-color);
+  }
+
   .header-social-link:hover,
   .header-social-link:focus {
     background-color: var(--primary-black-color);
@@ -229,7 +253,7 @@
 /* ========================================DESKTOP==================================== */
 
 @media (min-width: 1440px) {
-  .header-container {
+  .header {
     padding-top: 28px;
   }
 
