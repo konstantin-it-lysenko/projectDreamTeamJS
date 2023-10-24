@@ -1,12 +1,12 @@
 import svgSprite from '../../img/sport-sprite.svg';
 
 export function createExercisesMarkup(data) {
-	return `<ul class="exercises-list">${data.map(createMarkup).join('')}</ul>
+  return `<ul class="exercises-list">${data.map(createMarkup).join('')}</ul>
 	<ul class="exer-pagination-list"></ul>`;
 }
 
 function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
-	return `<li class="exercises-item" data-exercise-id="${_id}">
+  return `<li class="exercises-item" data-exercise-id="${_id}">
 			<div class="exercises-header">
 				<div class="exercises-meta-container">
 					<p class="exercises-meta">WORKOUT</p>
@@ -53,20 +53,16 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 		</li>`;
 }
 
-export function createExercisesPaginationBtnsMarkup(
-	firstBtn = 1,
-	secondBtn = 2,
-	thirdBtn = 3
-) {
-	return `
+export function createExercisesPaginationBtnsMarkup() {
+  return `
 			<li class="exer-pagination-item">
-				<button type="button" class="exer-pagination-btn active" data-id="1">${firstBtn}</button>
+				<button type="button" class="exer-pagination-btn " ></button>
 			</li>
 			<li class="exer-pagination-item">
-				<button type="button" class="exer-pagination-btn" data-id="2">${secondBtn}</button>
-			</li>
+				<button type="button" class="exer-pagination-btn" ></button>
+			</li
 			<li class="exer-pagination-item">
-				<button type="button" class="exer-pagination-btn" data-id="3">${thirdBtn}</button>
+				<button type="button" class="exer-pagination-btn" ></button>
 			</li>
 		`;
 }
