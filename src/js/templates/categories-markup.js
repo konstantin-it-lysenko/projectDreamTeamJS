@@ -1,6 +1,5 @@
 export function createCategoryMarkup(data) {
 	return `<ul class="categories-list">${data.map(createMarkup).join('')}</ul>`;
-	// <ul class="cat-pagination-list">${createCatsPagiBtnsMarkup()}</ul>`;
 }
 
 function createMarkup({ filter, name, imgURL }) {
@@ -16,17 +15,3 @@ background-size: cover;
 			</button>
 		</li>`;
 }
-
-// function createCatsPagiBtnsMarkup() {
-// 	return `
-// 			<li class="cat-pagination-item">
-//   <button type="button" class="cat-pagination-btn" data-page="1">1</button>
-// </li>
-// <li class="cat-pagination-item">
-//   <button type="button" class="cat-pagination-btn" data-page="2">2</button>
-// </li>
-// <li class="cat-pagination-item">
-//   <button type="button" class="cat-pagination-btn" data-page="3">3</button>
-// </li>
-// 		`;
-// }
