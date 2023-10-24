@@ -131,7 +131,7 @@ body {
   cursor: pointer;
 }
 .favor-exercises svg {
-  fill: var(--primary-black-color);
+  /* fill: var(--primary-black-color); */
 }
 .favor-exercises-startbtn {
   gap: 8px;
