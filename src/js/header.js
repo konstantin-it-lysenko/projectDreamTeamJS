@@ -5,6 +5,10 @@ import {
   closeMobileMenu,
 } from './burger-menu.js';
 
+import { gsap } from 'gsap';
+import { Observer } from 'gsap/Observer';
+gsap.registerPlugin(Observer);
+
 const navItems = document.querySelectorAll('.header-nav-item');
 let activeNavItemIndex = sessionStorage.getItem('activeNavItemIndex'); //активна сторінка
 
@@ -27,7 +31,7 @@ window.addEventListener('resize', checkWindowWidth);
 
 // перевірка яка сторінка активна
 if (activeNavItemIndex === null) {
-  activeNavItemIndex = 0; // Наприклад, встановіть активною першу сторінку.
+  activeNavItemIndex = 0;
 }
 // console.log(activeNavItemIndex);
 
@@ -49,3 +53,41 @@ navItems.forEach(function (nav, index) {
     sessionStorage.setItem('activeNavItemIndex', index);
   });
 });
+
+const headerLogo = document.querySelector('.header-logo-icon');
+
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0,
+};
+// const logoAnimation = gsap.to(headerLogo, {
+//   duration: 2,
+//   opacity: 1,
+//   x: 0,
+//   rotationX: 360,
+//   paused: true, // Пауза анімації, щоб не відтворювалася автоматично.
+// });
+
+// Відкрийте анімацію, коли сторінка завантажиться.
+// window.addEventListener('load', () => {
+//   logoAnimation.play(); // Запуск анімації при завантаженні сторінки.
+// });
+
+const observer = new IntersectionObserver(handleIntersection, options);
+
+observer.observe(headerLogo);
+
+function handleIntersection(items, observer) {
+  items.forEach(item => {
+    if (!item.isIntersecting) {
+      return;
+    }
+    gsap.to(headerLogo, {
+      duration: 2,
+      opacity: 1,
+      x: 0,
+      rotationX: 360,
+    });
+  });
+}
