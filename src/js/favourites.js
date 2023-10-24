@@ -9,7 +9,16 @@ import {
   load,
   getExercises,
 } from './api-service/favourites-api';
+import { handleOpenModalClick } from './modal-exercise';
+import { fetchExerciseModalById } from './api-service/modal-exercise-api';
+import {
+  createModalExerciseMarkup,
+  createAddToFavoritesMarkup,
+  createRemoveFromFavoritesMarkup,
+} from './templates/modal-exercise-markup';
+import { ModalBox } from './modal-class-box';
 
+//-----------------------------------------------------------------------
 const refs = {
   quote: document.querySelector('.favor-quote-wrap p'),
   quoteAuthor: document.querySelector('.favor-quote-wrap h4'),
@@ -68,26 +77,62 @@ function getFavorExercises() {
       } else {
         paginationPages = Math.ceil(totalExercises / pagination);
         refs.pagination.innerHTML = createMarkupPagination(paginationPages);
+        const paginationBtns = document.querySelectorAll('.pag-btn');
+        paginationBtns.forEach(btn => {
+          btn.addEventListener('click', event => {
+            const pagBtnId = Number(
+              event.currentTarget.closest('.pag-btn').dataset.id
+            );
+            reloadCurrentPage(pagBtnId, favorExercises);
+          });
+        });
+        ddd(favorExercises);
         setCurrentPage(currentPage);
-        page = favorExercises.slice(
-          0 + currentPage * pagination,
-          pagination * (1 + currentPage)
-        );
       }
-      refs.exercises.innerHTML = createMarkupExercises(page);
+      fff(page);
     } else {
       refs.noExercises.classList.add('favor-exercises-noitems');
-      //   Notify.failure(`There are no exercises in your favorites`);
     }
   } catch (err) {
-    // Notify.failure(`Oops012! Something went wrong! Try reloading the page!`);
+    // Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
   }
 }
 
 function setCurrentPage(num) {
-  let currentPage = num + 1;
-  const activeBtn = document.getElementById(`p-${currentPage}`);
+  currentPage = num;
+  const inActiveBtns = document.querySelectorAll('.pag-btn');
+  inActiveBtns.forEach(btn => {
+    btn.classList.remove('pag-btn-active');
+  });
+  const activeBtn = document.getElementById(`p-${num + 1}`);
   activeBtn.classList.add('pag-btn-active');
+}
+
+function ddd(arr) {
+  page = arr.slice(
+    0 + currentPage * pagination,
+    pagination * (1 + currentPage)
+  );
+  fff(page);
+}
+
+function fff(page) {
+  refs.exercises.innerHTML = createMarkupExercises(page);
+  const exericesOpenBtns = document.querySelectorAll(
+    '[data-modal-exercise="open"]'
+  );
+  exericesOpenBtns.forEach(btn => {
+    btn.addEventListener('click', event => {
+      const exerciseId = event.currentTarget.closest('.favor-exercises-card')
+        .dataset.id;
+      handleOpenModalClick(event, exerciseId);
+    });
+  });
+}
+
+function reloadCurrentPage(num, arr) {
+  setCurrentPage(num);
+  ddd(arr);
 }
 
 getCurrentQuote();
@@ -95,7 +140,7 @@ getCurrentQuote();
 // Test favor exercises
 async function getManyExercises() {
   const { results } = await getExercises();
-  const dataExers = results.map(
+  const dataExercises = results.map(
     ({ _id, name, burnedCalories, bodyPart, target }) => ({
       _id: `${_id}`,
       name: `${name}`,
@@ -104,7 +149,7 @@ async function getManyExercises() {
       target: `${target}`,
     })
   );
-  save('favor-exercises', dataExers);
+  save('favor-exercises', dataExercises);
 }
 getManyExercises();
 // Test favor exercises

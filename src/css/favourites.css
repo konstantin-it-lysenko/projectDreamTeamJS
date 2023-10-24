@@ -109,11 +109,35 @@ body {
 .favor-exercises-head {
   display: flex;
   gap: 8px;
-  /* justify-content: center; */
+  justify-content: space-between;
   align-items: center;
 }
 .favor-exercises-head svg {
   fill: var(--primary-black-color);
+}
+.favor-exercises-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.favor-exercises button {
+  display: flex;
+  align-items: center;
+  line-height: 1.29;
+  color: var(--primary-black-color);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.favor-exercises svg {
+  fill: var(--primary-black-color);
+}
+.favor-exercises-startbtn {
+  gap: 8px;
+  height: 18px;
+}
+.favor-exercises-startbtn svg {
+  transform: rotate(90deg);
 }
 .favor-exercises-name {
   display: flex;
@@ -141,10 +165,12 @@ body {
   font-size: 24px;
   font-weight: 400;
   line-height: 1.33;
-  text-transform: capitalize;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.favor-exercises-name h3::first-letter {
+  text-transform: capitalize;
 }
 .favor-exercises-info {
   display: flex;
@@ -153,16 +179,21 @@ body {
 .favor-exercises-item {
   font-size: 12px;
   line-height: 1.5;
-  color: var(--primary-black-color);
   letter-spacing: -0.03em;
-  text-transform: capitalize;
+  color: rgba(36, 36, 36, 0.4);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.favor-exercises-item::first-letter {
+  text-transform: capitalize;
+}
 .favor-exercises-item span {
-  color: rgba(36, 36, 36, 0.4);
-  margin-right: 2px;
+  color: var(--primary-black-color);
+  padding-left: 2px;
+}
+.favor-exercises-span {
+  text-transform: capitalize;
 }
 .favor-exercises-calories {
   max-width: 144px;
@@ -265,6 +296,13 @@ body {
   }
   .favor-exercises-card {
     width: 344px;
+  }
+  .favor-exercises button {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .favor-exercises-startbtn {
+    height: 24px;
   }
   .favor-exercises-body {
     max-width: 88px;
