@@ -72,6 +72,13 @@ async function catFilterBtnHandler(e) {
       ({ filter }) => filter === categoryName
     );
 
+    let filterPagiBtnNum = 1;
+
+    catPagiBtns.forEach(btn => {
+      btn.innerText = filterPagiBtnNum;
+      filterPagiBtnNum += 1;
+    })
+
     exercisesTitleSpan.innerHTML = '';
     catFilterInput.hidden = true;
     catsList.innerHTML = createCategoryMarkup(categoryByName);

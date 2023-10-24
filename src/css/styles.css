@@ -14,7 +14,7 @@
 @import url('./scroll-up.css');
 
 @font-face {
-  font-family: 'Neue Montreal', sans-serif;
+  font-family: 'Neue Montreal';
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
 }
 
 @font-face {
-  font-family: 'Neue Montreal', sans-serif;
+  font-family: 'Neue Montreal';
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -34,11 +34,21 @@
 }
 
 @font-face {
-  font-family: 'Neue Montreal', sans-serif;
+  font-family: 'Neue Montreal';
   font-weight: 700;
   font-style: normal;
   font-display: swap;
   src: local('Neue Montreal'),
     url(../fonts/NeueMontreal-Bold.woff2) format(woff2),
     url(../fonts/NeueMontreal-Bold.woff) format(woff);
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: local('Neue Montreal'),
+    url(../fonts/NeueMontreal-Italic.woff2) format(woff2),
+    url(../fonts/NeueMontreal-Italic.woff) format(woff);
 }

@@ -47,7 +47,7 @@ export const developers = [
   },
   {
     name: 'Anatolii Artiukhov',
-    linkedin: 'https://github.com/ArtanFS',
+    linkedin: 'https://www.linkedin.com/in/anatolii-artiukhov-261364297',
     github: 'https://github.com/ArtanFS',
   },
   {

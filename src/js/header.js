@@ -6,7 +6,7 @@ import {
 } from './burger-menu.js';
 
 const navItems = document.querySelectorAll('.header-nav-item');
-const activeNavItemIndex = localStorage.getItem('activeNavItemIndex'); //активна сторінка
+let activeNavItemIndex = sessionStorage.getItem('activeNavItemIndex'); //активна сторінка
 
 burgerEl.addEventListener('click', openMobileMenu);
 closeBtn.addEventListener('click', closeMobileMenu);
@@ -26,22 +26,26 @@ checkWindowWidth();
 window.addEventListener('resize', checkWindowWidth);
 
 // перевірка яка сторінка активна
+if (activeNavItemIndex === null) {
+  activeNavItemIndex = 0; // Наприклад, встановіть активною першу сторінку.
+}
+// console.log(activeNavItemIndex);
+
 if (activeNavItemIndex !== null) {
   navItems[activeNavItemIndex].classList.add('active');
 }
+// console.log(navItems[activeNavItemIndex]);
 
 navItems.forEach(function (nav, index) {
   const navLink = nav.querySelector('.header-nav-link');
-  console.log(navLink);
-
+  // console.log(navLink);
   navLink.addEventListener('click', function (event) {
     navItems.forEach(function (navItem) {
       navItem.classList.remove('active');
-      console.log(navItem);
     });
 
     nav.classList.add('active');
-    console.log(navItems);
-    localStorage.setItem('activeNavItemIndex', index);
+
+    sessionStorage.setItem('activeNavItemIndex', index);
   });
 });

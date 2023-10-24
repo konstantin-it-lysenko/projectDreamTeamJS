@@ -31,8 +31,11 @@
   margin-bottom: 40px;
   letter-spacing: -0.28px;
 }
-
 .hero-img {
+  display: flex;
+  flex-direction: column;
+}
+.hero-bg-desctop {
   border-radius: 25px;
   overflow: hidden;
 }
@@ -93,7 +96,7 @@
     letter-spacing: -0.36px;
   }
 
-  .hero-img {
+  .hero-bg-desctop {
     border-radius: 60px;
   }
   .hero-tags {
@@ -113,6 +116,10 @@
 @media screen and (min-width: 1440px) {
   .hero-container {
     position: relative;
+  }
+  .hero-img {
+    display: flex;
+    flex-direction: column-reverse;
   }
   .hero-tags {
     position: absolute;
