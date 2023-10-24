@@ -14,16 +14,10 @@ const refs = {
   catFilterInput: document.querySelector('.cat-filter-input'),
 };
 const { catsList, catFilterList, catPaginationList, exercisesTitleSpan, catFilterInput } = refs;
-const prev = document.querySelector('button[data-page="prev"]')
-const middle = document.querySelector('button[data-page="middle"]')
-const next = document.querySelector('button[data-page="next"]')
 
-prev.innerHTML = 1;
-middle.innerHTML = 2;
-next.innerHTML = 3;
-
+const catPagiBtns = catPaginationList.querySelectorAll('button[data-page]');
 let categoryName = 'Body parts';
-let test = 'bodypart';
+let part = 'bodypart';
 let respFilterAll = [];
 let totalCategoryPages = 1;
 let currentCategoryPage = 1;
@@ -59,13 +53,13 @@ async function catFilterBtnHandler(e) {
 
   switch (categoryName) {
     case 'Muscles':
-      test = 'muscles';
+      part = 'muscles';
       break;
     case 'Equipment':
-      test = 'equipment';
+      part = 'equipment';
       break;
     case 'Body parts':
-      test = 'bodypart';
+      part = 'bodypart';
       break;
   }
 
@@ -81,6 +75,7 @@ async function catFilterBtnHandler(e) {
     exercisesTitleSpan.innerHTML = '';
     catFilterInput.hidden = true;
     catsList.innerHTML = createCategoryMarkup(categoryByName);
+    catsPagination(categoryName, totalCategoryPages, currentCategoryPage);
   } catch {
     err => console.log(err);
   }
@@ -88,14 +83,25 @@ async function catFilterBtnHandler(e) {
 
 function catsPagiBtnHandler(e) {
   if (e.target.nodeName !== 'BUTTON') return;
+  const catPagiBtn = e.target;
 
+  currentCategoryPage = catPagiBtn.innerHTML
 
-  currentCategoryPage = Number(e.target.innerHTML);
-  console.log(currentCategoryPage);
+  if (catPagiBtn.dataset.page === 'next' && catPagiBtn.innerText < totalCategoryPages) {
+    catPagiBtns.forEach(btn => {
+      const btnNum = Number(btn.innerText);
+      // console.log('btnNum', btnNum);
+      // console.log('currentCategoryPage', currentCategoryPage);
+      btn.innerText = btnNum + 1;
+    })
+  } else if (catPagiBtn.dataset.page === 'prev' && catPagiBtn.innerText > 1) {
+    catPagiBtns.forEach(btn => {
+      const btnNum = Number(btn.innerText);
+      btn.innerText = btnNum - 1;
+    })
+  }
 
   catsPagination(categoryName, totalCategoryPages, currentCategoryPage)
-  currentCategoryPage += 1;
-  console.log(currentCategoryPage);
 }
 
 async function catsListBtnHandler(e) {
@@ -103,7 +109,7 @@ async function catsListBtnHandler(e) {
     catFilterInput.hidden = false;
     const currentExercise =
       e.target.closest('.categories-item').dataset.bodyPart;
-    const getExercises = await fetchExercises(test, currentExercise);
+    const getExercises = await fetchExercises(part, currentExercise);
     const perPage = getExercises.perPage;
     const totalPages = getExercises.totalPages;
     catsList.innerHTML = createExercisesMarkup(getExercises.results);
@@ -114,7 +120,7 @@ async function catsListBtnHandler(e) {
 
     exercisesTitleSpan.innerHTML = currentExercise;
     respFilterAll = await fetchAllExercises(
-      test,
+      part,
       currentExercise,
       perPage,
       totalPages
@@ -141,8 +147,6 @@ function catInputHandler(e) {
 
   exercisesList.addEventListener('click', exericesModalBtnsHandler);
 }
-
-// updatePagination(paginationContainer, currentPage, totalPages)
 
 function exericesModalBtnsHandler(event) {
   const nodeName = event.target.nodeName;
