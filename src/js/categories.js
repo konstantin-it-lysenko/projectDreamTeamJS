@@ -1,53 +1,42 @@
 import { fetchCategories } from './api-service/categories-api';
 import { fetchExercises, fetchAllExercises } from './api-service/exercises-api';
-import {
-  createExercisesMarkup,
-  createExercisesPaginationBtnsMarkup,
-} from './templates/exercises-markup';
-import {
-  createCategoryMarkup,
-  createPaginationBtnsMarkup,
-} from './templates/categories-markup';
+import { createExercisesMarkup } from './templates/exercises-markup';
+import { createCategoryMarkup } from './templates/categories-markup';
 import { handleOpenModalClick } from './modal-exercise';
 import throttle from 'lodash.throttle';
+import { catsPagination } from './categ-exer-pagination';
 
 const refs = {
   catsList: document.querySelector('.categories-wrapper'),
   catFilterList: document.querySelector('.cat-filter-list'),
+  catPaginationList: document.querySelector('.cat-pagination-list'),
   exercisesTitleSpan: document.querySelector('.exercises-title-span'),
   catFilterInput: document.querySelector('.cat-filter-input'),
 };
-const { catsList, catFilterList, exercisesTitleSpan, catFilterInput } = refs;
+const { catsList, catFilterList, catPaginationList, exercisesTitleSpan, catFilterInput } = refs;
 
-let categoryName = '';
-let test = 'bodypart';
+const catPagiBtns = catPaginationList.querySelectorAll('button[data-page]');
+let categoryName = 'Body parts';
+let part = 'bodypart';
 let respFilterAll = [];
 let totalCategoryPages = 1;
 let currentCategoryPage = 1;
 
 catFilterList.addEventListener('click', catFilterBtnHandler);
 catFilterInput.addEventListener('input', throttle(catInputHandler, 300));
+catPaginationList.addEventListener('click', catsPagiBtnHandler);
 
 fetchCategories()
   .then(resp => {
     totalCategoryPages = resp.totalPages;
-    currentCategoryPage = resp.page;
+
     catsList.insertAdjacentHTML(
       'beforeend',
       createCategoryMarkup(resp.results)
     );
     catsList.addEventListener('click', catsListBtnHandler);
-    const catPaginationList = document.querySelector('.cat-pagination-list');
-    catPaginationList.insertAdjacentHTML(
-      'beforeend',
-      updatePagination(
-        catPaginationList,
-        currentCategoryPage,
-        totalCategoryPages
-      )
-    );
 
-    catPaginationList.addEventListener('click', paginationBtnHandler);
+    catsPagination(categoryName, totalCategoryPages, currentCategoryPage);
   })
   .catch(err => console.log(err));
 
@@ -64,60 +53,62 @@ async function catFilterBtnHandler(e) {
 
   switch (categoryName) {
     case 'Muscles':
-      test = 'muscles';
+      part = 'muscles';
       break;
     case 'Equipment':
-      test = 'equipment';
+      part = 'equipment';
       break;
     case 'Body parts':
-      test = 'bodypart';
+      part = 'bodypart';
       break;
   }
 
-  fetchCategories(categoryName)
-    .then(resp => {
-      totalCategoryPages = resp.totalPages;
-      currentCategoryPage = resp.page;
-
-      const categoryByName = resp.results.filter(
-        ({ filter }) => filter === categoryName
-      );
-      exercisesTitleSpan.innerHTML = '';
-      catFilterInput.hidden = true;
-      catsList.innerHTML = createCategoryMarkup(categoryByName);
-      const catPaginationList = document.querySelector('.cat-pagination-list');
-      createExercisesPaginationBtnsMarkup();
-      updatePagination(
-        catPaginationList,
-        currentCategoryPage,
-        totalCategoryPages
-      );
-    })
-    .catch(err => console.log(err));
   try {
     const resp = await fetchCategories(categoryName);
+
+    totalCategoryPages = resp.totalPages;
+    currentCategoryPage = resp.page;
     const categoryByName = resp.results.filter(
       ({ filter }) => filter === categoryName
     );
+
+    let filterPagiBtnNum = 1;
+
+    catPagiBtns.forEach(btn => {
+      btn.innerText = filterPagiBtnNum;
+      filterPagiBtnNum += 1;
+    })
+
     exercisesTitleSpan.innerHTML = '';
     catFilterInput.hidden = true;
     catsList.innerHTML = createCategoryMarkup(categoryByName);
+    catsPagination(categoryName, totalCategoryPages, currentCategoryPage);
   } catch {
     err => console.log(err);
   }
 }
 
-async function paginationBtnHandler(e) {
-  const currentPage = e.target.dataset.id;
-  try {
-    const resp = await fetchCategories(categoryName, currentPage);
-    const removeExtraCategories = resp.results.filter(
-      ({ filter }) => filter === categoryName
-    );
-    catsList.innerHTML = createCategoryMarkup(removeExtraCategories);
-  } catch {
-    err => console.log(err);
+function catsPagiBtnHandler(e) {
+  if (e.target.nodeName !== 'BUTTON') return;
+  const catPagiBtn = e.target;
+
+  currentCategoryPage = catPagiBtn.innerHTML
+
+  if (catPagiBtn.dataset.page === 'next' && catPagiBtn.innerText < totalCategoryPages) {
+    catPagiBtns.forEach(btn => {
+      const btnNum = Number(btn.innerText);
+      // console.log('btnNum', btnNum);
+      // console.log('currentCategoryPage', currentCategoryPage);
+      btn.innerText = btnNum + 1;
+    })
+  } else if (catPagiBtn.dataset.page === 'prev' && catPagiBtn.innerText > 1) {
+    catPagiBtns.forEach(btn => {
+      const btnNum = Number(btn.innerText);
+      btn.innerText = btnNum - 1;
+    })
   }
+
+  catsPagination(categoryName, totalCategoryPages, currentCategoryPage)
 }
 
 async function catsListBtnHandler(e) {
@@ -125,7 +116,7 @@ async function catsListBtnHandler(e) {
     catFilterInput.hidden = false;
     const currentExercise =
       e.target.closest('.categories-item').dataset.bodyPart;
-    const getExercises = await fetchExercises(test, currentExercise);
+    const getExercises = await fetchExercises(part, currentExercise);
     const perPage = getExercises.perPage;
     const totalPages = getExercises.totalPages;
     catsList.innerHTML = createExercisesMarkup(getExercises.results);
@@ -136,7 +127,7 @@ async function catsListBtnHandler(e) {
 
     exercisesTitleSpan.innerHTML = currentExercise;
     respFilterAll = await fetchAllExercises(
-      test,
+      part,
       currentExercise,
       perPage,
       totalPages
@@ -164,89 +155,6 @@ function catInputHandler(e) {
   exercisesList.addEventListener('click', exericesModalBtnsHandler);
 }
 
-// const itemsPerPage = 10; // Количество элементов на одной странице
-// let currentPage = 1; // Текущая страница
-// let totalItems = 23; // Общее количество элементов
-
-// // Вычисляем общее количество страниц
-// const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-// // Создаем контейнер для пагинации
-// const paginationContainer = document.getElementById('pagination-container');
-
-// function updatePagination(paginationContainer, currentPage, totalPages) {
-//   paginationContainer.innerHTML = ''; // Очищаем контейнер
-
-//   for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-//     if (i >= 1 && i <= totalPages) {
-//       const item = document.createElement('li');
-//       item.className = 'pagination-item';
-//       if (i === currentPage) {
-//         item.className += ' active';
-//       }
-//       const button = document.createElement('button');
-//       button.className = 'cat-pagination-btn';
-//       button.textContent = i;
-//       item.appendChild(button);
-
-//       if (i === currentPage && currentPage >= totalPages) {
-//         item.className += ' disabled';
-//       }
-
-//       // Добавляем обработчик клика на кнопку
-//       button.addEventListener('click', function () {
-//         if (i !== currentPage) {
-//           currentPage = i;
-//           updatePagination(paginationContainer, currentPage, totalPages);
-//         }
-//       });
-
-//       paginationContainer.appendChild(item);
-//     }
-//   }
-// }
-
-function updatePagination(paginationContainer, currentPage, totalPages) {
-  paginationContainer.innerHTML = ''; // Очищаем контейнер
-  createExercisesPaginationBtnsMarkup();
-  for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-    if (i >= 1 && i <= totalPages) {
-      const item = document.querySelector('.cat-pagination-item');
-      if (i === currentPage) {
-        item.className += ' active';
-      }
-      const button = document.querySelector('cat-pagination-btn');
-      button.textContent = i;
-
-      if (i === currentPage) {
-        // Если текущая страница равна i
-        if (i === 1) {
-          // Если это первая страница
-          if (totalPages === 1) {
-            // Если всего одна страница, то кнопки 2 и 3 неактивны
-            item.className += ' disabled';
-          } else {
-            // Иначе, только кнопка 3 неактивна
-            item.className += ' disabled';
-          }
-        } else if (i === totalPages) {
-          // Если текущая страница - последняя, то только кнопка 2 неактивна
-          item.className += ' disabled';
-        }
-      }
-
-      // Добавляем обработчик клика на кнопку
-      button.addEventListener('click', function () {
-        if (i !== currentPage) {
-          currentPage = i;
-          updatePagination(paginationContainer, currentPage, totalPages);
-        }
-      });
-
-      paginationContainer.appendChild(item);
-    }
-  }
-}
 function exericesModalBtnsHandler(event) {
   const nodeName = event.target.nodeName;
 
