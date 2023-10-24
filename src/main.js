@@ -12,4 +12,3 @@ import './js/modal-team';
 import './js/modal-actions';
 import './js/scroll-up';
 import './js/loader';
-import './js/burger-menu';
