@@ -2,21 +2,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   createMarkupExercises,
   createMarkupPagination,
+  createMurkupNoitems,
 } from './templates/favourites-markup';
-import {
-  getQuote,
-  save,
-  load,
-  getExercises,
-} from './api-service/favourites-api';
+import { getQuote, save, load } from './api-service/favourites-api';
 import { handleOpenModalClick } from './modal-exercise';
-import { fetchExerciseModalById } from './api-service/modal-exercise-api';
-import {
-  createModalExerciseMarkup,
-  createAddToFavoritesMarkup,
-  createRemoveFromFavoritesMarkup,
-} from './templates/modal-exercise-markup';
-import { ModalBox } from './modal-class-box';
 
 //-----------------------------------------------------------------------
 const refs = {
@@ -24,9 +13,12 @@ const refs = {
   quoteAuthor: document.querySelector('.favor-quote-wrap h4'),
   exercises: document.querySelector('.favor-exercises-list'),
   noExercises: document.querySelector('.favor-exercises'),
-  pagination: document.querySelector('.pag-list'),
+  paginationMarkup: document.querySelector('.pag-list'),
 };
 
+const { quote, quoteAuthor, exercises, noExercises, paginationMarkup } = refs;
+const LS_FAVORITES_ID = 'favorite-exercises-list';
+const LS_QUOTE = 'quoteData';
 let pagination;
 let paginationPages = 1;
 let currentPage = 0;
@@ -42,56 +34,57 @@ function takeScreenParams() {
   } else if (window.innerWidth >= 1440) {
     pagination = 0;
   }
-  getFavorExercises();
+  getFavoriteExercises();
 }
 
 async function getCurrentQuote() {
   try {
-    const quote = load('quote-current-day');
+    const saveQuote = load(LS_QUOTE);
     const date = new Date().toDateString();
-    if (quote && date === quote.quoteDate) {
-      refs.quote.textContent = quote.quote;
-      refs.quoteAuthor.textContent = quote.author;
+    if (saveQuote && date === saveQuote.quoteDate) {
+      quote.textContent = saveQuote.quote;
+      quoteAuthor.textContent = saveQuote.author;
     } else {
       const currentQuote = await getQuote();
       currentQuote.quoteDate = date;
-      refs.quote.textContent = currentQuote.quote;
-      refs.quoteAuthor.textContent = currentQuote.author;
-      save('quote-current-day', currentQuote);
+      quote.textContent = currentQuote.quote;
+      quoteAuthor.textContent = currentQuote.author;
+      save(LS_QUOTE, currentQuote);
     }
   } catch (err) {
-    console.log('Favourites page', err);
+    // console.log('Favourites page', err);
     // Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
   }
 }
 
-function getFavorExercises() {
+export function getFavoriteExercises() {
   try {
-    const favorExercises = load('favor-exercises');
-    if (favorExercises) {
-      refs.noExercises.classList.remove('favor-exercises-noitems');
-      const totalExercises = favorExercises.length;
+    const favoriteExercises = load(LS_FAVORITES_ID);
+    if (favoriteExercises) {
+      noExercises.classList.remove('favor-exercises-noitems');
+      const totalExercises = favoriteExercises.length;
       if (pagination === 0 || totalExercises <= pagination) {
-        page = favorExercises;
-        refs.pagination.innerHTML = createMarkupPagination('');
+        page = favoriteExercises;
+        paginationMarkup.innerHTML = createMarkupPagination('');
       } else {
         paginationPages = Math.ceil(totalExercises / pagination);
-        refs.pagination.innerHTML = createMarkupPagination(paginationPages);
+        paginationMarkup.innerHTML = createMarkupPagination(paginationPages);
         const paginationBtns = document.querySelectorAll('.pag-btn');
         paginationBtns.forEach(btn => {
           btn.addEventListener('click', event => {
             const pagBtnId = Number(
               event.currentTarget.closest('.pag-btn').dataset.id
             );
-            reloadCurrentPage(pagBtnId, favorExercises);
+            reloadCurrentPage(pagBtnId, favoriteExercises);
           });
         });
-        ddd(favorExercises);
+        setExercisesToReload(favoriteExercises);
         setCurrentPage(currentPage);
       }
-      fff(page);
+      reloadMarkupExercises(page, favoriteExercises);
     } else {
-      refs.noExercises.classList.add('favor-exercises-noitems');
+      noExercises.classList.add('favor-exercises-noitems');
+      exercises.innerHTML = createMurkupNoitems();
     }
   } catch (err) {
     // Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
@@ -108,18 +101,21 @@ function setCurrentPage(num) {
   activeBtn.classList.add('pag-btn-active');
 }
 
-function ddd(arr) {
+function setExercisesToReload(arr) {
   page = arr.slice(
     0 + currentPage * pagination,
     pagination * (1 + currentPage)
   );
-  fff(page);
+  reloadMarkupExercises(page, arr);
 }
 
-function fff(page) {
-  refs.exercises.innerHTML = createMarkupExercises(page);
+function reloadMarkupExercises(page, arr) {
+  exercises.innerHTML = createMarkupExercises(page);
   const exericesOpenBtns = document.querySelectorAll(
     '[data-modal-exercise="open"]'
+  );
+  const exericesRemoveBtns = document.querySelectorAll(
+    '.favor-exercises-delbtn'
   );
   exericesOpenBtns.forEach(btn => {
     btn.addEventListener('click', event => {
@@ -128,28 +124,44 @@ function fff(page) {
       handleOpenModalClick(event, exerciseId);
     });
   });
+  exericesRemoveBtns.forEach(btn => {
+    btn.addEventListener('click', event => {
+      const exerciseId = event.currentTarget.closest('.favor-exercises-card')
+        .dataset.id;
+      removeFavoriteExerciseFromLS(exerciseId, arr);
+      getFavoriteExercises();
+    });
+  });
+}
+
+function removeFavoriteExerciseFromLS(id, arr) {
+  const removerObj = arr.find(exercise => exercise._id === id);
+  const favoriteExerciseIndex = arr.indexOf(removerObj);
+  arr.splice(favoriteExerciseIndex, 1);
+  save(LS_FAVORITES_ID, arr);
+  !arr.length && localStorage.removeItem(LS_FAVORITES_ID);
 }
 
 function reloadCurrentPage(num, arr) {
   setCurrentPage(num);
-  ddd(arr);
+  setExercisesToReload(arr);
 }
 
 getCurrentQuote();
 
 // Test favor exercises
-async function getManyExercises() {
-  const { results } = await getExercises();
-  const dataExercises = results.map(
-    ({ _id, name, burnedCalories, bodyPart, target }) => ({
-      _id: `${_id}`,
-      name: `${name}`,
-      burnedCalories: `${burnedCalories}`,
-      bodyPart: `${bodyPart}`,
-      target: `${target}`,
-    })
-  );
-  save('favor-exercises', dataExercises);
-}
-getManyExercises();
+// async function getManyExercises() {
+//   const { results } = await getExercises();
+//   const dataExercises = results.map(
+//     ({ _id, name, burnedCalories, bodyPart, target }) => ({
+//       _id: `${_id}`,
+//       name: `${name}`,
+//       burnedCalories: `${burnedCalories}`,
+//       bodyPart: `${bodyPart}`,
+//       target: `${target}`,
+//     })
+//   );
+//   save('favor-exercises', dataExercises);
+// }
+// getManyExercises();
 // Test favor exercises

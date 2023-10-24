@@ -27,14 +27,4 @@ const load = key => {
   }
 };
 
-// Test favor exercises
-async function getExercises() {
-  const resp = await axios(
-    'https://your-energy.b.goit.study/api/exercises?page=1&limit=12'
-  );
-  return resp.data;
-}
-
-// Test favor exercises
-
-export { getQuote, save, load, getExercises };
+export { getQuote, save, load };
