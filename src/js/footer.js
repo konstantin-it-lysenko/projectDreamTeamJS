@@ -22,24 +22,25 @@ function fetchSubscription(event) {
 
   fetchPostApi(subscriptionData)
     .then(resp => {
-      Notiflix.Notify.success(
-        'Were excited to have you on board! 🎉 Thank you f…ep towards improving your fitness and well-being.'
-      );
+      const massage = resp.data.message;
+      Notiflix.Notify.success(massage);
     })
     .catch(error => {
+      const badRequest = error.response.data.message;
       if (error.response.status === 409) {
         Notiflix.Notify.warning('Subscription already exists');
+      }
+      if (error.response.status === 400) {
+        Notiflix.Notify.warning(badRequest);
       }
     });
   formSubmit.reset();
 }
 function isValidEmail(email) {
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
+  // const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const emailPattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
   return emailPattern.test(email);
 }
-
-// const circleElement = document.querySelector('.footer_logo_icon');
 
 const options = {
   root: null,
