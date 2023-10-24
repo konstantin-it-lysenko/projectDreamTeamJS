@@ -1,6 +1,7 @@
 body {
   background-color: var(--primary-white-color);
 }
+
 .favor-container {
   padding-top: 80px;
   padding-bottom: 80px;
@@ -339,6 +340,14 @@ body {
     height: 487px;
     padding-top: 0;
     overflow: auto;
+  }
+  .favor-exercises::-webkit-scrollbar {
+    width: 8px;
+  }
+  .favor-exercises::-webkit-scrollbar-thumb {
+    background-color: var(--primary-black-color);
+    border-radius: 12px;
+    border: none;
   }
   .favor-exercises-noitems {
     padding: 102px 148px 0;

@@ -89,7 +89,7 @@ function getFavorExercises() {
         ddd(favorExercises);
         setCurrentPage(currentPage);
       }
-      fff(page);
+      fff(page, favorExercises);
     } else {
       refs.noExercises.classList.add('favor-exercises-noitems');
     }
@@ -113,13 +113,16 @@ function ddd(arr) {
     0 + currentPage * pagination,
     pagination * (1 + currentPage)
   );
-  fff(page);
+  fff(page, arr);
 }
 
-function fff(page) {
+function fff(page, arr) {
   refs.exercises.innerHTML = createMarkupExercises(page);
   const exericesOpenBtns = document.querySelectorAll(
     '[data-modal-exercise="open"]'
+  );
+  const exericesRemoveBtns = document.querySelectorAll(
+    '.favor-exercises-delbtn'
   );
   exericesOpenBtns.forEach(btn => {
     btn.addEventListener('click', event => {
@@ -128,6 +131,21 @@ function fff(page) {
       handleOpenModalClick(event, exerciseId);
     });
   });
+  exericesRemoveBtns.forEach(btn => {
+    btn.addEventListener('click', event => {
+      const exerciseId = event.currentTarget.closest('.favor-exercises-card')
+        .dataset.id;
+      removeFavoriteExerciseFromLS(exerciseId, arr);
+      getFavorExercises();
+    });
+  });
+}
+
+function removeFavoriteExerciseFromLS(id, arr) {
+  const removerObj = arr.find(exercise => exercise._id === id);
+  const favoriteExerciseIndex = arr.indexOf(removerObj);
+  arr.splice(favoriteExerciseIndex, 1);
+  save('favor-exercises', arr);
 }
 
 function reloadCurrentPage(num, arr) {
