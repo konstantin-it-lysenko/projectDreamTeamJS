@@ -32,14 +32,16 @@ if (activeNavItemIndex !== null) {
 
 navItems.forEach(function (nav, index) {
   const navLink = nav.querySelector('.header-nav-link');
+  console.log(navLink);
 
   navLink.addEventListener('click', function (event) {
     navItems.forEach(function (navItem) {
       navItem.classList.remove('active');
+      console.log(navItem);
     });
 
     nav.classList.add('active');
-
+    console.log(navItems);
     localStorage.setItem('activeNavItemIndex', index);
   });
 });
