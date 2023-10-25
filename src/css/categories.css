@@ -49,6 +49,7 @@
   color: rgba(36, 36, 36, 0.6);
   line-height: 1.43;
   background-color: transparent;
+  transition: color var(--transition);
 }
 .cat-filter-btn:is(:hover, :focus) {
   color: var(--primary-black-color);
@@ -76,9 +77,6 @@
   flex-direction: column;
   gap: 20px;
 }
-.exer-pagination-list {
-  margin-bottom: -50px;
-}
 .exer-pagination-list,
 .cat-pagination-list {
   display: flex;
@@ -92,10 +90,19 @@
   line-height: 1.33;
   letter-spacing: 0.96px;
   background: transparent;
+  transition: color var(--transition);
+}
+.exer-pagination-btn:is(:hover, :focus),
+.cat-pagination-btn:is(:hover, :focus) {
+  color: var(--primary-black-color);
+}
+.exer-pagination-btn.first--pagi.active,
+.cat-pagination-btn.first--pagi.active {
+  padding: 0 12px;
 }
 .exer-pagination-btn.active,
 .cat-pagination-btn.active {
-  padding: 0 12px;
+  padding: 0 10px;
   color: var(--primary-black-color);
   border: 1px solid var(--primary-black-color);
   border-radius: 50%;
@@ -110,6 +117,12 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+.categories-list.d-none,
+.exercises-list.d-none,
+.cat-pagination-list.d-none,
+.exer-pagination-list.d-none {
+  display: none;
+}
 .categories-item {
   min-width: 240px;
   width: 100%;
@@ -119,6 +132,10 @@
   position: relative;
   width: 100%;
   border-radius: 12px;
+  transition: transform var(--transition);
+}
+.categories-btn:is(:hover, :focus).categories-img {
+  transform: scale(1.05);
 }
 .categories-img {
   min-height: 220px;
