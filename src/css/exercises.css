@@ -92,6 +92,12 @@
   align-items: center;
   justify-content: center;
 }
+@media screen and (min-width: 375px) {
+  .exercises-item {
+    min-width: 335px;
+    width: calc((100% - 16px) / 2);
+  }
+}
 @media screen and (min-width: 768px) {
   .exercises-list {
     flex-direction: row;
