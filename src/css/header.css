@@ -69,13 +69,6 @@
   height: 100%;
   padding-top: 280px;
   background-color: var(--primary-black-color);
-
-  transform: translateX(-100%);
-  transition: transform 0.3s;
-}
-
-.mobile-menu-container.open {
-  transform: translateX(0);
 }
 
 .close-button {

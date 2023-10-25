@@ -61,18 +61,6 @@ const options = {
   rootMargin: '0px',
   threshold: 0,
 };
-// const logoAnimation = gsap.to(headerLogo, {
-//   duration: 2,
-//   opacity: 1,
-//   x: 0,
-//   rotationX: 360,
-//   paused: true, // Пауза анімації, щоб не відтворювалася автоматично.
-// });
-
-// Відкрийте анімацію, коли сторінка завантажиться.
-// window.addEventListener('load', () => {
-//   logoAnimation.play(); // Запуск анімації при завантаженні сторінки.
-// });
 
 const observer = new IntersectionObserver(handleIntersection, options);
 
