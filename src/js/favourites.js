@@ -23,6 +23,7 @@ let pagination;
 let paginationPages = 1;
 let currentPage = 0;
 let page;
+let pagBtnId = 0;
 
 window.addEventListener('load', takeScreenParams);
 window.addEventListener('resize', debounce(takeScreenParams, 300));
@@ -67,18 +68,7 @@ export function getFavoriteExercises() {
         page = favoriteExercises;
         paginationMarkup.innerHTML = createMarkupPagination('');
       } else {
-        paginationPages = Math.ceil(totalExercises / pagination);
-        paginationMarkup.innerHTML = createMarkupPagination(paginationPages);
-        const paginationBtns = document.querySelectorAll('.pag-btn');
-        paginationBtns.forEach(btn => {
-          btn.addEventListener('click', event => {
-            const pagBtnId = Number(
-              event.currentTarget.closest('.pag-btn').dataset.id
-            );
-            reloadCurrentPage(pagBtnId, favoriteExercises);
-            // smoothScrollUp();
-          });
-        });
+        reloadMarkupPagination(favoriteExercises);
         setExercisesToReload(favoriteExercises);
         setCurrentPage(currentPage);
       }
@@ -92,6 +82,22 @@ export function getFavoriteExercises() {
   }
 }
 
+function reloadMarkupPagination(arr) {
+  paginationPages = Math.ceil(arr.length / pagination);
+  paginationMarkup.innerHTML = createMarkupPagination(
+    paginationPages,
+    pagBtnId
+  );
+  const paginationBtns = document.querySelectorAll('.pag-btn');
+  paginationBtns.forEach(btn => {
+    btn.addEventListener('click', event => {
+      pagBtnId = Number(event.currentTarget.closest('.pag-btn').dataset.id);
+      reloadCurrentPage(pagBtnId, arr);
+      // smoothScrollUp();
+    });
+  });
+}
+
 function setCurrentPage(num) {
   currentPage = num;
   const inActiveBtns = document.querySelectorAll('.pag-btn');
@@ -103,13 +109,9 @@ function setCurrentPage(num) {
 }
 
 function setExercisesToReload(arr) {
-  console.log(arr.length);
-  console.log(pagination);
-  console.log(currentPage);
   Math.ceil(arr.length / pagination) < currentPage + 1
     ? (currentPage -= 1)
     : currentPage;
-  console.log(currentPage);
   page = arr.slice(currentPage * pagination, pagination * (1 + currentPage));
   reloadMarkupExercises(page, arr);
 }
@@ -148,6 +150,7 @@ function removeFavoriteExerciseFromLS(id, arr) {
 }
 
 function reloadCurrentPage(num, arr) {
+  reloadMarkupPagination(arr);
   setCurrentPage(num);
   setExercisesToReload(arr);
 }
