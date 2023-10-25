@@ -111,16 +111,17 @@
   gap: 20px;
 }
 .categories-item {
+  min-width: 240px;
   width: 100%;
   border-radius: 12px;
 }
 .categories-btn {
   position: relative;
+  width: 100%;
   border-radius: 12px;
 }
 .categories-img {
   min-height: 220px;
-  width: 100%;
 }
 .categories-info {
   position: absolute;
