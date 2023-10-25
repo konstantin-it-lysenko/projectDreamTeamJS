@@ -8,7 +8,6 @@ let limit = window.innerWidth < 768 ? 8 : 10;
 export async function fetchExercises(category, bodyPart, page = 1) {
   const params = new URLSearchParams({
     [category]: bodyPart,
-
     limit,
     page,
   });

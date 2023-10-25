@@ -10,10 +10,11 @@ const refs = {
   catsList: document.querySelector('.categories-wrapper'),
   catFilterList: document.querySelector('.cat-filter-list'),
   catPaginationList: document.querySelector('.cat-pagination-list'),
+  exerPaginationList: document.querySelector('.exer-pagination-list'),
   exercisesTitleSpan: document.querySelector('.exercises-title-span'),
   catFilterInput: document.querySelector('.cat-filter-input'),
 };
-const { catsList, catFilterList, catPaginationList, exercisesTitleSpan, catFilterInput } = refs;
+const { catsList, catFilterList, catPaginationList, exerPaginationList, exercisesTitleSpan, catFilterInput } = refs;
 
 const catPagiBtns = catPaginationList.querySelectorAll('button[data-page]');
 let categoryName = 'Body parts';
@@ -25,6 +26,8 @@ let currentCategoryPage = 1;
 catFilterList.addEventListener('click', catFilterBtnHandler);
 catFilterInput.addEventListener('input', throttle(catInputHandler, 300));
 catPaginationList.addEventListener('click', catsPagiBtnHandler);
+
+exerPaginationList.classList.add('is-hidden');
 
 fetchCategories()
   .then(resp => {
@@ -44,8 +47,11 @@ async function catFilterBtnHandler(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
-  catFilterInput.value = '';
   categoryName = e.target.dataset.name;
+
+  catPaginationList.classList.remove('is-hidden')
+  exerPaginationList.classList.add('is-hidden')
+  catFilterInput.value = '';
 
   const catFilterBtns = document.querySelectorAll('.cat-filter-btn');
   catFilterBtns.forEach(btn => btn.classList.remove('active'));
@@ -94,11 +100,13 @@ function catsPagiBtnHandler(e) {
 
   currentCategoryPage = catPagiBtn.innerHTML
 
+  catPagiBtns.forEach(btn => {
+    btn.classList.remove('active');
+  });
+
   if (catPagiBtn.dataset.page === 'next' && catPagiBtn.innerText < totalCategoryPages) {
     catPagiBtns.forEach(btn => {
       const btnNum = Number(btn.innerText);
-      // console.log('btnNum', btnNum);
-      // console.log('currentCategoryPage', currentCategoryPage);
       btn.innerText = btnNum + 1;
     })
   } else if (catPagiBtn.dataset.page === 'prev' && catPagiBtn.innerText > 1) {
@@ -106,14 +114,27 @@ function catsPagiBtnHandler(e) {
       const btnNum = Number(btn.innerText);
       btn.innerText = btnNum - 1;
     })
+  } else {
+    catPagiBtn.classList.add('active');
   }
+  console.log('Btn Text', catPagiBtn.innerText);
+  console.log('Page', currentCategoryPage);
+
+  // catPagiBtn.innerHTML = currentCategoryPage;
+
+  // [...catPagiBtns].find(btn => {
+  //   btn.innerText === currentCategoryPage
+  //   // return btn.classList.add('active');
+  // }
+  // );
+
+
 
   catsPagination(categoryName, totalCategoryPages, currentCategoryPage)
 }
 
 async function catsListBtnHandler(e) {
   try {
-    catFilterInput.hidden = false;
     const currentExercise =
       e.target.closest('.categories-item').dataset.bodyPart;
     const getExercises = await fetchExercises(part, currentExercise);
@@ -121,11 +142,14 @@ async function catsListBtnHandler(e) {
     const totalPages = getExercises.totalPages;
     catsList.innerHTML = createExercisesMarkup(getExercises.results);
 
-    const exercisesList = document.querySelector('.exercises-list');
+    catPaginationList.classList.add('is-hidden')
+    exerPaginationList.classList.remove('is-hidden')
+    catFilterInput.hidden = false;
+    exercisesTitleSpan.innerHTML = currentExercise;
 
+    const exercisesList = document.querySelector('.exercises-list');
     exercisesList.addEventListener('click', exericesModalBtnsHandler);
 
-    exercisesTitleSpan.innerHTML = currentExercise;
     respFilterAll = await fetchAllExercises(
       part,
       currentExercise,
@@ -133,7 +157,6 @@ async function catsListBtnHandler(e) {
       totalPages
     );
 
-    catFilterInput.hidden = false;
   } catch {
     err => console.log('Err', err);
   }
@@ -161,7 +184,7 @@ function exericesModalBtnsHandler(event) {
   if (nodeName === 'BUTTON' || nodeName === 'svg' || nodeName === 'use') {
     const exerciseId =
       event.target.closest('.exercises-item').dataset.exerciseId;
-    console.log('💖 ~ exericesModalBtnsHandler ~ exerciseId:', exerciseId);
+
     handleOpenModalClick(event, exerciseId);
   }
 }
