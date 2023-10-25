@@ -111,14 +111,17 @@ async function catsListBtnHandler(e) {
     const perPage = getExercises.perPage;
     const exercisesList = document.querySelector('.exercises-list');
     totalExercisesPages = getExercises.totalPages;
+    currentExercisesPage = getExercises.page;
 
+    console.log('currentExercisesPage', currentExercisesPage);
     exercisesList.addEventListener('click', exericesModalBtnsHandler);
 
     catPaginationList.classList.add('is-hidden');
     exerPaginationList.classList.remove('is-hidden');
     catFilterInput.hidden = false;
 
-    // updatePaginationState(exerPagiBtns, currentExercisesPage);
+    updatePaginationState(exerPagiBtns, currentExercisesPage);
+    exerPagiBtns[0].classList.add('active');
 
     respFilterAll = await fetchAllExercises(
       category,

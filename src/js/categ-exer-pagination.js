@@ -53,7 +53,6 @@ export async function exersPagination(categoryName, currentExercise, totalPages,
 
 export function updatePaginationState(arrOfBtns, page) {
     arrOfBtns.forEach(btn => {
-        // btn.disabled = false;
         btn.classList.remove('active');
     });
 
