@@ -1,4 +1,4 @@
-import{n as h,a as T,A,h as B}from"./loader-ad3a5d9d.js";function I(e){return e.map(({_id:t,name:s,burnedCalories:r,bodyPart:a,target:o})=>`<li><div class="favor-exercises-card" data-id="${t}">
+import{n as h,a as T,A,h as B}from"./loader-e71e231d.js";function I(e){return e.map(({_id:t,name:s,burnedCalories:r,bodyPart:a,target:o})=>`<li><div class="favor-exercises-card" data-id="${t}">
       <div class="favor-exercises-head">
         <div class="favor-exercises-wrap">
           <div class="favor-workout"><p>Workout</p></div>
