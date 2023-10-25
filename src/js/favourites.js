@@ -104,13 +104,13 @@ function setCurrentPage(num) {
 
 function setExercisesToReload(arr) {
   console.log(arr.length);
-  console.log(currentPage);
   console.log(pagination);
-  console.log(window.innerHeight);
-  page = arr.slice(
-    0 + currentPage * pagination,
-    pagination * (1 + currentPage)
-  );
+  console.log(currentPage);
+  Math.ceil(arr.length / pagination) < currentPage + 1
+    ? (currentPage -= 1)
+    : currentPage;
+  console.log(currentPage);
+  page = arr.slice(currentPage * pagination, pagination * (1 + currentPage));
   reloadMarkupExercises(page, arr);
 }
 
@@ -152,12 +152,12 @@ function reloadCurrentPage(num, arr) {
   setExercisesToReload(arr);
 }
 
-function smoothScrollUp() {
-  window.scrollBy({
-    top: -1 * window.innerHeight,
-    behavior: 'smooth',
-  });
-}
+// function smoothScrollUp() {
+//   window.scrollBy({
+//     top: -1 * window.innerHeight,
+//     behavior: 'smooth',
+//   });
+// }
 
 getCurrentQuote();
 
