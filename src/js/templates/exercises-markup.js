@@ -1,7 +1,7 @@
 import svgSprite from '../../img/sport-sprite.svg';
 
 export function createExercisesMarkup(data) {
-	return `<ul class="exercises-list">${data.map(createMarkup).join('')}</ul>`;
+	return `${data.map(createMarkup).join('')}`;
 }
 
 function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {

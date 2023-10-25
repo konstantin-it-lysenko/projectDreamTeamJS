@@ -3,9 +3,9 @@ import { fetchExercises } from "./api-service/exercises-api";
 import { createCategoryMarkup } from "./templates/categories-markup";
 import { createExercisesMarkup } from "./templates/exercises-markup";
 
-export async function catsPagination(categoryName = 'Body parts', totalPages, currentPage) {
+export async function catsPagination(categoryName = 'Body parts', totalPages, currentPage, arrOfBtns) {
 
-    const catsDiv = document.querySelector('.categories-wrapper')
+    const catsList = document.querySelector('.categories-list')
     const middle = document.querySelector('button[data-page="middle"]')
     const next = document.querySelector('button[data-page="next"]')
 
@@ -19,17 +19,27 @@ export async function catsPagination(categoryName = 'Body parts', totalPages, cu
         next.disabled = false;
     }
 
+    arrOfBtns.forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    [...arrOfBtns].forEach(btn => {
+        if ((btn.innerHTML).trim() === String(currentPage).trim()) {
+            btn.classList.add('active');
+        }
+    })
+
     try {
         const resp = await fetchCategories(categoryName, currentPage)
-        catsDiv.innerHTML = createCategoryMarkup(resp.results)
+        catsList.innerHTML = createCategoryMarkup(resp.results)
     } catch {
         err => console.log(err);
     }
 }
 
-export async function exersPagination(categoryName, currentExercise, totalPages, currentPage) {
+export async function exersPagination(categoryName, currentExercise, totalPages, currentPage, arrOfBtns) {
 
-    const catsDiv = document.querySelector('.categories-wrapper')
+    const exerList = document.querySelector('.exercises-list')
     const middle = document.querySelector('button[data-exer="middle"]')
     const next = document.querySelector('button[data-exer="next"]')
 
@@ -43,30 +53,20 @@ export async function exersPagination(categoryName, currentExercise, totalPages,
         next.disabled = false;
     }
 
-    try {
-        const resp = await fetchExercises(categoryName, currentExercise, currentPage)
-        catsDiv.innerHTML = createExercisesMarkup(resp.results)
-    } catch {
-        err => console.log(err);
-    }
-}
-
-export function updatePaginationState(arrOfBtns, page) {
     arrOfBtns.forEach(btn => {
         btn.classList.remove('active');
     });
 
     [...arrOfBtns].forEach(btn => {
-        if (btn.innerHTML === page) {
+        if ((btn.innerHTML).trim() === String(currentPage).trim()) {
             btn.classList.add('active');
         }
     })
 
-    // currentActiveBtn.classList.add('active');
-
-    // const currentActiveBtn = [...arrOfBtns].find(btn => {
-    //     btn.innerHTML === page
-    // })
-
-    // currentActiveBtn.classList.add('active');
+    try {
+        const resp = await fetchExercises(categoryName, currentExercise, currentPage)
+        exerList.innerHTML = createExercisesMarkup(resp.results)
+    } catch {
+        err => console.log(err);
+    }
 }
