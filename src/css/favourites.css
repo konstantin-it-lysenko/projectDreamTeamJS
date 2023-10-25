@@ -203,6 +203,7 @@ body {
 }
 .favor-exercises-target {
   width: 56px;
+  flex-grow: 1;
 }
 .favor-workout {
   display: flex;
@@ -307,9 +308,6 @@ body {
   .favor-exercises-body {
     max-width: 88px;
   }
-  .favor-exercises-target {
-    width: 60px;
-  }
 }
 @media screen and (min-width: 1440px) {
   .favor-container {
@@ -359,9 +357,6 @@ body {
   }
   .favor-exercises-body {
     max-width: 123px;
-  }
-  .favor-exercises-target {
-    width: 74px;
   }
 }
 

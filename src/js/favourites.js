@@ -6,7 +6,7 @@ import {
 } from './templates/favourites-markup';
 import { getQuote, save, load } from './api-service/favourites-api';
 import { handleOpenModalClick } from './modal-exercise';
-
+// import debounce from 'lodash.debounce';
 //-----------------------------------------------------------------------
 const refs = {
   quote: document.querySelector('.favor-quote-wrap p'),
@@ -26,6 +26,7 @@ let page;
 
 window.addEventListener('load', takeScreenParams);
 window.addEventListener('resize', takeScreenParams);
+// window.addEventListener('resize', debounce(takeScreenParams, 300));
 
 function takeScreenParams() {
   pagination = 8;
@@ -76,6 +77,7 @@ export function getFavoriteExercises() {
               event.currentTarget.closest('.pag-btn').dataset.id
             );
             reloadCurrentPage(pagBtnId, favoriteExercises);
+            // smoothScrollUp();
           });
         });
         setExercisesToReload(favoriteExercises);
@@ -102,6 +104,10 @@ function setCurrentPage(num) {
 }
 
 function setExercisesToReload(arr) {
+  console.log(arr.length);
+  console.log(currentPage);
+  console.log(pagination);
+  console.log(window.innerHeight);
   page = arr.slice(
     0 + currentPage * pagination,
     pagination * (1 + currentPage)
@@ -145,6 +151,13 @@ function removeFavoriteExerciseFromLS(id, arr) {
 function reloadCurrentPage(num, arr) {
   setCurrentPage(num);
   setExercisesToReload(arr);
+}
+
+function smoothScrollUp() {
+  window.scrollBy({
+    top: -1 * window.innerHeight,
+    behavior: 'smooth',
+  });
 }
 
 getCurrentQuote();
