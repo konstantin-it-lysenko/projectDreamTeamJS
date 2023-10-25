@@ -19,6 +19,7 @@
     "axios": "^1.5.1",
     "basiclightbox": "^5.0.4",
     "gsap": "^3.12.2",
+    "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "notiflix": "^3.2.6",
     "scrollmagic": "^2.0.8",

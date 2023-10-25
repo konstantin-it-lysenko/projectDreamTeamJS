@@ -6,7 +6,7 @@ import {
 } from './templates/favourites-markup';
 import { getQuote, save, load } from './api-service/favourites-api';
 import { handleOpenModalClick } from './modal-exercise';
-// import debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 //-----------------------------------------------------------------------
 const refs = {
   quote: document.querySelector('.favor-quote-wrap p'),
@@ -25,8 +25,7 @@ let currentPage = 0;
 let page;
 
 window.addEventListener('load', takeScreenParams);
-window.addEventListener('resize', takeScreenParams);
-// window.addEventListener('resize', debounce(takeScreenParams, 300));
+window.addEventListener('resize', debounce(takeScreenParams, 300));
 
 function takeScreenParams() {
   pagination = 8;
