@@ -6,7 +6,9 @@
   flex-direction: column;
   gap: 20px;
 }
-.exercises-title {
+.exercises-title,
+.exercises-title-span-page {
+  color: var(--primary-black-color);
   font-size: 28px;
   font-weight: 400;
   line-height: 1.36;
@@ -19,9 +21,6 @@
   line-height: 1;
   letter-spacing: -0.4px;
 }
-/* .exercises-title-span::first-letter {
-  text-transform: capitalize;
-} */
 .filter-container {
   margin-bottom: 20px;
   display: flex;
@@ -101,7 +100,7 @@
   border: 1px solid var(--primary-black-color);
   border-radius: 50%;
 }
-.categories-wrapper {
+.cat-main-wrapper {
   width: 100%;
 }
 .categories-list {

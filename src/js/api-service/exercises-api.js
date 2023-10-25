@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const { BASE_URL, EXERCISE_ENDPOINT } = API_PROPS;
 
-let limit = window.innerWidth < 768 ? 8 : 10;
+// let limit = window.innerWidth < 768 ? 8 : 10;
+let limit = window.innerWidth < 768 ? 5 : 5;
 
 export async function fetchExercises(category, bodyPart, page = 1) {
   const params = new URLSearchParams({

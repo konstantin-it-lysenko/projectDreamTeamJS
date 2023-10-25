@@ -2,9 +2,9 @@ import { fetchCategories } from './api-service/categories-api';
 import { fetchExercises, fetchAllExercises } from './api-service/exercises-api';
 import { createExercisesMarkup } from './templates/exercises-markup';
 import { createCategoryMarkup } from './templates/categories-markup';
-import { handleOpenModalClick } from './modal-exercise';
 import throttle from 'lodash.throttle';
-import { catsPagination } from './categ-exer-pagination';
+import { handleOpenModalClick } from './modal-exercise';
+import { catsPagination, exersPagination, updatePaginationState } from './categ-exer-pagination';
 
 const refs = {
   catsList: document.querySelector('.categories-wrapper'),
@@ -17,15 +17,20 @@ const refs = {
 const { catsList, catFilterList, catPaginationList, exerPaginationList, exercisesTitleSpan, catFilterInput } = refs;
 
 const catPagiBtns = catPaginationList.querySelectorAll('button[data-page]');
+const exerPagiBtns = exerPaginationList.querySelectorAll('button[data-exer]');
 let categoryName = 'Body parts';
-let part = 'bodypart';
+let category = 'bodypart';
+let currentExercise = '';
 let respFilterAll = [];
 let totalCategoryPages = 1;
+let totalExercisesPages = 1;
 let currentCategoryPage = 1;
+let currentExercisesPage = 1;
 
 catFilterList.addEventListener('click', catFilterBtnHandler);
 catFilterInput.addEventListener('input', throttle(catInputHandler, 300));
 catPaginationList.addEventListener('click', catsPagiBtnHandler);
+exerPaginationList.addEventListener('click', exerPagiBtnHandler);
 
 exerPaginationList.classList.add('is-hidden');
 
@@ -59,13 +64,13 @@ async function catFilterBtnHandler(e) {
 
   switch (categoryName) {
     case 'Muscles':
-      part = 'muscles';
+      category = 'muscles';
       break;
     case 'Equipment':
-      part = 'equipment';
+      category = 'equipment';
       break;
     case 'Body parts':
-      part = 'bodypart';
+      category = 'bodypart';
       break;
   }
 
@@ -81,85 +86,72 @@ async function catFilterBtnHandler(e) {
     let filterPagiBtnNum = 1;
 
     catPagiBtns.forEach(btn => {
-      btn.innerText = filterPagiBtnNum;
+      btn.innerHTML = filterPagiBtnNum;
       filterPagiBtnNum += 1;
     })
 
     exercisesTitleSpan.innerHTML = '';
     catFilterInput.hidden = true;
     catsList.innerHTML = createCategoryMarkup(categoryByName);
+    updatePaginationState(catPagiBtns, currentCategoryPage);
     catsPagination(categoryName, totalCategoryPages, currentCategoryPage);
   } catch {
     err => console.log(err);
   }
 }
 
+async function catsListBtnHandler(e) {
+  try {
+    currentExercise = e.target.closest('.categories-item').dataset.bodyPart;
+
+    const getExercises = await fetchExercises(category, currentExercise);
+    catsList.innerHTML = createExercisesMarkup(getExercises.results);
+    exercisesTitleSpan.innerHTML = `<span class="exercises-title-span-page">/</span> ${currentExercise}`;
+
+    const perPage = getExercises.perPage;
+    const exercisesList = document.querySelector('.exercises-list');
+    totalExercisesPages = getExercises.totalPages;
+
+    exercisesList.addEventListener('click', exericesModalBtnsHandler);
+
+    catPaginationList.classList.add('is-hidden');
+    exerPaginationList.classList.remove('is-hidden');
+    catFilterInput.hidden = false;
+
+    // updatePaginationState(exerPagiBtns, currentExercisesPage);
+
+    respFilterAll = await fetchAllExercises(
+      category,
+      currentExercise,
+      perPage,
+      totalExercisesPages
+    );
+  } catch {
+    err => console.log('Err', err);
+  }
+}
+
 function catsPagiBtnHandler(e) {
   if (e.target.nodeName !== 'BUTTON') return;
   const catPagiBtn = e.target;
+  currentCategoryPage = catPagiBtn.innerHTML;
 
-  currentCategoryPage = catPagiBtn.innerHTML
-
-  catPagiBtns.forEach(btn => {
-    btn.classList.remove('active');
-  });
-
-  if (catPagiBtn.dataset.page === 'next' && catPagiBtn.innerText < totalCategoryPages) {
+  if (catPagiBtn.dataset.page === 'next' && catPagiBtn.innerHTML < totalCategoryPages) {
     catPagiBtns.forEach(btn => {
-      const btnNum = Number(btn.innerText);
-      btn.innerText = btnNum + 1;
+      const btnNum = Number(btn.innerHTML);
+      btn.innerHTML = btnNum + 1;
     })
-  } else if (catPagiBtn.dataset.page === 'prev' && catPagiBtn.innerText > 1) {
+  } else if (catPagiBtn.dataset.page === 'prev' && catPagiBtn.innerHTML > 1) {
     catPagiBtns.forEach(btn => {
-      const btnNum = Number(btn.innerText);
-      btn.innerText = btnNum - 1;
+      const btnNum = Number(btn.innerHTML);
+      btn.innerHTML = btnNum - 1;
     })
   } else {
     catPagiBtn.classList.add('active');
   }
-  console.log('Btn Text', catPagiBtn.innerText);
-  console.log('Page', currentCategoryPage);
 
-  // catPagiBtn.innerHTML = currentCategoryPage;
-
-  // [...catPagiBtns].find(btn => {
-  //   btn.innerText === currentCategoryPage
-  //   // return btn.classList.add('active');
-  // }
-  // );
-
-
-
-  catsPagination(categoryName, totalCategoryPages, currentCategoryPage)
-}
-
-async function catsListBtnHandler(e) {
-  try {
-    const currentExercise =
-      e.target.closest('.categories-item').dataset.bodyPart;
-    const getExercises = await fetchExercises(part, currentExercise);
-    const perPage = getExercises.perPage;
-    const totalPages = getExercises.totalPages;
-    catsList.innerHTML = createExercisesMarkup(getExercises.results);
-
-    catPaginationList.classList.add('is-hidden')
-    exerPaginationList.classList.remove('is-hidden')
-    catFilterInput.hidden = false;
-    exercisesTitleSpan.innerHTML = currentExercise;
-
-    const exercisesList = document.querySelector('.exercises-list');
-    exercisesList.addEventListener('click', exericesModalBtnsHandler);
-
-    respFilterAll = await fetchAllExercises(
-      part,
-      currentExercise,
-      perPage,
-      totalPages
-    );
-
-  } catch {
-    err => console.log('Err', err);
-  }
+  updatePaginationState(catPagiBtns, currentCategoryPage);
+  catsPagination(categoryName, totalCategoryPages, currentCategoryPage);
 }
 
 function catInputHandler(e) {
@@ -176,6 +168,29 @@ function catInputHandler(e) {
   const exercisesList = document.querySelector('.exercises-list');
 
   exercisesList.addEventListener('click', exericesModalBtnsHandler);
+}
+
+function exerPagiBtnHandler(e) {
+  if (e.target.nodeName !== 'BUTTON') return;
+  const exerPagiBtn = e.target;
+  currentExercisesPage = exerPagiBtn.innerHTML;
+
+  if (exerPagiBtn.dataset.exer === 'next' && exerPagiBtn.innerHTML < totalExercisesPages) {
+    exerPagiBtns.forEach(btn => {
+      const btnNum = Number(btn.innerHTML);
+      btn.innerHTML = btnNum + 1;
+    })
+  } else if (exerPagiBtn.dataset.exer === 'prev' && exerPagiBtn.innerHTML > 1) {
+    exerPagiBtns.forEach(btn => {
+      const btnNum = Number(btn.innerHTML);
+      btn.innerHTML = btnNum - 1;
+    })
+  } else {
+    exerPagiBtn.classList.add('active');
+  }
+
+  updatePaginationState(exerPagiBtns, currentExercisesPage);
+  exersPagination(category, currentExercise, totalExercisesPages, currentExercisesPage);
 }
 
 function exericesModalBtnsHandler(event) {
