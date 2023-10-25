@@ -87,7 +87,14 @@
   border: 1px solid var(--primary-white-color);
   background-color: transparent;
   color: var(--primary-white-color);
+  transition: all var(--transition);
 }
+.footer_form > input:focus,
+.footer_form > input:hover {
+  outline: none;
+  background-color: #3e3d3d;
+}
+
 .footer_form_btn {
   display: flex;
   padding-top: 12px;
@@ -101,7 +108,26 @@
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
+  transition: all var(--transition);
 }
+
+/* .footer_form_btn:focus, */
+.footer_form_btn:hover {
+  outline: none;
+  background-color: var(--primary-color-c6cdd1);
+  font-weight: 500;
+  transform: scaleX(1.01);
+}
+
+.footer_form_btn:active {
+  outline: var(--primary-black-color);
+  background-color: #3e3d3d;
+
+  transform: scaleX(0.99);
+
+  color: var(--primary-white-color);
+}
+
 .footer_text {
   margin-top: 100px;
   color: var(--primary-color-c6cdd1);
