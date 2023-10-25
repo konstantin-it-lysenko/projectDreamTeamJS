@@ -1,7 +1,13 @@
 <section class="hero">
-  <div class="container">
+  <div class="hero-container container">
     <div class="hero-title-container">
-      <img src="../img/hero/30.png" alt="" />
+      <img
+        src="./img/hero/30.png"
+        alt="sun-icon"
+        width="60"
+        height="60"
+        class="sun-img"
+      />
       <h1 class="hero-title">Get <span>Body</span> in shape, Stay healthy</h1>
     </div>
     <p class="hero-text">
@@ -29,18 +35,37 @@
             ./img/hero/hero-mobile1x.png 1x,
             ./img/hero/hero-mobile2x.png 2x
           "
-          media="(max-width: 767px)"
+          media="(max-width: 767.98px)"
         />
-        <img src="./img/hero/hero-desktop1x.png" alt="" />
+        <img
+          src="./img/hero/hero-desktop1x.png"
+          alt="Two Girls Training"
+          class="hero-image"
+        />
       </picture>
     </div>
-    <div class="hero-tags">
-      <ul class="hero-tags-list">
-        <li class="hero-tags-item">#Sport</li>
-        <li class="hero-tags-item">#Healthy</li>
-        <li class="hero-tags-item">#Workout</li>
-        <li class="hero-tags-item">#Diet</li>
-      </ul>
+      <div class="hero-tags">
+        <picture>
+          <source
+            srcset="./img/hero/legs-img1x.png 1x,
+             ./img/hero/legs-img2x.png 2x"
+            media="(min-width: 1440px)"
+          />
+          <img
+            src="./img/hero/legs-img1x.jpg"
+            alt="Legs"
+            class="desktop-legs"
+            width="168"
+            height="100"
+          />
+        </picture>
+        <ul class="hero-tags-list">
+          <li class="hero-tags-item">#Sport</li>
+          <li class="hero-tags-item">#Healthy</li>
+          <li class="hero-tags-item">#Workout</li>
+          <li class="hero-tags-item">#Diet</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
