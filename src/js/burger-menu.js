@@ -11,6 +11,7 @@ let isMobileMenuOpen = false;
 export function openMobileMenu() {
   if (!isMobileMenuOpen) {
     mobileMenu.style.display = 'block';
+    document.body.classList.add('no-scroll');
     // анімація появи мобільного меню
     anime({
       targets: mobileMenu,
@@ -33,6 +34,7 @@ export function openMobileMenu() {
 // Функція закриття мобільного меню
 export function closeMobileMenu() {
   if (isMobileMenuOpen) {
+    document.body.classList.remove('no-scroll');
     // анімація закриття мобільного меню
     anime({
       targets: mobileMenu,

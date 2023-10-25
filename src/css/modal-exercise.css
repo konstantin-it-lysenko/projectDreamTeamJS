@@ -1,7 +1,7 @@
 .modal-exercise {
   position: relative;
-  background-color: #242424;
-  color: #f4f4f4;
+  background-color: var(--primary-black-color);
+  color: var(--primary-white-color);
   padding: 40px 20px;
   border-radius: 20px;
   max-width: 90%;
@@ -31,7 +31,7 @@
 }
 
 .modal-exercise-close-icon {
-  stroke: #f4f4f4;
+  stroke: var(--primary-white-color);
   width: 24px;
   height: 24px;
 }
@@ -130,12 +130,15 @@
 /* TODO Change gap to 8px (when font-family will be correct) */
 
 .add-to-favorites-btn {
-  background: #f4f4f4;
-  color: #242424;
+  background: var(--primary-white-color);
+  color: var(--primary-black-color);
+  border: 1px solid var(--primary-black-color);
   display: flex;
   gap: 6px;
   align-items: center;
   justify-content: center;
+  transition: color var(--transition), background-color var(--transition),
+    border-color var(--transition);
 }
 
 .add-to-favorites-btn span {
@@ -147,8 +150,9 @@
 .modal-exercise-heart-icon {
   width: 18px;
   height: 18px;
-  stroke: #242424;
+  stroke: var(--primary-black-color);
   fill: transparent;
+  transition: stroke var(--transition);
 }
 
 .modal-favorite-active-icon {
@@ -157,9 +161,17 @@
 }
 
 .give-rating-btn {
-  border: 1px solid #f4f4f4;
-  color: #f4f4f4;
+  border: 1px solid var(--primary-white-color);
+  color: var(--primary-white-color);
   background-color: transparent;
+  transition: color var(--transition), background-color var(--transition),
+    border-color var(--transition);
+}
+
+.give-rating-btn:focus {
+  color: var(--primary-black-color);
+  border-color: var(--primary-black-color);
+  background-color: var(--primary-white-color);
 }
 
 /** ======== MOBILE ======== */
@@ -263,5 +275,21 @@
 @media screen and (min-width: 1280px) {
   .modal-exercise {
     max-width: 708px;
+  }
+
+  .add-to-favorites-btn:hover {
+    background-color: transparent;
+    color: var(--primary-white-color);
+    border-color: var(--primary-white-color);
+  }
+
+  .add-to-favorites-btn:hover .modal-exercise-heart-icon {
+    stroke: var(--primary-white-color);
+  }
+
+  .give-rating-btn:hover {
+    color: var(--primary-black-color);
+    border-color: var(--primary-black-color);
+    background-color: var(--primary-white-color);
   }
 }
