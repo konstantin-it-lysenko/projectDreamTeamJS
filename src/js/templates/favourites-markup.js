@@ -1,3 +1,5 @@
+import svgSprite from '../../img/sport-sprite.svg';
+
 function createMarkupExercises(arr) {
   return arr
     .map(
@@ -8,18 +10,18 @@ function createMarkupExercises(arr) {
           <div class="favor-workout"><p>Workout</p></div>
           <button class="favor-exercises-delbtn" type="button">
             <svg width="16" height="16">
-              <use href="./img/sport-sprite.svg#icon-trash"></use>
+              <use href="${svgSprite}#icon-trash"></use>
             </svg>
           </button>
         </div>
         <button class="favor-exercises-startbtn" data-modal-exercise="open" type="button">Start<svg width="16" height="16">
-            <use href="./img/sport-sprite.svg#icon-arrow-up"></use>
+            <use href="${svgSprite}#icon-arrow-up"></use>
           </svg></button>
       </div>
       <div class="favor-exercises-name">
         <div class="favor-exercises-icon">
           <svg width="18" height="20">
-            <use href="./img/sport-sprite.svg#icon-running-stick"></use>
+            <use href="${svgSprite}#icon-running-stick"></use>
           </svg>
         </div>
         <h3>${name}</h3>
