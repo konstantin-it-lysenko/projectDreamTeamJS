@@ -118,14 +118,17 @@
 }
 
 .mobile-menu-social {
-  margin-top: 416px;
-  margin-bottom: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 20px;
 }
+
 .mobile-menu-social-list {
   display: flex;
   gap: 12px;
   align-items: center;
-  justify-content: center;
 }
 
 .mobile-menu-social-link {
@@ -139,6 +142,9 @@
 .mobile-menu-social-icon {
   fill: var(--primary-white-color);
   opacity: 0.8;
+}
+.no-scroll {
+  overflow: hidden;
 }
 
 /* ========================================TABLET==================================== */
@@ -212,7 +218,7 @@
     transition: fill var(--transition);
   }
 
-  /* /*!=========================hover - focus ================= */
+  /*!=========================hover - focus ================= */
 
   .header-logo-container {
     transition: transform 0.3s;
