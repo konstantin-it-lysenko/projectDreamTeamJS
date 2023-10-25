@@ -38,9 +38,7 @@ function createMarkupExercises(arr) {
 
 function createMarkupPagination(num) {
   let markup = '';
-  if (num === 1) {
-    markup = '';
-  } else {
+  if (num > 1) {
     for (let i = 1; i <= num; i += 1) {
       markup =
         markup +
@@ -54,4 +52,13 @@ function createMarkupPagination(num) {
   return markup;
 }
 
-export { createMarkupExercises, createMarkupPagination };
+function createMurkupNoitems() {
+  const murkup = `<p class="favor-exercises-text">
+    It appears that you haven't added any exercises to your favorites yet. To
+    get started, you can add exercises that you like to your favorites for
+    easier access in the future.
+  </p>`;
+  return murkup;
+}
+
+export { createMarkupExercises, createMarkupPagination, createMurkupNoitems };

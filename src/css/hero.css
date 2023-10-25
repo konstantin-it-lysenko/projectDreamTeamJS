@@ -114,11 +114,17 @@
 }
 
 @media screen and (min-width: 1440px) {
+  .hero-container {
+    position: relative;
+  }
   .hero-img {
     display: flex;
     flex-direction: column-reverse;
   }
   .hero-tags {
+    position: absolute;
+    top: -2px;
+    right: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;

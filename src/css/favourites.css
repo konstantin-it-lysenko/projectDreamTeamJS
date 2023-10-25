@@ -1,6 +1,7 @@
 body {
   background-color: var(--primary-white-color);
 }
+
 .favor-container {
   padding-top: 80px;
   padding-bottom: 80px;
@@ -127,10 +128,9 @@ body {
   color: var(--primary-black-color);
   background-color: transparent;
   border: none;
-  cursor: pointer;
 }
 .favor-exercises svg {
-  fill: var(--primary-black-color);
+  /* fill: var(--primary-black-color); */
 }
 .favor-exercises-startbtn {
   gap: 8px;
@@ -340,6 +340,14 @@ body {
     padding-top: 0;
     overflow: auto;
   }
+  .favor-exercises::-webkit-scrollbar {
+    width: 8px;
+  }
+  .favor-exercises::-webkit-scrollbar-thumb {
+    background-color: var(--primary-black-color);
+    border-radius: 12px;
+    border: none;
+  }
   .favor-exercises-noitems {
     padding: 102px 148px 0;
   }
@@ -359,14 +367,17 @@ body {
 
 .pag-list {
   display: flex;
-  gap: 8px;
+  /* gap: 8px; */
   padding-top: 32px;
   justify-content: center;
   align-items: center;
 }
+.pag-page {
+}
 .pag-btn {
+  width: 22px;
+  height: 32px;
   text-align: center;
-  cursor: pointer;
   background-color: transparent;
   color: #d4d4d4;
 }
@@ -376,4 +387,5 @@ body {
   border-radius: 50%;
   border: 1px solid var(--primary-black-color);
   color: var(--primary-black-color);
+  margin: 0 4px;
 }
