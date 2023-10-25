@@ -150,14 +150,16 @@
   top: 0;
   left: 0;
   background: var(--primary-black-color);
+  font-size: 14px;
   color: #fff;
-  padding: 5px;
+  padding-left: 10px;
   font-size: 16px;
   opacity: 0;
   transition: opacity 1s ease 0.25s;
 }
 .sidebar-timerstart[data-active='true']::before {
   content: 'The training has begun!';
+  font-size: 14px;
 }
 .sidebar-timerstart:hover::before,
 .sidebar-timerstart:focus::before {
