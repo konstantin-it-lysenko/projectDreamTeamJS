@@ -7,6 +7,7 @@ import {
 } from './templates/modal-exercise-markup';
 import { ModalBox } from './modal-class-box';
 import { onOpenClick } from './modal-form';
+import { getFavoriteExercises } from './favourites';
 
 const openModalSelector = '[data-modal-exercise="open"]';
 const closeModalSelector = '[data-modal-exercise="close"]';
@@ -85,13 +86,17 @@ function processAddingToFavorites(favoriteExercise, addToFavoriteBtnRef) {
 }
 
 function processRemovalsFromFavorites(favoriteExercise, addToFavoriteBtnRef) {
-  const currentFavoriteIndex = favoriteIdList.indexOf(favoriteExercise._id);
+  const currentFavoriteIndex = favoriteIdList.findIndex(
+    ({ _id }) => _id === favoriteExercise._id
+  );
   favoriteIdList.splice(currentFavoriteIndex, 1);
 
   const favoriteData = JSON.stringify(favoriteIdList);
   localStorage.setItem(LS_FAVORITES_ID, favoriteData);
 
   addToFavoriteBtnRef.innerHTML = createAddToFavoritesMarkup();
+
+  getFavoriteExercises();
 }
 
 function createRemoveMarkupIfIncludesId(favoriteExercise, addToFavoriteBtnRef) {
