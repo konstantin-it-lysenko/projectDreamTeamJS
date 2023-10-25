@@ -39,6 +39,16 @@ h3 {
   padding: 0 20px;
 }
 
+.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.d-none {
+  display: none;
+}
+
 body::-webkit-scrollbar {
   width: 8px;
 }

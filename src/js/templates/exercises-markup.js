@@ -1,12 +1,11 @@
 import svgSprite from '../../img/sport-sprite.svg';
 
 export function createExercisesMarkup(data) {
-  return `<ul class="exercises-list">${data.map(createMarkup).join('')}</ul>
-	<ul class="exer-pagination-list"></ul>`;
+	return `${data.map(createMarkup).join('')}`;
 }
 
 function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
-  return `<li class="exercises-item" data-exercise-id="${_id}">
+	return `<li class="exercises-item" data-exercise-id="${_id}">
 			<div class="exercises-header">
 				<div class="exercises-meta-container">
 					<p class="exercises-meta">WORKOUT</p>
@@ -51,18 +50,4 @@ function createMarkup({ rating, name, burnedCalories, bodyPart, target, _id }) {
 				</ul>
 			</div>
 		</li>`;
-}
-
-export function createExercisesPaginationBtnsMarkup() {
-  return `
-			<li class="exer-pagination-item">
-				<button type="button" class="exer-pagination-btn " ></button>
-			</li>
-			<li class="exer-pagination-item">
-				<button type="button" class="exer-pagination-btn" ></button>
-			</li
-			<li class="exer-pagination-item">
-				<button type="button" class="exer-pagination-btn" ></button>
-			</li>
-		`;
 }

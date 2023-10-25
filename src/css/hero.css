@@ -35,6 +35,9 @@
   display: flex;
   flex-direction: column;
 }
+.hero-image {
+  border-radius: 30px;
+}
 .hero-bg-desctop {
   border-radius: 25px;
   overflow: hidden;
@@ -77,6 +80,9 @@
     width: 60px;
     height: 60px;
     top: 6px;
+  }
+  .hero-image {
+    border-radius: 60px;
   }
   .hero-title {
     font-size: 74px;
