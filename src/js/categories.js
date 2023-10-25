@@ -5,6 +5,8 @@ import { createCategoryMarkup } from './templates/categories-markup';
 import throttle from 'lodash.throttle';
 import { handleOpenModalClick } from './modal-exercise';
 import { catsPagination, exersPagination } from './categ-exer-pagination';
+import { showLoader, hideLoader } from './loader';
+import { Notify } from 'notiflix';
 
 const refs = {
   catsList: document.querySelector('.categories-list'),
@@ -46,12 +48,16 @@ fetchCategories()
     );
     catsPagination(categoryName, totalCategoryPages, currentCategoryPage, catPagiBtns);
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+    console.error(err);
+    Notify.failure(err);
+  });
 
 async function catFilterBtnHandler(e) {
   if (e.target.nodeName !== 'BUTTON') {
     return;
   }
+  showLoader();
   categoryName = e.target.dataset.name;
 
   catsList.classList.remove('is-hidden', 'd-none');
@@ -75,36 +81,39 @@ async function catFilterBtnHandler(e) {
       category = 'bodypart';
       break;
   }
-
   try {
     const resp = await fetchCategories(categoryName, currentCategoryPage);
 
     totalCategoryPages = resp.totalPages;
-    currentCategoryPage = resp.page;
+    currentCategoryPage = 1;
     const categoryByName = resp.results.filter(
       ({ filter }) => filter === categoryName
     );
-
     exercisesTitleSpan.innerHTML = '';
     catFilterInput.hidden = true;
     catsList.innerHTML = createCategoryMarkup(categoryByName);
     catsPagination(categoryName, totalCategoryPages, currentCategoryPage, catPagiBtns);
   } catch {
-    err => console.log(err);
+    err => {
+      console.error(err);
+      Notify.failure(err);
+    }
+  } finally {
+    hideLoader();
   }
 }
 
 async function catsListBtnHandler(e) {
+  showLoader();
   try {
     currentExercise = e.target.closest('.categories-item').dataset.bodyPart;
 
     const getExercises = await fetchExercises(category, currentExercise);
     exercisesList.innerHTML = createExercisesMarkup(getExercises.results);
     exercisesTitleSpan.innerHTML = `<span class="exercises-title-span-page">/</span> ${currentExercise}`;
-
     const perPage = getExercises.perPage;
     totalExercisesPages = getExercises.totalPages;
-    currentExercisesPage = getExercises.page;
+    currentExercisesPage = 1;
 
     exersPagination(category, currentExercise, totalExercisesPages, currentExercisesPage, exerPagiBtns);
 
@@ -121,7 +130,12 @@ async function catsListBtnHandler(e) {
       totalExercisesPages
     );
   } catch {
-    err => console.log('Err', err);
+    err => {
+      console.error(err);
+      Notify.failure(err);
+    }
+  } finally {
+    hideLoader();
   }
 }
 
