@@ -98,6 +98,7 @@
 .modal-exercise-tag-container::after {
   content: '';
   display: block;
+  max-width: 100%;
   width: 295px;
   height: 0px;
   stroke-width: 1px;
@@ -139,19 +140,17 @@
 
 .modal-exercise-btn {
   display: block;
-  padding: 12px 24px;
+  padding: 12px 22px;
   border-radius: 30px;
   line-height: 1.29;
 }
-
-/* TODO Change gap to 8px (when font-family will be correct) */
 
 .add-to-favorites-btn {
   background: var(--primary-white-color);
   color: var(--primary-black-color);
   border: 1px solid var(--primary-black-color);
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
   justify-content: center;
   transition: color var(--transition), background-color var(--transition),
