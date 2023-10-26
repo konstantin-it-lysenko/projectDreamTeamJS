@@ -3,8 +3,28 @@ import { fetchPostApi } from './api-service/footer-api';
 import { gsap } from 'gsap';
 
 const formSubmit = document.querySelector('.js-footer-form');
-
+const btnSubmit = document.querySelector('.footer_form_btn');
 formSubmit.addEventListener('submit', fetchSubscription);
+
+function isValidEmail(email) {
+  // const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const emailPattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+  return emailPattern.test(email);
+}
+
+btnSubmit.disabled = true;
+
+emailInput.addEventListener('input', () => {
+  const email = emailInput.value;
+
+  if (isValidEmail(email)) {
+    btnSubmit.style.backgroundColor = '#c6cdd1';
+    btnSubmit.disabled = false;
+  } else {
+    btnSubmit.style.backgroundColor = '#f4f4f4';
+    btnSubmit.disabled = true;
+  }
+});
 
 function fetchSubscription(event) {
   event.preventDefault();
@@ -35,11 +55,6 @@ function fetchSubscription(event) {
       }
     });
   formSubmit.reset();
-}
-function isValidEmail(email) {
-  // const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  const emailPattern = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
-  return emailPattern.test(email);
 }
 
 const options = {
