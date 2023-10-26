@@ -49,11 +49,21 @@ function createMurkupNoitems() {
 
 function createMarkupPagination(num, id) {
   let markup = '';
-  if (num > 1) {
+  if (num > 2) {
     let start = id - 1;
     start < 0 ? (start = 0) : start;
     start === num - 2 ? (start = num - 3) : start;
     for (let i = start + 1; i < start + 4; i += 1) {
+      markup =
+        markup +
+        `<li class="pag-page">
+          <button class="pag-btn" type="button" data-id="${
+            i - 1
+          }" id="p-${i}">${i}</button>
+        </li>`;
+    }
+  } else if (num > 1) {
+    for (let i = 1; i < 3; i += 1) {
       markup =
         markup +
         `<li class="pag-page">

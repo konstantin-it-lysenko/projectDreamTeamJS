@@ -13,9 +13,9 @@ const openModalSelector = '[data-modal-exercise="open"]';
 const closeModalSelector = '[data-modal-exercise="close"]';
 const openModalExerciseBtnRef = document.querySelector(openModalSelector);
 const LS_FAVORITES_ID = 'favorite-exercises-list';
-const favoriteIdList = JSON.parse(localStorage.getItem(LS_FAVORITES_ID)) || [];
+let favoriteIdList = JSON.parse(localStorage.getItem(LS_FAVORITES_ID)) || [];
 
-openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
+openModalExerciseBtnRef?.addEventListener('click', handleOpenModalClick);
 
 export async function handleOpenModalClick(
   _,
@@ -49,6 +49,8 @@ export async function handleOpenModalClick(
     '.js-add-to-favorites-btn'
   );
 
+  favoriteIdList = JSON.parse(localStorage.getItem(LS_FAVORITES_ID)) || [];
+
   giveRatingBtnRef.addEventListener('click', event =>
     handleGiveRatingBtnClick(event, modalBox, exerciseData._id)
   );
@@ -70,10 +72,12 @@ function handleAddToFavoriteBtnClick(
   if (favoriteIdList.some(({ _id }) => _id === favoriteExercise._id)) {
     processRemovalsFromFavorites(favoriteExercise, addToFavoriteBtnRef);
     removeLocalStorageIfEmpty();
+    getFavoriteExercises();
     return;
   }
 
   processAddingToFavorites(favoriteExercise, addToFavoriteBtnRef);
+  getFavoriteExercises();
 }
 
 function processAddingToFavorites(favoriteExercise, addToFavoriteBtnRef) {
@@ -95,8 +99,6 @@ function processRemovalsFromFavorites(favoriteExercise, addToFavoriteBtnRef) {
   localStorage.setItem(LS_FAVORITES_ID, favoriteData);
 
   addToFavoriteBtnRef.innerHTML = createAddToFavoritesMarkup();
-
-  getFavoriteExercises();
 }
 
 function createRemoveMarkupIfIncludesId(favoriteExercise, addToFavoriteBtnRef) {

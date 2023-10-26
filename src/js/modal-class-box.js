@@ -5,10 +5,13 @@
  * @param {string} markup -The modal markup
  * @param {string} closeSelector - Selector that will close modal window
  * @param {Object} [reponceData] (Optional) - Data received from the backend
+ * @param {boolean} [canOpenAnotherModalByClosing] (Optional) [flag] -
+ * ability to open another modal by closing current
  */
 
 import * as basicLightbox from 'basiclightbox';
 import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import { handleOpenModalClick } from './modal-exercise';
 
 export class ModalBox {
   #closeKey = 'Escape';
@@ -26,13 +29,23 @@ export class ModalBox {
         this.handleCloseModalKeyDownBound
       );
       document.body.style.overflow = 'auto';
+
+      this.canOpenAnotherModalByClosing &&
+        handleOpenModalClick({}, this.currentId);
     },
   };
 
-  constructor(markup, closeSelector, responceData) {
+  constructor(
+    markup,
+    closeSelector,
+    responceData,
+    canOpenAnotherModalByClosing = false
+  ) {
     this.markup = markup;
     this.closeSelector = closeSelector;
     this.responceData = responceData;
+    this.canOpenAnotherModalByClosing = canOpenAnotherModalByClosing;
+    this.currentId = '';
     this.handleCloseModalKeyDownBound = this.handleCloseModalKeyDown.bind(this);
     this.build();
   }
@@ -44,7 +57,8 @@ export class ModalBox {
     );
   }
 
-  open() {
+  open(currentId) {
+    this.currentId = currentId;
     this.instance.show();
   }
 
