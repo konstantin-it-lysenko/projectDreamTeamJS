@@ -47,7 +47,7 @@
   background: none;
 }
 .exercises-btn-svg {
-  rotate: 90deg;
+  transform: rotate(90deg);
 }
 .exercises-name-container {
   margin-bottom: 16px;

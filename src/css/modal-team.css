@@ -94,7 +94,7 @@
   fill: var(--primary-white-color);
 }
 .arrow-up {
-  rotate: 180deg;
+  transform: rotate(180deg);
 }
 
 .team-name {
