@@ -1,3 +1,7 @@
+root {
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 body {
   background-color: var(--primary-white-color);
 }
@@ -115,6 +119,7 @@ body {
 }
 .favor-exercises-head svg {
   fill: var(--primary-black-color);
+  transition: transform var(--transition);
 }
 .favor-exercises-wrap {
   display: flex;
@@ -128,9 +133,6 @@ body {
   color: var(--primary-black-color);
   background-color: transparent;
   border: none;
-}
-.favor-exercises svg {
-  /* fill: var(--primary-black-color); */
 }
 .favor-exercises-startbtn {
   gap: 8px;
@@ -362,7 +364,6 @@ body {
 
 .pag-list {
   display: flex;
-  /* gap: 8px; */
   padding-top: 32px;
   justify-content: center;
   align-items: center;
@@ -375,6 +376,7 @@ body {
   text-align: center;
   background-color: transparent;
   color: #d4d4d4;
+  transition: color var(--transition);
 }
 .pag-btn-active {
   width: 32px;
@@ -383,4 +385,12 @@ body {
   border: 1px solid var(--primary-black-color);
   color: var(--primary-black-color);
   margin: 0 4px;
+}
+.pag-btn:hover,
+.pag-btn:focus {
+  color: var(--primary-black-color);
+}
+.favor-exercises-delbtn:hover svg,
+.favor-exercises-delbtn:focus svg {
+  transform: scale(1.2);
 }
