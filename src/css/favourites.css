@@ -67,6 +67,7 @@ body {
 }
 /**                          dailynorm */
 .favor-dailynorm {
+  position: relative;
   border-radius: 20px;
   background-color: #fff;
   padding: 20px;
@@ -268,6 +269,7 @@ body {
     width: 344px;
     height: 141px;
     margin-bottom: 0;
+    border-radius: 15px;
   }
   .favor-dailynorm h3 {
     font-size: 24px;
@@ -393,4 +395,34 @@ body {
 .favor-exercises-delbtn:hover svg,
 .favor-exercises-delbtn:focus svg {
   transform: scale(1.2);
+}
+.favor-dailynorm::before {
+  content: 'Want to start training?';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--primary-black-color);
+  font-size: 14px;
+  color: var(--primary-white-color);
+  padding-left: 10px;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity var(--transition);
+  border-top-left-radius: 20px;
+}
+.favor-dailynorm[data-active='true']::before {
+  content: 'The training has begun!';
+  font-size: 14px;
+}
+.favor-dailynorm:hover::before,
+.favor-dailynorm:focus::before {
+  opacity: 1;
+}
+.favor-dailynorm svg {
+  transition: transform var(--transition);
+}
+
+.favor-dailynorm:hover svg,
+.favor-dailynorm:focus svg {
+  transform: scale(1.7);
 }

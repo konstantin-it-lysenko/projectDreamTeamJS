@@ -5,6 +5,7 @@ import './js/burger-menu';
 // import './js/categories';
 // import './js/footer';
 import './js/favourites';
+import './js/favorites-timer';
 import './js/modal-exercise';
 import './js/modal-form';
 // import './js/modal-team';
