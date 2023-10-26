@@ -1,4 +1,3 @@
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   createMarkupExercises,
   createMarkupPagination,
@@ -19,14 +18,15 @@ const refs = {
 const { quote, quoteAuthor, exercises, noExercises, paginationMarkup } = refs;
 const LS_FAVORITES_ID = 'favorite-exercises-list';
 const LS_QUOTE = 'quoteData';
+let favoriteExercises = [];
 let pagination;
 let paginationPages = 1;
 let currentPage = 0;
-let page;
+let onePageExercises;
 let pagBtnId = 0;
 
 window.addEventListener('load', takeScreenParams);
-window.addEventListener('resize', debounce(takeScreenParams, 300));
+window.addEventListener('resize', debounce(takeScreenParams, 100));
 
 function takeScreenParams() {
   pagination = 8;
@@ -54,25 +54,24 @@ async function getCurrentQuote() {
     }
   } catch (err) {
     // console.log('Favourites page', err);
-    // Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
   }
 }
 
 export function getFavoriteExercises() {
+  //1
   try {
-    const favoriteExercises = load(LS_FAVORITES_ID);
+    favoriteExercises = load(LS_FAVORITES_ID);
     if (favoriteExercises) {
       noExercises.classList.remove('favor-exercises-noitems');
-      const totalExercises = favoriteExercises.length;
-      if (pagination === 0 || totalExercises <= pagination) {
-        page = favoriteExercises;
+      if (pagination === 0 || favoriteExercises.length <= pagination) {
+        onePageExercises = favoriteExercises;
         paginationMarkup.innerHTML = createMarkupPagination('');
       } else {
         reloadMarkupPagination(favoriteExercises);
-        setExercisesToReload(favoriteExercises);
         setCurrentPage(currentPage);
+        setExercisesToReload(favoriteExercises);
       }
-      reloadMarkupExercises(page, favoriteExercises);
+      reloadMarkupExercises(onePageExercises);
     } else {
       noExercises.classList.add('favor-exercises-noitems');
       exercises.innerHTML = createMurkupNoitems();
@@ -82,42 +81,9 @@ export function getFavoriteExercises() {
   }
 }
 
-function reloadMarkupPagination(arr) {
-  paginationPages = Math.ceil(arr.length / pagination);
-  paginationMarkup.innerHTML = createMarkupPagination(
-    paginationPages,
-    pagBtnId
-  );
-  const paginationBtns = document.querySelectorAll('.pag-btn');
-  paginationBtns.forEach(btn => {
-    btn.addEventListener('click', event => {
-      pagBtnId = Number(event.currentTarget.closest('.pag-btn').dataset.id);
-      reloadCurrentPage(pagBtnId, arr);
-      // smoothScrollUp();
-    });
-  });
-}
-
-function setCurrentPage(num) {
-  currentPage = num;
-  const inActiveBtns = document.querySelectorAll('.pag-btn');
-  inActiveBtns.forEach(btn => {
-    btn.classList.remove('pag-btn-active');
-  });
-  const activeBtn = document.getElementById(`p-${num + 1}`);
-  activeBtn.classList.add('pag-btn-active');
-}
-
-function setExercisesToReload(arr) {
-  Math.ceil(arr.length / pagination) < currentPage + 1
-    ? (currentPage -= 1)
-    : currentPage;
-  page = arr.slice(currentPage * pagination, pagination * (1 + currentPage));
-  reloadMarkupExercises(page, arr);
-}
-
-function reloadMarkupExercises(page, arr) {
-  exercises.innerHTML = createMarkupExercises(page);
+function reloadMarkupExercises(pageArr) {
+  //5
+  exercises.innerHTML = createMarkupExercises(pageArr);
   const exericesOpenBtns = document.querySelectorAll(
     '[data-modal-exercise="open"]'
   );
@@ -135,24 +101,68 @@ function reloadMarkupExercises(page, arr) {
     btn.addEventListener('click', event => {
       const exerciseId = event.currentTarget.closest('.favor-exercises-card')
         .dataset.id;
-      removeFavoriteExerciseFromLS(exerciseId, arr);
+      removeFavoriteExerciseFromLS(exerciseId);
       getFavoriteExercises();
     });
   });
 }
 
-function removeFavoriteExerciseFromLS(id, arr) {
-  const removerObj = arr.find(exercise => exercise._id === id);
-  const favoriteExerciseIndex = arr.indexOf(removerObj);
-  arr.splice(favoriteExerciseIndex, 1);
-  save(LS_FAVORITES_ID, arr);
-  !arr.length && localStorage.removeItem(LS_FAVORITES_ID);
+function reloadMarkupPagination(arr) {
+  //2
+  paginationPages = Math.ceil(arr.length / pagination);
+  console.log(paginationPages);
+  console.log(pagBtnId);
+  if (paginationPages === pagBtnId) {
+    pagBtnId -= 1;
+    currentPage -= 1;
+  }
+  paginationMarkup.innerHTML = createMarkupPagination(
+    paginationPages,
+    pagBtnId
+  );
+  const paginationBtns = document.querySelectorAll('.pag-btn');
+  paginationBtns.forEach(btn => {
+    btn.addEventListener('click', event => {
+      pagBtnId = Number(event.currentTarget.closest('.pag-btn').dataset.id);
+      reloadMarkupPagination(arr);
+      setCurrentPage(pagBtnId);
+      setExercisesToReload(arr);
+      reloadMarkupExercises(onePageExercises);
+      // smoothScrollUp();
+    });
+  });
 }
 
-function reloadCurrentPage(num, arr) {
-  reloadMarkupPagination(arr);
-  setCurrentPage(num);
-  setExercisesToReload(arr);
+function setExercisesToReload(arr) {
+  //3
+  Math.ceil(arr.length / pagination) < currentPage + 1
+    ? (currentPage -= 1)
+    : currentPage;
+  onePageExercises = arr.slice(
+    currentPage * pagination,
+    pagination * (1 + currentPage)
+  );
+  // reloadMarkupExercises(onePageExercises);
+}
+
+function setCurrentPage(num) {
+  //4
+  currentPage = num;
+  const inActiveBtns = document.querySelectorAll('.pag-btn');
+  inActiveBtns.forEach(btn => {
+    btn.classList.remove('pag-btn-active');
+  });
+  const activeBtn = document.getElementById(`p-${num + 1}`);
+  activeBtn.classList.add('pag-btn-active');
+}
+
+function removeFavoriteExerciseFromLS(id) {
+  //7
+  const removerObj = favoriteExercises.find(exercise => exercise._id === id);
+  const favoriteExerciseIndex = favoriteExercises.indexOf(removerObj);
+  favoriteExercises.splice(favoriteExerciseIndex, 1);
+  save(LS_FAVORITES_ID, favoriteExercises);
+  !favoriteExercises.length && localStorage.removeItem(LS_FAVORITES_ID);
 }
 
 // function smoothScrollUp() {
