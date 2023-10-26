@@ -80,4 +80,4 @@ function handleIntersection(items, observer) {
   });
 }
 
-/*!========================= animation ================= */
+
