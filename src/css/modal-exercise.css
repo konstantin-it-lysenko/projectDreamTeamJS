@@ -48,6 +48,19 @@
   margin-bottom: 10px;
 }
 
+.modal-exercise-title::selection,
+.modal-exercise-rating-number::selection,
+.modal-exercise-tag-value::selection {
+  color: var(--primary-black-color);
+  background-color: #b5b5b5;
+}
+
+.modal-exercise-tag-key::selection,
+.modal-exercise-description::selection {
+  color: var(--primary-white-color);
+  background-color: #474747;
+}
+
 .modal-exercise-rating-container {
   margin-bottom: 20px;
   display: flex;
