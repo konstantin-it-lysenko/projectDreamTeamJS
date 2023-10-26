@@ -58,7 +58,6 @@ async function getCurrentQuote() {
 }
 
 export function getFavoriteExercises() {
-  //1
   try {
     favoriteExercises = load(LS_FAVORITES_ID);
     if (favoriteExercises) {
@@ -82,7 +81,6 @@ export function getFavoriteExercises() {
 }
 
 function reloadMarkupExercises(pageArr) {
-  //5
   exercises.innerHTML = createMarkupExercises(pageArr);
   const exericesOpenBtns = document.querySelectorAll(
     '[data-modal-exercise="open"]'
@@ -108,10 +106,7 @@ function reloadMarkupExercises(pageArr) {
 }
 
 function reloadMarkupPagination(arr) {
-  //2
   paginationPages = Math.ceil(arr.length / pagination);
-  console.log(paginationPages);
-  console.log(pagBtnId);
   if (paginationPages === pagBtnId) {
     pagBtnId -= 1;
     currentPage -= 1;
@@ -134,7 +129,6 @@ function reloadMarkupPagination(arr) {
 }
 
 function setExercisesToReload(arr) {
-  //3
   Math.ceil(arr.length / pagination) < currentPage + 1
     ? (currentPage -= 1)
     : currentPage;
@@ -142,11 +136,9 @@ function setExercisesToReload(arr) {
     currentPage * pagination,
     pagination * (1 + currentPage)
   );
-  // reloadMarkupExercises(onePageExercises);
 }
 
 function setCurrentPage(num) {
-  //4
   currentPage = num;
   const inActiveBtns = document.querySelectorAll('.pag-btn');
   inActiveBtns.forEach(btn => {
@@ -157,7 +149,6 @@ function setCurrentPage(num) {
 }
 
 function removeFavoriteExerciseFromLS(id) {
-  //7
   const removerObj = favoriteExercises.find(exercise => exercise._id === id);
   const favoriteExerciseIndex = favoriteExercises.indexOf(removerObj);
   favoriteExercises.splice(favoriteExerciseIndex, 1);
@@ -172,21 +163,6 @@ function removeFavoriteExerciseFromLS(id) {
 //   });
 // }
 
-getCurrentQuote();
-
-// Test favor exercises
-// async function getManyExercises() {
-//   const { results } = await getExercises();
-//   const dataExercises = results.map(
-//     ({ _id, name, burnedCalories, bodyPart, target }) => ({
-//       _id: `${_id}`,
-//       name: `${name}`,
-//       burnedCalories: `${burnedCalories}`,
-//       bodyPart: `${bodyPart}`,
-//       target: `${target}`,
-//     })
-//   );
-//   save('favor-exercises', dataExercises);
-// }
-// getManyExercises();
-// Test favor exercises
+document.addEventListener('DOMContentLoaded', function () {
+  getCurrentQuote();
+});
