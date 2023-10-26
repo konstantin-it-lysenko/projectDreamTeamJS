@@ -103,6 +103,37 @@ body {
 .favor-exercises-list p {
   text-align: center;
 }
+/**                          pagination */
+.pag-list {
+  display: flex;
+  padding-top: 32px;
+  justify-content: center;
+  align-items: center;
+}
+.pag-btn {
+  width: 22px;
+  height: 32px;
+  text-align: center;
+  background-color: transparent;
+  color: #d4d4d4;
+  transition: color var(--transition);
+}
+.pag-btn-active {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-black-color);
+  color: var(--primary-black-color);
+  margin: 0 4px;
+}
+.pag-btn:hover,
+.pag-btn:focus {
+  color: var(--primary-black-color);
+}
+.favor-exercises-delbtn:hover svg,
+.favor-exercises-delbtn:focus svg {
+  transform: scale(1.2);
+}
 /**                          exercises-card */
 .favor-exercises-card {
   width: 335px;
@@ -360,37 +391,4 @@ body {
   .favor-exercises-body {
     max-width: 123px;
   }
-}
-
-.pag-list {
-  display: flex;
-  padding-top: 32px;
-  justify-content: center;
-  align-items: center;
-}
-.pag-page {
-}
-.pag-btn {
-  width: 22px;
-  height: 32px;
-  text-align: center;
-  background-color: transparent;
-  color: #d4d4d4;
-  transition: color var(--transition);
-}
-.pag-btn-active {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--primary-black-color);
-  color: var(--primary-black-color);
-  margin: 0 4px;
-}
-.pag-btn:hover,
-.pag-btn:focus {
-  color: var(--primary-black-color);
-}
-.favor-exercises-delbtn:hover svg,
-.favor-exercises-delbtn:focus svg {
-  transform: scale(1.2);
 }
