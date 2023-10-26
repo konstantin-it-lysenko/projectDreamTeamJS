@@ -79,3 +79,13 @@ function handleIntersection(items, observer) {
     });
   });
 }
+
+/==========================animation===========================/;
+// document.addEventListener('DOMContentLoaded', function () {
+//   const startBtn = document.querySelector('.exercises-btn');
+//   const svgElement = document.querySelector('.exercises-btn-svg');
+//   const exercisesList = document.querySelector('.exercises-list');
+//   console.log(startBtn);
+//   console.log(svgElement);
+//   console.log(exercisesList);
+// });
