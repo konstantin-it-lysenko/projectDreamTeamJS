@@ -15,7 +15,7 @@ const openModalExerciseBtnRef = document.querySelector(openModalSelector);
 const LS_FAVORITES_ID = 'favorite-exercises-list';
 const favoriteIdList = JSON.parse(localStorage.getItem(LS_FAVORITES_ID)) || [];
 
-openModalExerciseBtnRef.addEventListener('click', handleOpenModalClick);
+openModalExerciseBtnRef?.addEventListener('click', handleOpenModalClick);
 
 export async function handleOpenModalClick(
   _,

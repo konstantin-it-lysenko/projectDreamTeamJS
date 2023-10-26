@@ -9,6 +9,7 @@
 
 import * as basicLightbox from 'basiclightbox';
 import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import { handleOpenModalClick } from './modal-exercise';
 
 export class ModalBox {
   #closeKey = 'Escape';
@@ -26,13 +27,22 @@ export class ModalBox {
         this.handleCloseModalKeyDownBound
       );
       document.body.style.overflow = 'auto';
+
+      this.canOpenAnotherModal && handleOpenModalClick({}, this.currentId);
     },
   };
 
-  constructor(markup, closeSelector, responceData) {
+  constructor(
+    markup,
+    closeSelector,
+    responceData,
+    canOpenAnotherModal = false
+  ) {
     this.markup = markup;
     this.closeSelector = closeSelector;
     this.responceData = responceData;
+    this.canOpenAnotherModal = canOpenAnotherModal;
+    this.currentId = '';
     this.handleCloseModalKeyDownBound = this.handleCloseModalKeyDown.bind(this);
     this.build();
   }
@@ -44,7 +54,8 @@ export class ModalBox {
     );
   }
 
-  open() {
+  open(currentId) {
+    this.currentId = currentId;
     this.instance.show();
   }
 
