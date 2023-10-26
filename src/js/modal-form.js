@@ -1,6 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { postRatting } from './api-service/modal-form-api';
 import { ModalBox } from './modal-class-box';
+import svgSpritePath from '../img/sport-sprite.svg';
 
 const teamModalOpenBtn = document.querySelector('.form-modal-btn');
 
@@ -107,7 +108,7 @@ function createModalRatingMarkup() {
         
         <button type="button" class="form-btn-close">
             <svg class="team-close-icon" width="24" height="24">
-              <use href="./img/sport-sprite.svg#icon-cross"></use>
+              <use href="${svgSpritePath}#icon-cross"></use>
             </svg>
           </button>
           
