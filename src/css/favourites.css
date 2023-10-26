@@ -84,6 +84,36 @@ body {
 .favor-dailynorm p {
   color: rgba(36, 36, 36, 0.6);
 }
+/**                          timer */
+.favor-dailynorm::before {
+  content: 'Want to start training?';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--primary-black-color);
+  font-size: 14px;
+  color: var(--primary-white-color);
+  padding-left: 10px;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity var(--transition);
+  border-top-left-radius: 20px;
+}
+.favor-dailynorm[data-active='true']::before {
+  content: 'The training has begun!';
+}
+.favor-dailynorm:hover::before,
+.favor-dailynorm:focus::before {
+  opacity: 1;
+}
+.favor-dailynorm svg {
+  transition: transform var(--transition);
+}
+
+.favor-dailynorm:hover svg,
+.favor-dailynorm:focus svg {
+  transform: scale(1.5);
+}
 /**                          img */
 .favor-img-wrap {
   border-radius: 20px;
