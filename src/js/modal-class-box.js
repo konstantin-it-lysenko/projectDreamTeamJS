@@ -5,6 +5,8 @@
  * @param {string} markup -The modal markup
  * @param {string} closeSelector - Selector that will close modal window
  * @param {Object} [reponceData] (Optional) - Data received from the backend
+ * @param {boolean} [canOpenAnotherModalByClosing] (Optional) [flag] -
+ * ability to open another modal by closing current
  */
 
 import * as basicLightbox from 'basiclightbox';
@@ -28,7 +30,8 @@ export class ModalBox {
       );
       document.body.style.overflow = 'auto';
 
-      this.canOpenAnotherModal && handleOpenModalClick({}, this.currentId);
+      this.canOpenAnotherModalByClosing &&
+        handleOpenModalClick({}, this.currentId);
     },
   };
 
@@ -36,12 +39,12 @@ export class ModalBox {
     markup,
     closeSelector,
     responceData,
-    canOpenAnotherModal = false
+    canOpenAnotherModalByClosing = false
   ) {
     this.markup = markup;
     this.closeSelector = closeSelector;
     this.responceData = responceData;
-    this.canOpenAnotherModal = canOpenAnotherModal;
+    this.canOpenAnotherModalByClosing = canOpenAnotherModalByClosing;
     this.currentId = '';
     this.handleCloseModalKeyDownBound = this.handleCloseModalKeyDown.bind(this);
     this.build();
