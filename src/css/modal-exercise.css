@@ -1,3 +1,7 @@
+.basicLightbox.basicLightbox--visible {
+  height: 100dvh;
+}
+
 .modal-exercise {
   position: relative;
   background-color: var(--primary-black-color);
