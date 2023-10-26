@@ -2,6 +2,7 @@ import { fetchCategories } from './api-service/categories-api';
 import { fetchExercises } from './api-service/exercises-api';
 import { createCategoryMarkup } from './templates/categories-markup';
 import { createExercisesMarkup } from './templates/exercises-markup';
+import { showLoader, hideLoader } from './loader';
 
 export async function catsPagination(
   categoryName = 'Body parts',
@@ -9,6 +10,7 @@ export async function catsPagination(
   currentPage,
   arrOfBtns
 ) {
+  showLoader();
   const catsList = document.querySelector('.categories-list');
   const middle = document.querySelector('button[data-page="middle"]');
   const next = document.querySelector('button[data-page="next"]');
@@ -37,7 +39,9 @@ export async function catsPagination(
     const resp = await fetchCategories(categoryName, currentPage);
     catsList.innerHTML = createCategoryMarkup(resp.results);
   } catch {
-    err => console.log(err);
+    err => console.error(err);
+  } finally {
+    hideLoader();
   }
 }
 
@@ -48,6 +52,7 @@ export async function exersPagination(
   currentPage,
   arrOfBtns
 ) {
+  showLoader();
   const exerList = document.querySelector('.exercises-list');
   const middle = document.querySelector('button[data-exer="middle"]');
   const next = document.querySelector('button[data-exer="next"]');
@@ -80,6 +85,8 @@ export async function exersPagination(
     );
     exerList.innerHTML = createExercisesMarkup(resp.results);
   } catch {
-    err => console.log(err);
+    err => console.error(err);
+  } finally {
+    hideLoader();
   }
 }
