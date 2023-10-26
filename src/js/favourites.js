@@ -115,6 +115,7 @@ function reloadMarkupPagination(arr) {
     paginationPages,
     pagBtnId
   );
+
   const paginationBtns = document.querySelectorAll('.pag-btn');
   paginationBtns.forEach(btn => {
     btn.addEventListener('click', event => {
@@ -123,7 +124,7 @@ function reloadMarkupPagination(arr) {
       setCurrentPage(pagBtnId);
       setExercisesToReload(arr);
       reloadMarkupExercises(onePageExercises);
-      // smoothScrollUp();
+      smoothScrollDown();
     });
   });
 }
@@ -156,12 +157,12 @@ function removeFavoriteExerciseFromLS(id) {
   !favoriteExercises.length && localStorage.removeItem(LS_FAVORITES_ID);
 }
 
-// function smoothScrollUp() {
-//   window.scrollBy({
-//     top: -1 * window.innerHeight,
-//     behavior: 'smooth',
-//   });
-// }
+function smoothScrollDown() {
+  window.scrollBy({
+    top: 1 * window.innerHeight,
+    behavior: 'smooth',
+  });
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   getCurrentQuote();
