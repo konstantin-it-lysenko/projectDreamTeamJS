@@ -155,9 +155,11 @@
   transition: stroke var(--transition);
 }
 
-.modal-favorite-active-icon {
-  fill: #d10000;
-  stroke: #d10000;
+.modal-exercise-trash-icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--primary-black-color);
+  transition: fill var(--transition);
 }
 
 .give-rating-btn {
@@ -285,6 +287,10 @@
 
   .add-to-favorites-btn:hover .modal-exercise-heart-icon {
     stroke: var(--primary-white-color);
+  }
+
+  .add-to-favorites-btn:hover .modal-exercise-trash-icon {
+    fill: var(--primary-white-color);
   }
 
   .give-rating-btn:hover {
