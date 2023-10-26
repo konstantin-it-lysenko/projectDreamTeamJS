@@ -17,7 +17,15 @@ const refs = {
   exercisesTitleSpan: document.querySelector('.exercises-title-span'),
   catFilterInput: document.querySelector('.cat-filter-input'),
 };
-const { catsList, exercisesList, catFilterList, catPaginationList, exerPaginationList, exercisesTitleSpan, catFilterInput } = refs;
+const {
+  catsList,
+  exercisesList,
+  catFilterList,
+  catPaginationList,
+  exerPaginationList,
+  exercisesTitleSpan,
+  catFilterInput,
+} = refs;
 const catPagiBtns = catPaginationList.querySelectorAll('button[data-page]');
 const exerPagiBtns = exerPaginationList.querySelectorAll('button[data-exer]');
 let categoryName = 'Body parts';
@@ -46,7 +54,12 @@ fetchCategories()
       'beforeend',
       createCategoryMarkup(resp.results)
     );
-    catsPagination(categoryName, totalCategoryPages, currentCategoryPage, catPagiBtns);
+    catsPagination(
+      categoryName,
+      totalCategoryPages,
+      currentCategoryPage,
+      catPagiBtns
+    );
   })
   .catch(err => {
     console.error(err);
@@ -62,8 +75,8 @@ async function catFilterBtnHandler(e) {
 
   catsList.classList.remove('is-hidden', 'd-none');
   catPaginationList.classList.remove('is-hidden', 'd-none');
-  exercisesList.classList.add('is-hidden', 'd-none')
-  exerPaginationList.classList.add('is-hidden', 'd-none')
+  exercisesList.classList.add('is-hidden', 'd-none');
+  exerPaginationList.classList.add('is-hidden', 'd-none');
   catFilterInput.value = '';
 
   const catFilterBtns = document.querySelectorAll('.cat-filter-btn');
@@ -92,12 +105,18 @@ async function catFilterBtnHandler(e) {
     exercisesTitleSpan.innerHTML = '';
     catFilterInput.hidden = true;
     catsList.innerHTML = createCategoryMarkup(categoryByName);
-    catsPagination(categoryName, totalCategoryPages, currentCategoryPage, catPagiBtns);
+    catPagiBtns.forEach((btn, idx) => (btn.innerHTML = idx + 1));
+    catsPagination(
+      categoryName,
+      totalCategoryPages,
+      currentCategoryPage,
+      catPagiBtns
+    );
   } catch {
     err => {
       console.error(err);
       Notify.failure(err);
-    }
+    };
   } finally {
     hideLoader();
   }
@@ -114,8 +133,14 @@ async function catsListBtnHandler(e) {
     const perPage = getExercises.perPage;
     totalExercisesPages = getExercises.totalPages;
     currentExercisesPage = 1;
-
-    exersPagination(category, currentExercise, totalExercisesPages, currentExercisesPage, exerPagiBtns);
+    exerPagiBtns.forEach((btn, idx) => (btn.innerHTML = idx + 1));
+    exersPagination(
+      category,
+      currentExercise,
+      totalExercisesPages,
+      currentExercisesPage,
+      exerPagiBtns
+    );
 
     catsList.classList.add('is-hidden', 'd-none');
     catPaginationList.classList.add('is-hidden', 'd-none');
@@ -133,7 +158,7 @@ async function catsListBtnHandler(e) {
     err => {
       console.error(err);
       Notify.failure(err);
-    }
+    };
   } finally {
     hideLoader();
   }
@@ -144,21 +169,29 @@ function catsPagiBtnHandler(e) {
   const catPagiBtn = e.target;
   currentCategoryPage = catPagiBtn.innerHTML;
 
-  if (catPagiBtn.dataset.page === 'next' && catPagiBtn.innerHTML < totalCategoryPages) {
+  if (
+    catPagiBtn.dataset.page === 'next' &&
+    catPagiBtn.innerHTML < totalCategoryPages
+  ) {
     catPagiBtns.forEach(btn => {
       const btnNum = Number(btn.innerHTML);
       btn.innerHTML = btnNum + 1;
-    })
+    });
   } else if (catPagiBtn.dataset.page === 'prev' && catPagiBtn.innerHTML > 1) {
     catPagiBtns.forEach(btn => {
       const btnNum = Number(btn.innerHTML);
       btn.innerHTML = btnNum - 1;
-    })
+    });
   } else {
     catPagiBtn.classList.add('active');
   }
 
-  catsPagination(categoryName, totalCategoryPages, currentCategoryPage, catPagiBtns);
+  catsPagination(
+    categoryName,
+    totalCategoryPages,
+    currentCategoryPage,
+    catPagiBtns
+  );
 }
 
 function catInputHandler(e) {
@@ -178,21 +211,30 @@ function exerPagiBtnHandler(e) {
   const exerPagiBtn = e.target;
   currentExercisesPage = exerPagiBtn.innerHTML;
 
-  if (exerPagiBtn.dataset.exer === 'next' && exerPagiBtn.innerHTML < totalExercisesPages) {
+  if (
+    exerPagiBtn.dataset.exer === 'next' &&
+    exerPagiBtn.innerHTML < totalExercisesPages
+  ) {
     exerPagiBtns.forEach(btn => {
       const btnNum = Number(btn.innerHTML);
       btn.innerHTML = btnNum + 1;
-    })
+    });
   } else if (exerPagiBtn.dataset.exer === 'prev' && exerPagiBtn.innerHTML > 1) {
     exerPagiBtns.forEach(btn => {
       const btnNum = Number(btn.innerHTML);
       btn.innerHTML = btnNum - 1;
-    })
+    });
   } else {
     exerPagiBtn.classList.add('active');
   }
 
-  exersPagination(category, currentExercise, totalExercisesPages, currentExercisesPage, exerPagiBtns);
+  exersPagination(
+    category,
+    currentExercise,
+    totalExercisesPages,
+    currentExercisesPage,
+    exerPagiBtns
+  );
 }
 
 function exericesModalBtnsHandler(event) {

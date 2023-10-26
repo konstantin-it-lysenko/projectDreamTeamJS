@@ -1,185 +1,197 @@
 .form-modal-btn {
-    padding: 15px;
-    cursor: pointer;
-    background-color: rgba(4, 4, 4, 0.4);
-    border-radius: 20px;
+	padding: 15px;
+	cursor: pointer;
+	background-color: rgba(4, 4, 4, 0.4);
+	border-radius: 20px;
 }
 
 .form-modal-backdrop {
-    position: fixed;
-    top: 0;
-    z-index: 70;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(4, 4, 4, 0.4);
-    transition: opacity 0.4s ease, visibility 0.4s ease;
+	position: fixed;
+	top: 0;
+	z-index: 70;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(4, 4, 4, 0.4);
+	transition:
+		opacity 0.4s ease,
+		visibility 0.4s ease;
 }
 
-.form-modal { /*Тут*/
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 335px;
-    min-height: 357px;
-    border-radius: 20px;
-    background-color: #242424;
-    color: #f4f4f4;
-    padding: 40px 20px;
-    transition: transform 0.4s ease;
-    overflow: auto;
+.form-modal {
+	/*Тут*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 335px;
+	min-height: 357px;
+	border-radius: 20px;
+	background-color: #242424;
+	color: #f4f4f4;
+	padding: 40px 20px;
+	transition: transform 0.4s ease;
+	overflow: auto;
 }
 
 .form-btn-close {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    right: 14px;
-    top: 14px;
-    width: 24px;
-    height: 24px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #f4f4f4;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	right: 14px;
+	top: 14px;
+	width: 24px;
+	height: 24px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	color: #f4f4f4;
 }
 
 .form-modal-title {
-    color: rgba(244, 244, 244, 0.40);
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Neue Montreal;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.5;
+	color: rgba(244, 244, 244, 0.4);
+	font-feature-settings:
+		"clig" off,
+		"liga" off;
+	font-family: Neue Montreal;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.5;
 }
 
 /**/
 .rating {
-    display: flex;
-    padding-top: 8px;
-    align-items:center;
-    gap: 2px;
-    font-size: 24px;
+	display: flex;
+	padding-top: 8px;
+	align-items: center;
+	gap: 2px;
+	font-size: 24px;
 }
-.rating_value{
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.5;
+.rating_value {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.5;
 }
 .rating_body {
-    position: relative;
+	position: relative;
 }
 
 .rating_body::before {
-    content: "★★★★★";
-    display: block;
-    color: rgba(244, 244, 244, 0.20);
+	content: "★★★★★";
+	display: block;
+	color: rgba(244, 244, 244, 0.2);
 }
 
 .rating_active {
-    position: absolute;
-    width: 20%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    overflow: hidden;
+	position: absolute;
+	width: 20%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	overflow: hidden;
 }
 
 .rating_active::before {
-    content: "★★★★★";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    color: #EEA10C;
+	content: "★★★★★";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	color: #eea10c;
 }
 
 .rating_items {
-    display: flex;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+	display: flex;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
 }
 
 .rating_item {
-    flex: 0 0 20%;
-    height: 100%;
-    opacity: 0;
+	flex: 0 0 20%;
+	height: 100%;
+	opacity: 0;
 }
 
 .form-info {
-    padding-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 20px;
+	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-bottom: 20px;
 }
-.form-info-item{
-    display: flex;
-    background-color: transparent;
-    padding: 12px 14px;
-    justify-content: start;
-    border-radius: 30px;
-    border: 1px solid #F4F4F4;
-    color: rgba(244, 244, 244, 0.60);
-    font-family: Neue Montreal;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.28;
+.form-info-item {
+	display: flex;
+	background-color: transparent;
+	padding: 12px 14px;
+	justify-content: start;
+	border-radius: 30px;
+	border: 1px solid #f4f4f4;
+	color: rgba(244, 244, 244, 0.6);
+	font-family: Neue Montreal;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.28;
 }
-.form-mail-input{
-    height: 42px;
+.form-mail-input {
+	height: 42px;
 }
-.form-textarea{
-    border-radius: 15px;
-    border: 1px solid #F4F4F4;
-    height: 93px;
-    resize: none;
+.form-textarea {
+	border-radius: 15px;
+	border: 1px solid #f4f4f4;
+	height: 93px;
+	resize: none;
 }
 .form-submit-btn {
-    border-radius: 30px;
-    background: #F4F4F4;
-    width: 295px;
-    padding: 12px 131px;
-    justify-content: center;
-    align-items: center;
-    color: #242424;
+	border-radius: 30px;
+	background: #f4f4f4;
+	width: 295px;
+	padding: 12px 131px;
+	justify-content: center;
+	align-items: center;
+	color: #242424;
 
-    font-family: "Neue Montreal";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.28;
+	font-family: "Neue Montreal";
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.28;
 
+	transition: transform var(--transition);
+}
+.form-submit-btn:hover {
+	outline: none;
+	background-color: var(--primary-color-c6cdd1);
+	font-weight: 500;
+	transform: scaleX(1.01);
 }
 
 @media screen and (min-width: 768px) {
-    .form-modal{
-        width: 430px;
-        min-height: 412px;
-        padding: 40px;
-    }
-    .form-info{
-        padding-top: 32px;
-        padding-bottom: 32px;
-        gap: 16px;
-    }
-    .form-submit-btn{
-        width: 350px;
-        height: 48px;
-    }
-    .form-mail-input {
-        height: 48px;
-    }
-    .form-textarea{
-        height: 106px;
-    }
+	.form-modal {
+		width: 430px;
+		min-height: 412px;
+		padding: 40px;
+	}
+	.form-info {
+		padding-top: 32px;
+		padding-bottom: 32px;
+		gap: 16px;
+	}
+	.form-submit-btn {
+		width: 350px;
+		height: 48px;
+	}
+	.form-mail-input {
+		height: 48px;
+	}
+	.form-textarea {
+		height: 106px;
+	}
 }
