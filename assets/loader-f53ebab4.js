@@ -167,7 +167,7 @@ Notiflix needs to be appended to the "<`+g+'>" element, but you called it before
           </div>
           <form class="form-info">
             <input type="email" name="email" placeholder="Email" class="form-info-item form-mail-input">
-            <textarea type="text" name="comment" placeholder="Your comment" class="form-info-item form-textarea"></textarea>
+            <textarea name="comment" placeholder="Your comment" class="form-info-item form-textarea"></textarea>
             <button type="submit" class="form-submit-btn">Send</button>
           </form>
           
