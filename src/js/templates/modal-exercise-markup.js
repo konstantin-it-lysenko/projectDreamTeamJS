@@ -72,7 +72,7 @@ export function createModalExerciseMarkup({
           </li>
           <li>
             <p class="modal-exercise-tag-key">Burned Calories</p>
-            <p class="modal-exercise-tag-value">${burnedCalories}</p>
+            <p class="modal-exercise-tag-value">${burnedCalories}/3 min</p>
           </li>
         </ul>
       </div>
