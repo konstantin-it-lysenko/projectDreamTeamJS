@@ -13,8 +13,9 @@
       referrerpolicy="no-referrer"
     />
     
-    <script type="module" crossorigin src="/projectDreamTeamJS/assets/loader-5f28e71c.js"></script>
-    <link rel="stylesheet" href="/projectDreamTeamJS/assets/loader-a87fd963.css">
+    <script type="module" crossorigin src="/projectDreamTeamJS/assets/favourites-page-5c8be183.js"></script>
+    <link rel="modulepreload" crossorigin href="/projectDreamTeamJS/assets/loader-5611809e.js">
+    <link rel="stylesheet" href="/projectDreamTeamJS/assets/loader-53413742.css">
   </head>
   <body>
     <header class="header">
@@ -172,11 +173,13 @@
           </div>
         </div>
         <div class="favor-info">
-          <div class="favor-dailynorm">
-            <svg width="20" height="20">
-              <use href="/projectDreamTeamJS/assets/sport-sprite-b2c6dc33.svg#icon-dumbbell"></use>
-            </svg>
-            <h3>110 min</h3>
+          <div class="favor-dailynorm" id="startTimerListItem">
+            <div class="favor-dailynorm-icon">
+              <svg width="20" height="20">
+                <use href="/projectDreamTeamJS/assets/sport-sprite-b2c6dc33.svg#icon-dumbbell"></use>
+              </svg>
+            </div>
+            <h3 id="timerValue">110 min</h3>
             <p>Daily norm of sports</p>
           </div>
           <div class="favor-img-wrap">
