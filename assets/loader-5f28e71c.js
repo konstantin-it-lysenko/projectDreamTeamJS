@@ -101,7 +101,7 @@ Notiflix needs to be appended to the "<`+g+'>" element, but you called it before
           </li>
           <li>
             <p class="modal-exercise-tag-key">Burned Calories</p>
-            <p class="modal-exercise-tag-value">${s}</p>
+            <p class="modal-exercise-tag-value">${s}/3 min</p>
           </li>
         </ul>
       </div>
