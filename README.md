@@ -18,7 +18,7 @@ to help individuals maintain a healthy and active lifestyle.
 - <p align="left"><a href="#installation" style="text-decoration: none; color: currentColor">Installation</a></p>
 - <p align="left"><a href="#features" style="text-decoration: none; color: currentColor">Features</a></p>
 - <p align="left"><a href="#contributing" style="text-decoration: none; color: currentColor">Contributing</a></p>
-- <p align="left"><a href="#contact" style="text-decoration: none; color: currentColor">Contact</a></p>
+- <p align="left"><a href="#contact" style="text-decoration: none; color: currentColor"style="text-decoration: none; color: currentColor">Contact</a></p>
 
 ## Technologies Used
 
@@ -37,7 +37,7 @@ To install and run projectDreamTeamJS using npm, you need to have Node JS LTS
 version installed on your machine. Here are the steps to install and run the
 project:
 
-> [!NOTE] Make sure you have the project source code and a `vite-config.js` file
+> [!NOTE] Make sure you have the project source code and a `vite.config.js` file
 > ready for this setup.
 
 1. Clone the Project: Clone the projectDreamTeamJS repository to your local
@@ -134,7 +134,3 @@ at:
 [CSS.com]:
   https://img.shields.io/badge/css-123456?style=for-the-badge&logo=html5&logoColor=fafafa
 [CSS-url]: https://www.w3.org/Style/CSS/Overview.en.html
-
-```
-
-```
